@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-Bap — Korean menu, decoded</title>
+<meta name="description" content="Snap any Korean menu. K-Bap translates it and flags dishes that don't fit the ingredients you list.">
+<style>
+  :root{--bg:#fff;--fg:#1a1a1a;--muted:#666;--primary:#FF7134}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,system-ui,sans-serif}
+  main{max-width:480px;margin:0 auto;padding:48px 16px;text-align:center}
+  h1{font-size:28px;margin:0 0 8px}
+  p{color:var(--muted);margin:0 0 32px}
+  .btn{display:block;padding:16px;margin:12px 0;border-radius:12px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600}
+  .btn.secondary{background:#111}
+</style>
+</head>
+<body>
+<main>
+  <h1>Snap the menu, know what to skip.</h1>
+  <p>K-Bap reads any Korean menu, translates it, and flags dishes that don't fit the ingredients you list. Free.</p>
+  <a class="btn" id="ios" href="https://apps.apple.com/app/id6788635067">Download on the App Store</a>
+  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.rocher.kbap">Get it on Google Play</a>
+</main>
+<script>
+  // ponytail: on iOS, itms-apps:// escapes Meta's in-app browser and opens the App Store directly.
+  var ios = document.getElementById('ios');
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    ios.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.location.href = 'itms-apps://apps.apple.com/app/id6788635067';
+      setTimeout(function () { window.location.href = ios.href; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
