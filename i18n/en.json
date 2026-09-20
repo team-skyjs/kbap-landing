@@ -1,0 +1,77 @@
+{
+  "meta.title": "K-Bap — read any Korean menu",
+  "meta.description": "Point your camera at a Korean menu. K-Bap translates every dish and marks the ones containing ingredients you listed as off-limits.",
+
+  "hero.headline": "You can't read the menu. K-Bap can.",
+  "hero.sub": "Point your camera at a Korean menu. Every dish comes back in your language, and the ones containing ingredients from your avoid list are marked.",
+  "hero.note": "Free. Browse as a guest, or sign up to have dishes rated against your own list.",
+  "hero.shotAlt": "The K-Bap home screen, with a scan button and dishes rated safe for the user",
+
+  "problem.eyebrow": "The problem",
+  "problem.title": "Korean menus give you names and prices, rarely ingredients.",
+  "problem.body": "You know what you can't eat, and the menu gives you no way to check. K-Bap reads the Korean and checks each dish against the ingredients you listed.",
+
+  "features.eyebrow": "What the app does",
+  "features.title": "Eight things you get",
+
+  "f1.title": "Scan a menu",
+  "f1.body": "One photo of a Korean menu. K-Bap reads the Korean, gives you each dish in your language, and rates it against the ingredients you avoid.",
+  "f1.alt": "The K-Bap home screen with a Scan a menu button and a row of dishes rated safe",
+
+  "f2.title": "81 ingredients to pick from",
+  "f2.body": "Tap what you skip, from peanut and butter to alcohol and shellfish. Fifteen presets, among them vegan, halal, kosher and gluten-free, fill the list in for you, and you can edit any entry afterwards.",
+  "f2.alt": "The edit restrictions screen with egg, butter and peanut selected from a grid of ingredient chips",
+
+  "f3.title": "A rating built from your list",
+  "f3.body": "Every dish carries one of four labels, worked out from the list you saved. Change the list and the ratings change with it.",
+  "f3.alt": "A dish detail screen showing an Avoid for you label and the ingredients behind it",
+
+  "f4.title": "Browse without scanning",
+  "f4.body": "Search Korean dishes by name or scroll the catalog. Each card carries the same rating a scanned dish would get.",
+  "f4.alt": "A grid of Korean dishes, each with a risk badge in the corner",
+
+  "f5.title": "See which ingredient caused it",
+  "f5.body": "Open a dish and its ingredients come back in risk order, each one labeled and marked with how often restaurants use it. Spice level sits at the top, on a scale of ten.",
+  "f5.alt": "The What's inside panel listing butter as an ingredient to avoid, found in about 60 percent of restaurants",
+
+  "f6.title": "Ask in Korean without speaking it",
+  "f6.body": "K-Bap writes the question, or the whole order, in Korean. Show the staff the screen and they read what you can't eat.",
+  "f6.alt": "A card written in Korean asking whether the dish contains butter, to show restaurant staff",
+  "f6.alt2": "A Korean order card that asks for one dish and lists the ingredients the diner can't eat",
+
+  "f7.title": "Reviews from other diners",
+  "f7.body": "Read what other people made of a dish before you order it, and add your own once you've tried it.",
+
+  "f8.title": "My Foods",
+  "f8.body": "Two lists on your profile: what you ordered and what you scanned. Useful when you want that dish again and can't remember the name.",
+
+  "risk.eyebrow": "How dishes are marked",
+  "risk.title": "The four labels",
+  "risk.sub": "Color alone is easy to miss, so each label carries its own shape.",
+  "risk.safe.label": "Safe",
+  "risk.safe.body": "Nothing from your avoid list turned up in this dish.",
+  "risk.caution.label": "Caution",
+  "risk.caution.body": "Recipes differ between restaurants, so ask before you order.",
+  "risk.avoid.label": "Avoid",
+  "risk.avoid.body": "This dish contains something you listed as off-limits.",
+  "risk.nodata.label": "No data",
+  "risk.nodata.body": "We can't rate this dish yet. Don't read that as safe. Ask the restaurant.",
+
+  "langs.eyebrow": "Languages",
+  "langs.title": "Read the menu in your own language",
+  "langs.sub": "Dish names, ingredients and descriptions come back in whichever of these you pick.",
+
+  "cta.title": "Get K-Bap before your next meal in Korea",
+  "cta.sub": "Free on iPhone and Android.",
+
+  "store.appleAlt": "Download on the App Store",
+  "store.playAlt": "Get it on Google Play",
+
+  "float.label": "Install K-Bap",
+
+  "footer.privacy": "Privacy Policy",
+  "footer.terms": "Terms of Service",
+  "footer.safety": "Safety",
+  "footer.disclaimer": "Ingredient information is a guide, not medical advice. Always confirm with the restaurant.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}
