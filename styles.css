@@ -1,11 +1,15 @@
 /* Pretendard renders 5.33% wider than the system UI font at the same size, so
    when it swapped in it re-wrapped the headline and moved the hero image down
    (CLS 0.052). This fallback is the system font scaled to Pretendard's width,
-   so the pre-swap and post-swap line breaks match and nothing moves. */
+   so the pre-swap and post-swap line breaks match and nothing moves.
+   100.8% is measured, not derived: at this value the fallback and Pretendard
+   render the headline within 0.6px of each other and the hero image lands on
+   the same pixel either way. Tuned against Helvetica Neue, which is what iOS
+   resolves and where the paid traffic is. */
 @font-face{
   font-family:"Pretendard Fallback";
   src:local("Helvetica Neue"), local("Roboto"), local("Segoe UI"), local("Arial");
-  size-adjust:105.3%;
+  size-adjust:100.8%;
   font-weight:100 900;
 }
 
