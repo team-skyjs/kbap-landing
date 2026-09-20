@@ -44,6 +44,15 @@ for (const m of html.matchAll(/(?:src|href)="((?!https?:|#)[^"]+)"/g)) {
   assert.ok(fs.existsSync(f), `index.html references a missing file: ${m[1]}`);
   if (/\.(webp|png|jpg|svg)$/.test(m[1])) imgs.add(f);
 }
+// og:image is an absolute URL, so resolve it back to a local file and count it too
+const SITE = 'https://team-skyjs.github.io/kbap-landing/';
+const og = html.match(/property="og:image" content="([^"]+)"/);
+assert.ok(og, 'og:image is missing');
+assert.ok(og[1].startsWith(SITE), `og:image must be an absolute ${SITE} URL`);
+const ogFile = path.join(dir, og[1].slice(SITE.length));
+assert.ok(fs.existsSync(ogFile), `og:image points at a missing file: ${og[1]}`);
+imgs.add(ogFile);
+
 const bytes = [...imgs].reduce((n, f) => n + fs.statSync(f).size, 0);
 assert.ok(bytes <= 1_500_000, `images total ${bytes} bytes, over the 1.5MB budget`);
 

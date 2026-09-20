@@ -89,6 +89,9 @@ section > .wrap > p{color:var(--ink-2)}
   border-radius:20px;border:1px solid var(--line);background:#fff;
 }
 .shot-hero{width:232px;margin-top:30px}
+/* A cropped region rather than a whole phone screen, so it spans the text
+   column instead of sitting in a narrow phone-width block. */
+.shot-wide{width:100%;border-radius:14px}
 .pair{display:flex;gap:10px;justify-content:center}
 .pair .shot{width:150px;margin-top:26px}
 
@@ -187,6 +190,7 @@ footer a:hover{color:var(--ink)}
   .lede{font-size:18px}
   h2{font-size:30px}
   .shot{width:230px}
+  .shot-wide{width:100%}
   .shot-hero{width:270px}
   .pair .shot{width:200px}
   .final h2{font-size:32px}
