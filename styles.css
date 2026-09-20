@@ -1,0 +1,193 @@
+/* K-Bap landing — palette is the ad creative's, so the ad and the page match. */
+:root{
+  --primary:#FF7134;
+  /* #FF7134 is 2.6:1 on white, so orange TEXT uses this darker tone (5.0:1). */
+  --primary-ink:#C4441A;
+  --peach:#FFE8DE;
+  --cream:#FBF6EC;
+  --ink:#2F3137;
+  /* The palette's body grey is #6A6F7C, which is 5.0:1 on white but only 4.27:1
+     on the peach panels, and #9196A1 is 2.96:1 anywhere. Both miss the 4.5:1
+     bar, so secondary text darkens a step. Measurably: 5.9:1 on white,
+     5.0:1 on peach. */
+  --ink-2:#5F646F;
+  --ink-3:#5F646F;
+  --panel:#F9F8F8;
+  --line:#EAEBEE;
+
+  /* Risk states: meaning is fixed. Fill = ad palette, label text = the app's
+     own accessible tones (all >5:1 on white) so page and app agree. */
+  --safe:#00BE65;   --safe-ink:#007F43;
+  --warn:#FFA526;   --warn-ink:#9A5F00;
+  --avoid:#F76661;  --avoid-ink:#C4352F;
+  --unable:#5B6470; --unable-ink:#6A6F7C;
+
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%}
+h1,h2,h3{line-height:1.25;margin:0;text-wrap:balance}
+p{margin:0}
+
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+
+section{padding:56px 0}
+.band{background:var(--cream)}
+
+.eyebrow{
+  font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-2);margin-bottom:10px;
+}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+section > .wrap > p{color:var(--ink-2)}
+
+/* ---------- hero ---------- */
+.hero{
+  background:linear-gradient(180deg,var(--peach) 0%,#fff 100%);
+  padding:28px 0 8px;
+  text-align:center;
+}
+.wordmark{display:block;margin:0 auto 22px;height:38px;width:auto}
+.hero h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lede{color:var(--ink-2);font-size:17px;margin-bottom:26px}
+.note{color:var(--ink-2);font-size:14px;margin-top:14px}
+
+/* ---------- store badges (Apple + Google official assets, unmodified) ----------
+   Apple's SVG is 119.664x40 with NO clear space baked in, so the 1/4-height
+   margin the guidelines require is added here as padding.
+   Google's PNG is 646x250 where the pill is 564x168 centred in 41px of
+   transparency: 41/168 is already ~1/4, so it gets no extra padding, and its
+   box height is pill/0.672 to make both pills the same height. Neither asset is
+   rotated, recoloured, re-drawn or animated. */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px}
+/* flex:0 0 auto matters: a shrinking flex item would squash the badge art, and
+   rescaling it off its own proportions counts as modifying the asset. */
+.badge{display:inline-flex;flex:0 0 auto;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.badge img{display:block}
+.badge-apple{padding:12px}              /* 48 / 4 */
+.badge-apple img{height:48px;width:144px}
+.badge-play img{height:71px;width:184px} /* pill = 48px tall */
+.badge:focus-visible{outline:3px solid var(--primary-ink);outline-offset:2px;border-radius:10px}
+/* Two full-size badges need ~356px. Below that they stack, so every phone in
+   the QA set (375/390/412) gets the same predictable layout. */
+@media (max-width:479px){ .badges:not(.badges-float){flex-direction:column} }
+
+/* ---------- screenshots (straight, no tilt, no shadow, no reflection) ---------- */
+.shot{
+  display:block;margin:26px auto 0;width:190px;height:auto;
+  border-radius:20px;border:1px solid var(--line);background:#fff;
+}
+.shot-hero{width:232px;margin-top:30px}
+.pair{display:flex;gap:10px;justify-content:center}
+.pair .shot{width:150px;margin-top:26px}
+
+/* ---------- features ---------- */
+.feat{padding:34px 0;border-top:1px solid var(--line)}
+.feat:first-of-type{border-top:none}
+.num{
+  font-size:13px;font-weight:800;letter-spacing:.1em;
+  color:var(--primary-ink);margin-bottom:6px;
+}
+.feat h3{font-size:21px;font-weight:700;margin-bottom:8px}
+.feat p{color:var(--ink-2)}
+.ficon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:14px;
+  background:var(--peach);color:var(--primary-ink);margin-bottom:12px;
+}
+
+/* ---------- risk states ---------- */
+.risks{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+.risk{
+  display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;
+}
+.risk .mark{flex:0 0 auto;line-height:0}
+.risk h3{font-size:17px;font-weight:700;margin-bottom:2px}
+.risk p{color:var(--ink-2);font-size:15px}
+.risk-safe .mark{color:var(--safe)}    .risk-safe h3{color:var(--safe-ink)}
+.risk-caution .mark{color:var(--warn)} .risk-caution h3{color:var(--warn-ink)}
+.risk-avoid .mark{color:var(--avoid)}  .risk-avoid h3{color:var(--avoid-ink)}
+.risk-nodata .mark{color:var(--unable)}.risk-nodata h3{color:var(--unable-ink)}
+
+/* ---------- languages ---------- */
+.langs{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.langs li{
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;font-size:15px;font-weight:600;color:var(--ink);
+}
+
+/* ---------- final CTA ---------- */
+.final{background:var(--peach);text-align:center}
+.appicon{border-radius:18px;margin-bottom:16px}
+.final h2{font-size:27px;margin-bottom:8px}
+.final p{color:var(--ink-2);margin-bottom:18px}
+.final .badges{margin-top:4px}
+
+/* ---------- footer ---------- */
+footer{background:#fff;padding:36px 0 44px;border-top:1px solid var(--line);text-align:center}
+footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:16px}
+footer a{color:var(--ink-2);font-size:15px;text-decoration:underline;text-underline-offset:3px}
+footer a:hover{color:var(--ink)}
+.disclaimer{color:var(--ink-2);font-size:14px;margin-bottom:10px}
+.copy{color:var(--ink-3);font-size:13px}
+
+/* ---------- floating install bar ----------
+   Always reachable, whatever the scroll position. Hidden while either big CTA
+   is on screen so the badges never sit on top of each other. */
+.floatbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(255,255,255,.96);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+  transform:translateY(0);
+  transition:transform .22s ease,opacity .22s ease;
+}
+.floatbar[hidden]{display:none}
+.floatbar.is-off{transform:translateY(110%);opacity:0;pointer-events:none}
+.floatbar-inner{
+  max-width:640px;margin:0 auto;padding:6px 12px;
+  display:flex;align-items:center;gap:10px;
+}
+.floaticon{border-radius:10px;flex:0 0 auto}
+.floatlabel{font-size:15px;font-weight:700;flex:1 1 auto;text-align:left}
+.badges-float{flex:0 0 auto;gap:0;flex-wrap:nowrap}
+.badges-float .badge-apple{padding:10px}          /* 40 / 4 */
+.badges-float .badge-apple img{height:40px;width:120px}
+.badges-float .badge-play img{height:60px;width:155px} /* pill = 40px tall */
+/* A real phone gets exactly one store badge (app.js adds .one-store), which
+   leaves room for the icon and label. Only a narrow window still showing both
+   badges has to drop them so each badge keeps its required clear space. */
+@media (max-width:519px){
+  .floatbar:not(.one-store) .floatlabel,
+  .floatbar:not(.one-store) .floaticon{display:none}
+  .floatbar:not(.one-store) .badges-float{flex:1 1 auto;justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){ .floatbar{transition:none} }
+
+/* ---------- wider screens: same single 640px column, just roomier ---------- */
+@media (min-width:600px){
+  section{padding:72px 0}
+  .hero{padding-top:44px}
+  .hero h1{font-size:40px}
+  .lede{font-size:18px}
+  h2{font-size:30px}
+  .shot{width:230px}
+  .shot-hero{width:270px}
+  .pair .shot{width:200px}
+  .final h2{font-size:32px}
+}
