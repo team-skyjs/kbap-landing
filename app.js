@@ -82,12 +82,8 @@
   var pill = document.querySelector('.pill');
   if (pill && isAndroid) pill.setAttribute('data-store', 'android');
 
-  // One store badge per device, side by side only on desktop. If JS never runs,
-  // both stay visible and simply wrap, which beats hiding a store outright.
-  if (isIOS || isAndroid) {
-    var drop = isIOS ? '.badge-play' : '.badge-apple';
-    document.querySelectorAll('.badges ' + drop).forEach(function (b) { b.remove(); });
-  }
+  // Badge visibility is settled in <head> via the html class, not here: doing it
+  // after load moved the page (CLS). See styles.css .ios/.android rules.
 
   // --- store links: UTM passthrough, then the iOS in-app-browser escape ------
   document.querySelectorAll('a[data-store="android"]').forEach(function (a) {

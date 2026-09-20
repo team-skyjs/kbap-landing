@@ -21,6 +21,13 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
+<!-- Which store this device has, decided before first paint. app.js used to
+     remove the other badge after load, but at 412px the pair wraps to two rows,
+     so dropping one collapsed a row and pulled the hero up 83px (CLS 0.052).
+     A class here costs nothing and the layout is right from the first frame.
+     No JS: both badges stay, which is the correct fallback. -->
+<script>(function(u,d){if(/iPhone|iPad|iPod/.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))d.className='ios';else if(/Android/.test(u))d.className='android';})(navigator.userAgent,document.documentElement);</script>
+
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <!-- Pretendard is the app's and the ad creative's typeface. Loaded off the
