@@ -2,61 +2,19 @@
   "meta.title": "K-Bap — read any Korean menu",
   "meta.description": "Point your camera at a Korean menu. K-Bap translates every dish and marks the ones containing ingredients you listed as off-limits.",
 
-  "nav.install": "Install",
-
-  "hero.headline1": "You can't read the menu.",
-  "hero.headline2": "K-Bap can.",
-  "hero.sub": "Point your camera at a Korean menu. Dishes you should skip come back marked.",
-  "hero.note": "Free · browse without an account",
+  "hero.headline1": "You can't read",
+  "hero.headline2": "the menu.",
+  "hero.headline3": "K-Bap can.",
+  "hero.sub": "Snap a Korean menu. The dishes you should skip come back marked.",
+  "hero.note": "Free · 10 languages",
   "hero.shotAlt": "The K-Bap home screen, with a scan button and dishes rated safe for the user",
-
-  "features.title": "What the app does",
-
-  "f1.title": "Scan a menu",
-  "f1.body": "One photo, and every dish comes back in your language.",
-  "f1.alt": "The Scan a menu button on the K-Bap home screen",
-
-  "f2.title": "A rating built from your list",
-  "f2.body": "Four labels worked out from the list you saved. No data never means safe.",
-  "f2.alt": "An ingredient panel listing butter as one to avoid, found in about 60 percent of restaurants",
-
-  "f3.title": "81 ingredients",
-  "f3.body": "Tap what you skip, from peanut and butter to alcohol and shellfish.",
-  "f3.alt": "A grid of ingredient chips with egg, butter and peanut selected",
-
-  "f4.title": "Diet and religion presets",
-  "f4.body": "Fifteen presets, among them vegan, halal, kosher and gluten-free, fill the list in.",
-
-  "f5.title": "Ask in Korean without speaking it",
-  "f5.body": "K-Bap writes your question, or the whole order, in Korean for the staff.",
-  "f5.alt": "A Korean order card that asks for one dish and lists the ingredients the diner can't eat",
-
-  "f6.title": "Browse without scanning",
-  "f6.body": "Search dishes by name or scroll the catalog, rated the same way.",
-  "f6.alt": "A grid of Korean dishes, each with a risk badge in the corner",
-
-  "f7.title": "Reviews from other diners",
-  "f7.body": "Read what other people made of a dish, and add your own once you've tried it.",
-
-  "f8.title": "My Foods",
-  "f8.body": "What you ordered and what you scanned, both kept on your profile.",
-
-  "risk.safe.label": "Safe",
-  "risk.caution.label": "Caution",
-  "risk.avoid.label": "Avoid",
-  "risk.nodata.label": "No data",
-
-  "langs.line": "Available in English, 한국어, 日本語, 简体中文, 繁體中文, Tiếng Việt, Bahasa Indonesia, ไทย, Русский, Español.",
-
-  "cta.title": "Order without guessing.",
-  "cta.sub": "Free on iPhone and Android.",
 
   "store.appleAlt": "Download on the App Store",
   "store.playAlt": "Get it on Google Play",
 
-  "footer.privacy": "Privacy Policy",
-  "footer.terms": "Terms of Service",
+  "footer.privacy": "Privacy",
+  "footer.terms": "Terms",
   "footer.safety": "Safety",
-  "footer.disclaimer": "Ingredient information is a guide, not medical advice. Always confirm with the restaurant.",
+  "footer.disclaimer": "Ingredient information is a guide, not medical advice.",
   "footer.copyright": "© 2026 Team SkyJS"
 }

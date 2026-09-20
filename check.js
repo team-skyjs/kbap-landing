@@ -13,6 +13,7 @@ const path = require('path');
 const dir = __dirname;
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
 const en = JSON.parse(fs.readFileSync(path.join(dir, 'i18n/en.json'), 'utf8'));
+const css = fs.readFileSync(path.join(dir, 'styles.css'), 'utf8');
 const kbap = require('./app.js');
 
 const decode = (s) => s
@@ -107,11 +108,21 @@ assert.ok(!/location\s*\.\s*(href\s*=|replace\(|assign\()/.test(outside),
 assert.ok(/window\.location\.href = itmsUrl\(/.test(handler) && /1500/.test(handler),
   'the itms-apps escape and its 1.5s https fallback must both run on tap');
 
-// --- 2nd-round design rules that are cheap to regress
-assert.ok(!/class="num"/.test(html), 'numbered eyelabels are back; the brief removed them');
-assert.ok(/class="pill"[^>]*data-store=/.test(html), 'the sticky-nav install pill is missing or has no store link');
-assert.ok(/<header class="nav">/.test(html), 'the sticky nav is missing');
-assert.strictEqual((html.match(/class="card[ "]/g) || []).length, 8, 'there must be 8 feature cards');
-assert.strictEqual((html.match(/class="rk /g) || []).length, 4, 'all four risk labels must be present');
+// --- the page is one hero screen; these are the bits that must not creep back
+assert.ok(!/class="num"/.test(html), 'numbered eyelabels are back');
+assert.strictEqual((html.match(/<h1[\s>]/g) || []).length, 1, 'the hero has exactly one h1');
+assert.strictEqual((html.match(/class="badge badge-/g) || []).length, 2,
+  'both store badges must be in the markup so a no-JS visitor still sees their store');
+assert.ok(/min-height:100svh/.test(css), 'the hero must fill one screen');
+
+// Two badges stacked vertically on a phone is the thing this page must never do,
+// so the no-JS pill height has to leave both on one row at 375px.
+const bh = /\.badges\{\s*--bh:(\d+)px/.exec(css);
+assert.ok(bh, '--bh (badge pill height) is not defined on .badges');
+const h = Number(bh[1]);
+const rowWidth = h * 2.9916 + h / 2 + 6 + (h / 0.672) * 2.584;   // apple box + gap + play box
+assert.ok(rowWidth <= 375 - 44, `both badges need ${Math.ceil(rowWidth)}px but only 331px is free at 375px, so they would stack`);
+assert.ok(/\.ios \.badge-play,\.android \.badge-apple\{display:none\}/.test(css),
+  'the per-device badge rule is missing, so phones would show both');
 
 console.log(`ok — ${checked} strings match i18n/en.json, images ${(bytes / 1024).toFixed(0)}KB, links and ?lang= verified`);
