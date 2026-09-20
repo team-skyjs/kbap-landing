@@ -115,14 +115,22 @@ assert.strictEqual((html.match(/class="badge badge-/g) || []).length, 2,
   'both store badges must be in the markup so a no-JS visitor still sees their store');
 assert.ok(/min-height:100svh/.test(css), 'the hero must fill one screen');
 
-// Two badges stacked vertically on a phone is the thing this page must never do,
-// so the no-JS pill height has to leave both on one row at 375px.
+// The badge row is flex-nowrap, so an oversized pill does not stack the badges,
+// it pushes them out of the viewport. Either way the page is broken, so the
+// two-badge height has to keep the pair inside the narrowest common phone.
 const bh = /\.badges\{\s*--bh:(\d+)px/.exec(css);
 assert.ok(bh, '--bh (badge pill height) is not defined on .badges');
 const h = Number(bh[1]);
+assert.ok(h >= 40, `badge pill is ${h}px; Apple's minimum is 40px`);
 const rowWidth = h * 2.9916 + h / 2 + 6 + (h / 0.672) * 2.584;   // apple box + gap + play box
-assert.ok(rowWidth <= 375 - 44, `both badges need ${Math.ceil(rowWidth)}px but only 331px is free at 375px, so they would stack`);
-assert.ok(/\.ios \.badge-play,\.android \.badge-apple\{display:none\}/.test(css),
-  'the per-device badge rule is missing, so phones would show both');
+// 360px phone minus 44px of page padding, with 12px of slack for sub-pixel
+// rounding. Measured: 40px pill spans 23→322 of 360. A 44px pill would need
+// 329px of the 316px available and would overflow.
+const free = 360 - 44 - 12;
+assert.ok(rowWidth <= free,
+  `both badges need ${Math.ceil(rowWidth)}px but only ${free}px is usable on a 360px phone, so they would overflow`);
+assert.ok(/\.ios \.badge-play\{display:none\}/.test(css), 'iOS should not be offered Play');
+assert.ok(!/\.badge-apple\{display:none\}/.test(css),
+  'the App Store badge must never be hidden: this page catches iOS paid traffic');
 
 console.log(`ok — ${checked} strings match i18n/en.json, images ${(bytes / 1024).toFixed(0)}KB, links and ?lang= verified`);

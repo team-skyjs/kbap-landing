@@ -54,10 +54,9 @@ p{margin:0}
 }
 .hero > *:not(.glow){position:relative}
 
-.brand{flex:0 0 auto;padding:6px 0 0}
-.brand img{display:block;margin:0 auto;height:23px;width:auto}
-
-.copy{flex:0 0 auto;margin-top:clamp(26px,7svh,60px)}
+/* No wordmark at the top: the one on file is the old lockup, and the headline
+   says the name anyway. */
+.copy{flex:0 0 auto;margin-top:clamp(52px,12svh,120px)}
 
 h1{
   font-size:clamp(34px,9.4vw,56px);
@@ -83,16 +82,21 @@ h1{
    Nothing is rotated, recoloured, redrawn or animated, and flex:0 0 auto stops
    a narrow viewport from shrinking the art off its own proportions.
 
-   --bh is the pill height. With JS the device gets one badge at 52px. Without
-   it both show at 44px, which still fits one row at 375px: two badges stacked
-   vertically is the thing this page must never do. */
+   --bh is the pill height. iOS gets one badge at 52px. Everywhere else both
+   show at 40px, Apple's documented minimum, which leaves ~16px of slack on a
+   360px phone. 44px measured as fitting on paper and still wrapped, so the
+   floor buys the headroom: two badges stacked vertically is the one thing this
+   page must never do. */
 .badges{
-  --bh:44px;
+  --bh:40px;
   margin-top:clamp(22px,3.6svh,34px);
   display:flex;justify-content:center;align-items:center;gap:6px;
 }
-.ios .badges,.android .badges{--bh:52px}
-.ios .badge-play,.android .badge-apple{display:none}
+/* Only iOS drops a badge, and it drops Play. The App Store link stays on every
+   device: this page exists to catch iOS paid traffic, so it must never be the
+   link that disappears. Android and desktop therefore show both, at 44px. */
+.ios .badges{--bh:52px}
+.ios .badge-play{display:none}
 
 .badge{display:inline-flex;flex:0 0 auto;text-decoration:none;-webkit-tap-highlight-color:transparent;transition:transform .18s ease}
 .badge:active{transform:scale(.97)}
@@ -134,16 +138,15 @@ footer a:hover{color:var(--ink)}
    would push back the largest paint, so it stays painted the whole time. */
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes lift{from{transform:translate(-50%,28px)}to{transform:translate(-50%,0)}}
-.brand,h1,.lede,.badges,.note{animation:rise .62s cubic-bezier(.22,.7,.28,1) backwards}
-.brand{animation-delay:.04s}
-h1{animation-delay:.10s}
+h1,.lede,.badges,.note{animation:rise .62s cubic-bezier(.22,.7,.28,1) backwards}
+h1{animation-delay:.06s}
 .lede{animation-delay:.20s}
 .badges{animation-delay:.28s}
 .note{animation-delay:.36s}
 .screen{animation:lift .8s cubic-bezier(.22,.7,.28,1) .18s backwards}
 
 @media (prefers-reduced-motion:reduce){
-  .brand,h1,.lede,.badges,.note,.screen,.badge{animation:none;transition:none}
+  h1,.lede,.badges,.note,.screen,.badge{animation:none;transition:none}
 }
 
 /* ---------------- roomier screens ---------------- */
