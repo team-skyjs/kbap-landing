@@ -77,6 +77,18 @@
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(navigator.userAgent);
 
+  // The nav pill points at whichever store this device actually has. On desktop
+  // it stays on the App Store, which is where the paid traffic is headed.
+  var pill = document.querySelector('.pill');
+  if (pill && isAndroid) pill.setAttribute('data-store', 'android');
+
+  // One store badge per device, side by side only on desktop. If JS never runs,
+  // both stay visible and simply wrap, which beats hiding a store outright.
+  if (isIOS || isAndroid) {
+    var drop = isIOS ? '.badge-play' : '.badge-apple';
+    document.querySelectorAll('.badges ' + drop).forEach(function (b) { b.remove(); });
+  }
+
   // --- store links: UTM passthrough, then the iOS in-app-browser escape ------
   document.querySelectorAll('a[data-store="android"]').forEach(function (a) {
     a.href = playUrl(search);
@@ -94,29 +106,6 @@
       setTimeout(function () { window.location.href = https; }, 1500);
     });
   });
-
-  // --- floating bar: one badge on a phone, both on desktop ------------------
-  var bar = document.getElementById('floatbar');
-  if (bar) {
-    if (isIOS) { bar.querySelector('.badge-play').remove(); bar.classList.add('one-store'); }
-    else if (isAndroid) { bar.querySelector('.badge-apple').remove(); bar.classList.add('one-store'); }
-    bar.hidden = false;
-
-    var heroCta = document.getElementById('hero-cta');
-    var finalCta = document.getElementById('final-cta');
-    if ('IntersectionObserver' in window && heroCta && finalCta) {
-      var onScreen = new Set();
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) onScreen.add(en.target); else onScreen.delete(en.target);
-        });
-        bar.classList.toggle('is-off', onScreen.size > 0);
-      }, { threshold: 0.01 });
-      io.observe(heroCta);
-      io.observe(finalCta);
-      bar.classList.add('is-off'); // the hero CTA is what you land on
-    }
-  }
 
   // --- ?lang= : English is inline, so a fetch only happens for other langs ---
   var lang = resolveLang(search);

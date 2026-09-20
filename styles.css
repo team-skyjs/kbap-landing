@@ -1,4 +1,17 @@
-/* K-Bap landing — palette is the ad creative's, so the ad and the page match. */
+/* Pretendard renders 5.33% wider than the system UI font at the same size, so
+   when it swapped in it re-wrapped the headline and moved the hero image down
+   (CLS 0.052). This fallback is the system font scaled to Pretendard's width,
+   so the pre-swap and post-swap line breaks match and nothing moves. */
+@font-face{
+  font-family:"Pretendard Fallback";
+  src:local("Helvetica Neue"), local("Roboto"), local("Segoe UI"), local("Arial");
+  size-adjust:105.3%;
+  font-weight:100 900;
+}
+
+/* K-Bap landing — palette is the ad creative's, so the ad and the page match.
+   Structure and type follow the 2nd-round brief: lighter weights, tighter
+   leading, cards instead of eight identical blocks. */
 :root{
   --primary:#FF7134;
   /* #FF7134 is 2.6:1 on white, so orange TEXT uses this darker tone (5.0:1). */
@@ -6,12 +19,11 @@
   --peach:#FFE8DE;
   --cream:#FBF6EC;
   --ink:#2F3137;
-  /* The palette's body grey is #6A6F7C, which is 5.0:1 on white but only 4.27:1
-     on the peach panels, and #9196A1 is 2.96:1 anywhere. Both miss the 4.5:1
-     bar, so secondary text darkens a step. Measurably: 5.9:1 on white,
-     5.0:1 on peach. */
+  /* The palette's body grey is #6A6F7C, which is 5.0:1 on white but only
+     4.27:1 on the peach panels, and #9196A1 is 2.96:1 anywhere. Both miss the
+     4.5:1 bar, so secondary text darkens a step: 5.9:1 white, 5.0:1 peach. */
   --ink-2:#5F646F;
-  --ink-3:#5F646F;
+  --ink-3:#8A8F9A;   /* headline's second tone only — never body text */
   --panel:#F9F8F8;
   --line:#EAEBEE;
 
@@ -22,46 +34,70 @@
   --avoid:#F76661;  --avoid-ink:#C4352F;
   --unable:#5B6470; --unable-ink:#6A6F7C;
 
-  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --font:"Pretendard Variable",Pretendard,"Pretendard Fallback",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --nav:56px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;
-  background:#fff;
+  background:var(--cream);
   color:var(--ink);
   font-family:var(--font);
-  font-size:17px;
-  line-height:1.6;
+  font-size:16px;
+  line-height:1.55;
   overflow-x:hidden;
 }
 img{max-width:100%}
-h1,h2,h3{line-height:1.25;margin:0;text-wrap:balance}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
 p{margin:0}
+ul{margin:0;padding:0;list-style:none}
 
-.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
 
-section{padding:56px 0}
-.band{background:var(--cream)}
-
-.eyebrow{
-  font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-2);margin-bottom:10px;
+/* ---------- sticky nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:30;height:var(--nav);
+  background:rgba(251,246,236,.82);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
 }
-h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
-section > .wrap > p{color:var(--ink-2)}
+.nav-in{
+  max-width:640px;margin:0 auto;padding:0 20px;height:var(--nav);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-wm{display:block;height:20px;width:auto}
+/* The always-reachable install control. Scroll position never hides it. */
+.pill{
+  display:inline-flex;align-items:center;height:36px;padding:0 16px;
+  border-radius:999px;background:var(--primary-ink);color:#fff;  /* white on #FF7134 is 2.74:1 */
+  font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+}
+.pill:hover{background:#A93712}
+.pill:focus-visible{outline:3px solid var(--primary-ink);outline-offset:2px}
 
 /* ---------- hero ---------- */
-.hero{
-  background:linear-gradient(180deg,var(--peach) 0%,#fff 100%);
-  padding:28px 0 8px;
-  text-align:center;
+.hero{padding:56px 0 0;overflow:hidden}
+h1{
+  font-size:38px;line-height:1.08;letter-spacing:-.03em;
+  display:flex;flex-direction:column;
 }
-.wordmark{display:block;margin:0 auto 22px;height:38px;width:auto}
-.hero h1{font-size:32px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
-.lede{color:var(--ink-2);font-size:17px;margin-bottom:26px}
-.note{color:var(--ink-2);font-size:14px;margin-top:14px}
+.h1-dim{color:var(--ink-3)}   /* two-tone headline, same size */
+.lede{margin-top:18px;font-size:17px;color:var(--ink-2);max-width:30em}
+.note{margin-top:12px;font-size:12px;color:var(--ink-2)}
+
+/* App screen with no device frame, running off the right edge and cut at the
+   bottom. Keeps the hero short and avoids Apple's device-image rules entirely. */
+.hero-shot{
+  margin:34px -28px 0 20%;
+  height:340px;overflow:hidden;
+  border:1px solid var(--line);border-radius:24px 24px 0 0;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.18);
+  background:#fff;
+}
+.hero-shot img{display:block;width:100%;height:auto}
 
 /* ---------- store badges (Apple + Google official assets, unmodified) ----------
    Apple's SVG is 119.664x40 with NO clear space baked in, so the 1/4-height
@@ -69,129 +105,94 @@ section > .wrap > p{color:var(--ink-2)}
    Google's PNG is 646x250 where the pill is 564x168 centred in 41px of
    transparency: 41/168 is already ~1/4, so it gets no extra padding, and its
    box height is pill/0.672 to make both pills the same height. Neither asset is
-   rotated, recoloured, re-drawn or animated. */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px}
-/* flex:0 0 auto matters: a shrinking flex item would squash the badge art, and
+   rotated, recoloured, re-drawn or animated.
+   flex:0 0 auto matters: a shrinking flex item would squash the badge art, and
    rescaling it off its own proportions counts as modifying the asset. */
+.badges{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .badge{display:inline-flex;flex:0 0 auto;text-decoration:none;-webkit-tap-highlight-color:transparent}
 .badge img{display:block}
-.badge-apple{padding:12px}              /* 48 / 4 */
-.badge-apple img{height:48px;width:144px}
-.badge-play img{height:71px;width:184px} /* pill = 48px tall */
+.badge-apple{padding:13px}                /* 52 / 4 */
+.badge-apple img{height:52px;width:156px}
+.badge-play img{height:77px;width:199px}  /* pill = 52px tall */
 .badge:focus-visible{outline:3px solid var(--primary-ink);outline-offset:2px;border-radius:10px}
-/* Two full-size badges need ~356px. Below that they stack, so every phone in
-   the QA set (375/390/412) gets the same predictable layout. */
-@media (max-width:479px){ .badges:not(.badges-float){flex-direction:column} }
 
-/* ---------- screenshots (straight, no tilt, no shadow, no reflection) ---------- */
-.shot{
-  display:block;margin:26px auto 0;width:190px;height:auto;
-  border-radius:20px;border:1px solid var(--line);background:#fff;
+/* ---------- feature cards ---------- */
+.cards{padding:64px 0 0}
+h2{font-size:30px;line-height:1.12;letter-spacing:-.025em}
+.grid{margin-top:26px;display:grid;grid-template-columns:1fr;gap:12px}
+.card{
+  position:relative;overflow:hidden;
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;
 }
-.shot-hero{width:232px;margin-top:30px}
-/* A cropped region rather than a whole phone screen, so it spans the text
-   column instead of sitting in a narrow phone-width block. */
-.shot-wide{width:100%;border-radius:14px}
-.pair{display:flex;gap:10px;justify-content:center}
-.pair .shot{width:150px;margin-top:26px}
-
-/* ---------- features ---------- */
-.feat{padding:34px 0;border-top:1px solid var(--line)}
-.feat:first-of-type{border-top:none}
-.num{
-  font-size:13px;font-weight:800;letter-spacing:.1em;
-  color:var(--primary-ink);margin-bottom:6px;
-}
-.feat h3{font-size:21px;font-weight:700;margin-bottom:8px}
-.feat p{color:var(--ink-2)}
-.ficon{
+.card-quiet{background:var(--panel)}   /* breaks the run of white cards */
+.chip{
   display:inline-flex;align-items:center;justify-content:center;
-  width:52px;height:52px;border-radius:14px;
-  background:var(--peach);color:var(--primary-ink);margin-bottom:12px;
+  width:40px;height:40px;border-radius:12px;
+  background:var(--peach);color:var(--primary-ink);margin-bottom:14px;
 }
-
-/* ---------- risk states ---------- */
-.risks{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
-.risk{
-  display:flex;gap:14px;align-items:flex-start;
-  background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;
+.card h3{font-size:20px;line-height:1.2;letter-spacing:-.015em}
+.card p{margin-top:7px;font-size:15px;line-height:1.5;color:var(--ink-2)}
+/* UI fragment, bleeding off the bottom of its card. */
+.frag{
+  display:block;margin:18px -20px -20px;max-height:260px;overflow:hidden;
+  border-radius:12px 12px 0 0;border-top:1px solid var(--line);
 }
-.risk .mark{flex:0 0 auto;line-height:0}
-.risk h3{font-size:17px;font-weight:700;margin-bottom:2px}
-.risk p{color:var(--ink-2);font-size:15px}
-.risk-safe .mark{color:var(--safe)}    .risk-safe h3{color:var(--safe-ink)}
-.risk-caution .mark{color:var(--warn)} .risk-caution h3{color:var(--warn-ink)}
-.risk-avoid .mark{color:var(--avoid)}  .risk-avoid h3{color:var(--avoid-ink)}
-.risk-nodata .mark{color:var(--unable)}.risk-nodata h3{color:var(--unable-ink)}
+.frag img{display:block;width:100%;height:auto}
 
-/* ---------- languages ---------- */
-.langs{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.langs li{
-  background:var(--panel);border:1px solid var(--line);border-radius:999px;
-  padding:7px 14px;font-size:15px;font-weight:600;color:var(--ink);
+/* four risk labels, inside the rating card — colour AND shape both carry state */
+.chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.rk{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px 5px 6px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);
+  font-size:13px;font-weight:600;
 }
+.rk .mk{display:inline-flex;line-height:0}
+.rk-safe .mk{color:var(--safe)}    .rk-safe{color:var(--safe-ink)}
+.rk-caution .mk{color:var(--warn)} .rk-caution{color:var(--warn-ink)}
+.rk-avoid .mk{color:var(--avoid)}  .rk-avoid{color:var(--avoid-ink)}
+.rk-nodata .mk{color:var(--unable)}.rk-nodata{color:var(--unable-ink)}
 
-/* ---------- final CTA ---------- */
-.final{background:var(--peach);text-align:center}
-.appicon{border-radius:18px;margin-bottom:16px}
-.final h2{font-size:27px;margin-bottom:8px}
-.final p{color:var(--ink-2);margin-bottom:18px}
-.final .badges{margin-top:4px}
+.langs-line{margin-top:22px;font-size:15px;line-height:1.6;color:var(--ink-2)}
+
+/* ---------- final CTA (left aligned, per brief) ---------- */
+.final{margin-top:64px;background:var(--peach);padding:56px 0}
+.final h2{font-size:32px}
+.final p{margin-top:8px;font-size:16px;color:var(--ink-2)}
 
 /* ---------- footer ---------- */
-footer{background:#fff;padding:36px 0 44px;border-top:1px solid var(--line);text-align:center}
-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:16px}
-footer a{color:var(--ink-2);font-size:15px;text-decoration:underline;text-underline-offset:3px}
+footer{background:var(--cream);padding:34px 0 44px;border-top:1px solid var(--line)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:14px}
+footer a{color:var(--ink-2);font-size:14px;text-decoration:underline;text-underline-offset:3px}
 footer a:hover{color:var(--ink)}
-.disclaimer{color:var(--ink-2);font-size:14px;margin-bottom:10px}
-.copy{color:var(--ink-3);font-size:13px}
+.disclaimer{color:var(--ink-2);font-size:13px;margin-bottom:8px;max-width:40em}
+.copy{color:var(--ink-2);font-size:12px}
 
-/* ---------- floating install bar ----------
-   Always reachable, whatever the scroll position. Hidden while either big CTA
-   is on screen so the badges never sit on top of each other. */
-.floatbar{
-  position:fixed;left:0;right:0;bottom:0;z-index:20;
-  background:rgba(255,255,255,.96);
-  -webkit-backdrop-filter:saturate(180%) blur(12px);
-  backdrop-filter:saturate(180%) blur(12px);
-  border-top:1px solid var(--line);
-  padding-bottom:env(safe-area-inset-bottom);
-  transform:translateY(0);
-  transition:transform .22s ease,opacity .22s ease;
-}
-.floatbar[hidden]{display:none}
-.floatbar.is-off{transform:translateY(110%);opacity:0;pointer-events:none}
-.floatbar-inner{
-  max-width:640px;margin:0 auto;padding:6px 12px;
-  display:flex;align-items:center;gap:10px;
-}
-.floaticon{border-radius:10px;flex:0 0 auto}
-.floatlabel{font-size:15px;font-weight:700;flex:1 1 auto;text-align:left}
-.badges-float{flex:0 0 auto;gap:0;flex-wrap:nowrap}
-.badges-float .badge-apple{padding:10px}          /* 40 / 4 */
-.badges-float .badge-apple img{height:40px;width:120px}
-.badges-float .badge-play img{height:60px;width:155px} /* pill = 40px tall */
-/* A real phone gets exactly one store badge (app.js adds .one-store), which
-   leaves room for the icon and label. Only a narrow window still showing both
-   badges has to drop them so each badge keeps its required clear space. */
-@media (max-width:519px){
-  .floatbar:not(.one-store) .floatlabel,
-  .floatbar:not(.one-store) .floaticon{display:none}
-  .floatbar:not(.one-store) .badges-float{flex:1 1 auto;justify-content:center}
+/* ---------- wider screens ---------- */
+@media (min-width:680px){
+  .hero{padding-top:76px}
+  h1{font-size:52px}
+  .lede{font-size:19px;margin-top:22px}
+  .hero-shot{margin:44px -40px 0 40%;height:420px}
+  h2{font-size:38px}
+  .cards{padding-top:88px}
+  .grid{grid-template-columns:1fr 1fr;gap:14px}
+  .card-wide{grid-column:1 / -1}
+  /* A phone UI fragment stretched to a 600px card renders ~1.6x life size and
+     reads wrong next to the card's own text. On desktop the wide cards put it
+     in a right-hand panel instead, close to its true scale. */
+  .card-wide:has(.frag){display:grid;grid-template-columns:1fr 296px;column-gap:24px;align-items:start}
+  .card-wide:has(.frag) > :not(.frag){grid-column:1}
+  .card-wide:has(.frag) > .frag{
+    /* span 10, not 1/-1: with no explicit rows, -1 resolves to the end of the
+       EXPLICIT grid (line 1), so 1/-1 would pin the panel into row 1 and stretch
+       that row, leaving a gap under the icon chip. */
+    grid-column:2;grid-row:1 / span 10;align-self:center;
+    margin:0 -20px 0 0;max-height:none;
+    border:1px solid var(--line);border-right:0;border-radius:12px 0 0 12px;
+  }
+  .final{margin-top:88px;padding:72px 0}
+  .final h2{font-size:40px}
 }
 
-@media (prefers-reduced-motion:reduce){ .floatbar{transition:none} }
-
-/* ---------- wider screens: same single 640px column, just roomier ---------- */
-@media (min-width:600px){
-  section{padding:72px 0}
-  .hero{padding-top:44px}
-  .hero h1{font-size:40px}
-  .lede{font-size:18px}
-  h2{font-size:30px}
-  .shot{width:230px}
-  .shot-wide{width:100%}
-  .shot-hero{width:270px}
-  .pair .shot{width:200px}
-  .final h2{font-size:32px}
-}
+@media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto} }

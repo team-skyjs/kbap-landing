@@ -97,10 +97,21 @@ for (const f of fs.readdirSync(path.join(dir, 'i18n'))) {
 
 // --- Meta kills redirect chains: nothing may navigate outside a click handler
 const js = fs.readFileSync(path.join(dir, 'app.js'), 'utf8');
-for (const m of js.matchAll(/(?:window\.)?location\.(?:href\s*=|replace\()/g)) {
-  const before = js.slice(0, m.index);
-  assert.ok(before.lastIndexOf('addEventListener(\'click\'') > before.lastIndexOf('\n  }'),
-    'app.js navigates outside a click handler, which Meta would see as a redirect');
-}
+const hStart = js.indexOf("a.addEventListener('click'");
+assert.ok(hStart !== -1, 'the iOS itms-apps click handler is gone');
+const hEnd = js.indexOf('});', js.indexOf('}, 1500);', hStart)) + 3;
+const handler = js.slice(hStart, hEnd);
+const outside = js.slice(0, hStart) + js.slice(hEnd);
+assert.ok(!/location\s*\.\s*(href\s*=|replace\(|assign\()/.test(outside),
+  'app.js navigates outside the click handler, which Meta would see as a redirect');
+assert.ok(/window\.location\.href = itmsUrl\(/.test(handler) && /1500/.test(handler),
+  'the itms-apps escape and its 1.5s https fallback must both run on tap');
+
+// --- 2nd-round design rules that are cheap to regress
+assert.ok(!/class="num"/.test(html), 'numbered eyelabels are back; the brief removed them');
+assert.ok(/class="pill"[^>]*data-store=/.test(html), 'the sticky-nav install pill is missing or has no store link');
+assert.ok(/<header class="nav">/.test(html), 'the sticky nav is missing');
+assert.strictEqual((html.match(/class="card[ "]/g) || []).length, 8, 'there must be 8 feature cards');
+assert.strictEqual((html.match(/class="rk /g) || []).length, 4, 'all four risk labels must be present');
 
 console.log(`ok — ${checked} strings match i18n/en.json, images ${(bytes / 1024).toFixed(0)}KB, links and ?lang= verified`);
