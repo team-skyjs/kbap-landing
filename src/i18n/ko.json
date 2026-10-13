@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — 한식 메뉴판, 이제 다 읽혀요",
+  "meta.description": "한국어 메뉴판을 찍으면 모든 메뉴를 사진, 재료, 알레르기 경고, 맵기, 나와 비슷한 사람들의 리뷰와 함께 보여줘요.",
+
+  "hero.headline1": "메뉴 이름만으로는",
+  "hero.headline2": "뭐가 들었는지 몰라요.",
+  "hero.headline3": "K-Bap은 알아요.",
+  "hero.sub": "메뉴판을 찍으면, 피해야 할 메뉴가 표시돼서 돌아와요.",
+  "hero.note": "무료 · 10개 언어",
+  "hero.shotAlt": "내 회피 목록을 기준으로 한식 메뉴를 안전 또는 회피로 평가하는 K-Bap 앱 화면",
+
+  "store.appleAlt": "App Store에서 다운로드",
+  "store.playAlt": "Google Play에서 다운로드",
+
+  "f.translate.eyebrow": "번역",
+  "f.translate.title": "번역, 그 이상",
+  "f.translate.body": "한국어 메뉴판을 찍으면 모든 메뉴가 내 언어로 보여요. 메뉴를 누르면 어떤 음식인지, 무엇이 들어가는지까지 알려줘요.",
+
+  "f.allergy.eyebrow": "알레르기",
+  "f.allergy.title": "숨은 재료까지 찾아내요",
+  "f.allergy.body": "한식에는 젓갈, 된장·고추장 같은 장류, 액젓처럼 눈에 안 보이는 재료가 많아요. 피해야 할 재료를 알려주면 모든 메뉴를 안전, 주의, 회피로 표시해요.",
+
+  "f.photos.eyebrow": "사진",
+  "f.photos.title": "모든 메뉴에 사진을",
+  "f.photos.body": "한국엔 사진 없이 글자만 빼곡한 메뉴판이 많아요. K-Bap은 메뉴마다 사진을 보여줘서, 뭘 주문하는지 알 수 있어요.",
+
+  "f.reviews.eyebrow": "리뷰",
+  "f.reviews.title": "나와 비슷한 사람들의 리뷰",
+  "f.reviews.body": "세계 여러 나라 여행자들의 리뷰를 보거나, 입맛이 가장 비슷한 같은 나라 사람들의 리뷰만 모아 볼 수 있어요.",
+
+  "f.spice.eyebrow": "맵기",
+  "f.spice.title": "먹기 전에 맵기부터 확인",
+  "f.spice.body": "모든 메뉴에 평균 맵기가 안 매움부터 극한맛까지 표시돼요.",
+
+  "f.order.eyebrow": "주문",
+  "f.order.title": "한국어를 몰라도 한국어로 주문",
+  "f.order.body": "번역 앱은 이제 그만. 고른 메뉴를 한국어 주문 화면으로 만들어 드려요. 빼 달라고 할 재료까지 담아서, 직원에게 보여주기만 하면 돼요.",
+
+  "f.share.eyebrow": "공유",
+  "f.share.title": "먹은 한식을 자랑하세요",
+  "f.share.body": "먹은 한식을 원하는 사진과 함께 인스타그램에 공유할 수 있어요.",
+
+  "cta.title": "다음 한식, 이제 고민 없이.",
+
+  "nav.blog": "블로그",
+  "nav.changelog": "업데이트 소식",
+  "langSuggest": "한국어로 보기",
+
+  "footer.privacy": "개인정보처리방침",
+  "footer.terms": "이용약관",
+  "footer.safety": "안전 안내",
+  "footer.contact": "문의",
+  "footer.language": "언어",
+  "footer.disclaimer": "재료 정보는 참고용이며 의학적 조언이 아니에요.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

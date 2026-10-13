@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — 看懂每一份韓文菜單",
+  "meta.description": "拍下韓文菜單，每道菜都以你的語言呈現，還有照片、食材、過敏提醒、辣度，以及和你一樣的旅客的評價。",
+
+  "hero.headline1": "看不懂",
+  "hero.headline2": "韓文菜單？",
+  "hero.headline3": "K-Bap 看得懂。",
+  "hero.sub": "拍下韓文菜單，不該點的菜會被標出來。",
+  "hero.note": "免費 · 支援 10 種語言",
+  "hero.shotAlt": "K-Bap App 依使用者自己的清單將韓國菜標為安全或禁止",
+
+  "store.appleAlt": "在 App Store 下載",
+  "store.playAlt": "在 Google Play 下載",
+
+  "f.translate.eyebrow": "翻譯",
+  "f.translate.title": "不只是翻譯",
+  "f.translate.body": "拍下韓文菜單，每道菜都會以你的語言顯示。點一下，就能看到這是什麼菜、裡面有哪些食材。",
+
+  "f.allergy.eyebrow": "過敏",
+  "f.allergy.title": "隱藏的食材也找得出來",
+  "f.allergy.body": "韓國菜裡藏著許多看不見的食材：鹹魚醬、大醬和辣椒醬等醬類、魚露。告訴 K-Bap 你要避開什麼，每道菜都會標為安全、注意或禁止。",
+
+  "f.photos.eyebrow": "照片",
+  "f.photos.title": "每道菜都有照片",
+  "f.photos.body": "韓國很多菜單沒有圖片，只有滿滿的韓文。K-Bap 為每道菜顯示照片，讓你知道自己點的是什麼。",
+
+  "f.reviews.eyebrow": "評價",
+  "f.reviews.title": "來自和你一樣的人的評價",
+  "f.reviews.body": "看看世界各地的旅客對每道菜的評價，也可以只看和你口味最接近的同國旅客的評價。",
+
+  "f.spice.eyebrow": "辣度",
+  "f.spice.title": "吃之前就知道有多辣",
+  "f.spice.body": "每道菜都標有平均辣度，從不辣到特辣。",
+
+  "f.order.eyebrow": "點餐",
+  "f.order.title": "不會韓語，也能用韓語點餐",
+  "f.order.body": "不用再依賴翻譯 App。K-Bap 把你選的菜做成韓文點餐畫面，連要去掉的食材也寫上，給店員看就好。",
+
+  "f.share.eyebrow": "分享",
+  "f.share.title": "分享你吃過的韓國菜",
+  "f.share.body": "把你吃過的韓國菜，連同你挑選的照片一起分享到 Instagram。",
+
+  "cta.title": "下一頓韓國菜，不再用猜的。",
+
+  "nav.blog": "部落格",
+  "nav.changelog": "更新動態",
+  "langSuggest": "查看繁體中文版",
+
+  "footer.privacy": "隱私權政策",
+  "footer.terms": "使用條款",
+  "footer.safety": "安全須知",
+  "footer.contact": "聯絡我們",
+  "footer.language": "語言",
+  "footer.disclaimer": "食材資訊僅供參考，並非醫療建議。",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

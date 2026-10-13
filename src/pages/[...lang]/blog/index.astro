@@ -1,0 +1,35 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { langParam, localePath } from '../../../i18n/langs.js';
+import { t as dict } from '../../../i18n/t.js';
+import { posts } from '../../../content/posts.js';
+
+// A blog index only for languages that have posts: an empty page is thin content.
+export async function getStaticPaths() {
+  const all = await posts();
+  const langs = [...new Set(all.map((p) => p.lang))];
+  return langs.map((lang) => ({
+    params: { lang: langParam(lang) },
+    props: { lang, list: all.filter((p) => p.lang === lang), langs },
+  }));
+}
+
+const { lang, list, langs } = Astro.props;
+const t = dict(lang);
+---
+<Base lang={lang} path="/blog/" title={`${t('nav.blog')} — K-Bap`} alternates={langs}>
+  <main class="page">
+    <h1>{t('nav.blog')}</h1>
+    <ul class="posts">
+      {list.map((p) => (
+        <li>
+          <a href={localePath(lang, `/blog/${p.slug}/`)}>
+            <h2>{p.data.title}</h2>
+            <p>{p.data.description}</p>
+            <time datetime={p.data.date.toISOString()}>{p.data.date.toLocaleDateString(lang, { dateStyle: 'long' })}</time>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>

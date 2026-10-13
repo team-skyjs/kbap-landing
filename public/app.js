@@ -10,13 +10,8 @@
   var APP_STORE = 'https://apps.apple.com/app/id6788635067';
   var PLAY = 'https://play.google.com/store/apps/details?id=com.rocher.kbap';
 
-  /** Languages the app itself ships. Anything else falls back to English. */
+  /** Languages the app itself ships (each has its own /<code>/ page). */
   var LANGS = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'vi', 'id', 'th', 'ru', 'es'];
-
-  /** Dictionaries that actually exist in i18n/. The ad sets already send
-   *  ?lang=ja and ?lang=zh-*, so without this gate every non-English click
-   *  would spend a request on a 404. Add a code here when its json lands. */
-  var HAVE = ['en'];
 
   /* ------------------------------------------------------------------ *
    * Pure helpers (also exported for check.js)
@@ -47,9 +42,8 @@
     return APP_STORE;
   }
 
-  /** ?lang= hook. Only English is translated so far; the rest resolve to en. */
-  function resolveLang(search) {
-    var raw = new URLSearchParams(search || '').get('lang');
+  /** A locale tag (?lang= from the ad sets, or the browser's) to one of LANGS. */
+  function resolveLang(raw) {
     if (!raw) return 'en';
     if (LANGS.indexOf(raw) !== -1) return raw;
     var lower = raw.toLowerCase();
@@ -63,7 +57,7 @@
     return httpsUrl.replace(/^https:\/\//, 'itms-apps://');
   }
 
-  var api = { playUrl: playUrl, appStoreUrl: appStoreUrl, resolveLang: resolveLang, itmsUrl: itmsUrl, LANGS: LANGS, HAVE: HAVE };
+  var api = { playUrl: playUrl, appStoreUrl: appStoreUrl, resolveLang: resolveLang, itmsUrl: itmsUrl, LANGS: LANGS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.kbap = api;
 
@@ -103,30 +97,17 @@
     });
   });
 
-  // --- ?lang= : English is inline, so a fetch only happens for other langs ---
-  var lang = resolveLang(search);
-  if (HAVE.indexOf(lang) === -1) lang = 'en'; // asked for, but not translated yet
-  document.documentElement.lang = lang;
-  if (lang !== 'en') {
-    fetch('i18n/' + lang + '.json')
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (dict) {
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-          var v = dict[el.getAttribute('data-i18n')];
-          if (v) el.textContent = v;
-        });
-        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
-          var v = dict[el.getAttribute('data-i18n-alt')];
-          if (v) el.setAttribute('alt', v);
-        });
-        document.querySelectorAll('[data-i18n-content]').forEach(function (el) {
-          var v = dict[el.getAttribute('data-i18n-content')];
-          if (v) el.setAttribute('content', v);
-        });
-      })
-      .catch(function () {
-        // No dictionary for that language yet. English is already on screen.
-        document.documentElement.lang = 'en';
-      });
+  // --- root page only: offer the visitor's language as a link. Never navigate
+  // on our own (see top of file); the ad sets' ?lang= wins over the browser.
+  var suggest = document.querySelector('.lang-suggest');
+  if (suggest) {
+    var want = resolveLang(new URLSearchParams(search).get('lang') || navigator.language);
+    var label = JSON.parse(suggest.getAttribute('data-suggest'))[want];
+    if (label) {
+      suggest.href = '/' + want + '/' + search;
+      suggest.lang = want;
+      suggest.textContent = label + ' \u2192';
+      suggest.hidden = false;
+    }
   }
 })(typeof globalThis !== 'undefined' ? globalThis : this);

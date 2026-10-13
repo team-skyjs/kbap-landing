@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — đọc mọi thực đơn tiếng Hàn",
+  "meta.description": "Quét thực đơn tiếng Hàn và xem mọi món bằng ngôn ngữ của bạn, kèm ảnh, nguyên liệu, cảnh báo dị ứng, độ cay và đánh giá từ những du khách như bạn.",
+
+  "hero.headline1": "Không đọc được",
+  "hero.headline2": "thực đơn?",
+  "hero.headline3": "K-Bap đọc được.",
+  "hero.sub": "Chụp thực đơn tiếng Hàn. Những món bạn nên tránh sẽ được đánh dấu.",
+  "hero.note": "Miễn phí · 10 ngôn ngữ",
+  "hero.shotAlt": "Ứng dụng K-Bap đánh giá món Hàn là An toàn hoặc Tránh theo danh sách của chính người dùng",
+
+  "store.appleAlt": "Tải về trên App Store",
+  "store.playAlt": "Tải trên Google Play",
+
+  "f.translate.eyebrow": "Dịch",
+  "f.translate.title": "Hơn cả một bản dịch",
+  "f.translate.body": "Quét thực đơn tiếng Hàn và mọi món hiện ra bằng ngôn ngữ của bạn. Chạm vào một món để biết đó là món gì và có những nguyên liệu nào.",
+
+  "f.allergy.eyebrow": "Dị ứng",
+  "f.allergy.title": "Lộ diện nguyên liệu ẩn",
+  "f.allergy.body": "Món Hàn ẩn chứa nhiều thứ: hải sản muối lên men, các loại tương đậu lên men, nước mắm. Cho K-Bap biết bạn cần tránh gì, mọi món sẽ được đánh dấu An toàn, Thận trọng hoặc Tránh.",
+
+  "f.photos.eyebrow": "Ảnh",
+  "f.photos.title": "Món nào cũng có ảnh",
+  "f.photos.body": "Nhiều thực đơn ở Hàn Quốc không có hình, chỉ toàn chữ Hangul. K-Bap hiển thị ảnh của từng món để bạn biết mình đang gọi gì.",
+
+  "f.reviews.eyebrow": "Đánh giá",
+  "f.reviews.title": "Đánh giá từ những người như bạn",
+  "f.reviews.body": "Xem du khách khắp thế giới nghĩ gì về từng món, hoặc chỉ xem đánh giá của người cùng quốc gia, những người có khẩu vị gần với bạn nhất.",
+
+  "f.spice.eyebrow": "Độ cay",
+  "f.spice.title": "Biết độ cay trước khi ăn",
+  "f.spice.body": "Mỗi món đều hiển thị độ cay trung bình, từ Không cay đến Siêu cay.",
+
+  "f.order.eyebrow": "Gọi món",
+  "f.order.title": "Gọi món bằng tiếng Hàn mà không cần biết tiếng Hàn",
+  "f.order.body": "Không cần ứng dụng dịch. K-Bap biến các món bạn chọn thành màn hình gọi món bằng tiếng Hàn để đưa nhân viên xem, kèm cả những nguyên liệu cần bỏ ra.",
+
+  "f.share.eyebrow": "Chia sẻ",
+  "f.share.title": "Chia sẻ món bạn đã ăn",
+  "f.share.body": "Đăng bữa ăn Hàn Quốc của bạn lên Instagram cùng những bức ảnh bạn chọn.",
+
+  "cta.title": "Bữa ăn Hàn tiếp theo, không cần đoán nữa.",
+
+  "nav.blog": "Blog",
+  "nav.changelog": "Có gì mới",
+  "langSuggest": "Xem bằng tiếng Việt",
+
+  "footer.privacy": "Quyền riêng tư",
+  "footer.terms": "Điều khoản",
+  "footer.safety": "An toàn",
+  "footer.contact": "Liên hệ",
+  "footer.language": "Ngôn ngữ",
+  "footer.disclaimer": "Thông tin nguyên liệu chỉ mang tính tham khảo, không phải lời khuyên y tế.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

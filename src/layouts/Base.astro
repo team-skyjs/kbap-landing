@@ -1,0 +1,95 @@
+---
+import '../styles.css';
+import { LANGS, ENDONYM, localePath } from '../i18n/langs.js';
+import { t as dict } from '../i18n/t.js';
+import { posts, releases } from '../content/posts.js';
+
+interface Props {
+  lang: string;
+  /** Path without the language prefix, e.g. "/" or "/blog/hello/". */
+  path: string;
+  title?: string;
+  description?: string;
+  /** Languages this exact page exists in. Only these get hreflang links. */
+  alternates?: string[];
+}
+
+const { lang, path, alternates = LANGS } = Astro.props;
+const t = dict(lang);
+const title = Astro.props.title ?? t('meta.title');
+const description = Astro.props.description ?? t('meta.description');
+const site = Astro.site!.origin;
+const url = (l: string) => site + localePath(l, path);
+const og = `${site}/assets/brand/og-cover.jpg`;
+
+// Footer links only point at pages that exist: no blog in your language → the English one.
+const blogLangs = new Set((await posts()).map((p) => p.lang));
+const blogHref = blogLangs.has(lang) ? localePath(lang, '/blog/') : blogLangs.has('en') ? '/blog/' : null;
+const hasChangelog = (await releases()).length > 0;
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="theme-color" content="#FBF6EC">
+<link rel="canonical" href={url(lang)}>
+{alternates.map((l) => <link rel="alternate" hreflang={l} href={url(l)}>)}
+{alternates.includes('en') && <link rel="alternate" hreflang="x-default" href={url('en')}>}
+<link rel="icon" href="/assets/brand/icon.webp" type="image/webp">
+<link rel="apple-touch-icon" href="/assets/brand/icon.webp">
+<link rel="sitemap" href="/sitemap-index.xml">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content={url(lang)}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={og}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content={lang.replace('-', '_')}>
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Which store this device has, decided before first paint so the badge row is
+     right in the first frame and nothing moves afterwards. No JS: both badges
+     stay, sized to still sit on one row. -->
+<script is:inline>(function(u,d){if(/iPhone|iPad|iPod/.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))d.className='ios';else if(/Android/.test(u))d.className='android';})(navigator.userAgent,document.documentElement);</script>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- Pretendard is the app's and the ad creative's typeface. Loaded off the
+     critical path so a slow CDN can't hold up first paint on paid traffic. -->
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"></noscript>
+
+<!-- Meta Pixel: no pixel exists on the ad account (checked 2026-09-21). When one is
+     created, the base code goes here. Nothing is loaded until then. -->
+<slot name="head" />
+</head>
+<body>
+<slot />
+
+<footer>
+  <nav aria-label="Site">
+    {blogHref && <a href={blogHref}>{t('nav.blog')}</a>}
+    {hasChangelog && <a href="/changelog/">{t('nav.changelog')}</a>}
+    <a href="mailto:teamskyjs@gmail.com">{t('footer.contact')}: teamskyjs@gmail.com</a>
+  </nav>
+  <nav aria-label="Legal">
+    <a href="https://team-skyjs.github.io/kbap-legal/privacy-policy.html">{t('footer.privacy')}</a>
+    <a href="https://team-skyjs.github.io/kbap-legal/terms-of-service.html">{t('footer.terms')}</a>
+    <a href="https://team-skyjs.github.io/kbap-legal/safety.html">{t('footer.safety')}</a>
+  </nav>
+  <nav class="langs" aria-label={t('footer.language')}>
+    {alternates.map((l) => (
+      <a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a>
+    ))}
+  </nav>
+  <p class="disclaimer">{t('footer.disclaimer')}</p>
+  <p class="copy-line">{t('footer.copyright')}</p>
+</footer>
+
+<script is:inline src="/app.js"></script>
+</body>
+</html>

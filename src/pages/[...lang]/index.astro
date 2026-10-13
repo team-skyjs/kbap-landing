@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import Badges from '../../components/Badges.astro';
+import { LANGS, langParam } from '../../i18n/langs.js';
+import { t as dict } from '../../i18n/t.js';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang: langParam(lang) }, props: { lang } }));
+}
+
+const { lang } = Astro.props;
+const t = dict(lang);
+
+// ponytail: copy-only sections until the kbap-design layouts land; then each gets its interactive demo.
+const FEATURES = ['translate', 'allergy', 'photos', 'reviews', 'spice', 'order', 'share'];
+
+// Each language's own "View in …" line, for the root page's suggestion link (app.js).
+const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l, dict(l)('langSuggest')]));
+---
+<Base lang={lang} path="/">
+  {lang === 'en' && (
+    <a class="lang-suggest" hidden data-suggest={JSON.stringify(suggest)}></a>
+  )}
+
+  <main>
+    <section class="hero">
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="copy">
+        <h1>
+          <span>{t('hero.headline1')}</span>
+          <span>{t('hero.headline2')}</span>
+          <span class="dim">{t('hero.headline3')}</span>
+        </h1>
+        <p class="lede">{t('hero.sub')}</p>
+        <Badges t={t} />
+        <p class="note">{t('hero.note')}</p>
+      </div>
+
+      <!-- The app itself, rising into frame and cut off by the fold. No device
+           frame: just the screen, so there is nothing for Apple's device-image
+           rules to object to. -->
+      <div class="stage">
+        <img class="screen" src="/assets/shots/home.webp" alt={t('hero.shotAlt')}
+             width="600" height="1300" fetchpriority="high" decoding="async">
+      </div>
+    </section>
+
+    <div class="features">
+      {FEATURES.map((f) => (
+        <section class="feature" id={f}>
+          <p class="eyebrow">{t(`f.${f}.eyebrow`)}</p>
+          <h2>{t(`f.${f}.title`)}</h2>
+          <p>{t(`f.${f}.body`)}</p>
+        </section>
+      ))}
+    </div>
+
+    <section class="cta">
+      <h2>{t('cta.title')}</h2>
+      <Badges t={t} />
+    </section>
+  </main>
+</Base>

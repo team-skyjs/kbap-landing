@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — baca menu Korea apa pun",
+  "meta.description": "Pindai menu Korea dan lihat setiap hidangan dalam bahasa Anda, lengkap dengan foto, bahan, peringatan alergi, tingkat pedas, dan ulasan dari pelancong seperti Anda.",
+
+  "hero.headline1": "Tidak bisa membaca",
+  "hero.headline2": "menunya?",
+  "hero.headline3": "K-Bap bisa.",
+  "hero.sub": "Foto menu Korea. Hidangan yang sebaiknya Anda hindari akan ditandai.",
+  "hero.note": "Gratis · 10 bahasa",
+  "hero.shotAlt": "Aplikasi K-Bap menilai hidangan Korea sebagai Aman atau Hindari berdasarkan daftar pengguna",
+
+  "store.appleAlt": "Unduh di App Store",
+  "store.playAlt": "Dapatkan di Google Play",
+
+  "f.translate.eyebrow": "Terjemahan",
+  "f.translate.title": "Lebih dari sekadar terjemahan",
+  "f.translate.body": "Pindai menu Korea dan setiap hidangan muncul dalam bahasa Anda. Ketuk satu untuk melihat hidangan apa itu dan apa saja bahannya.",
+
+  "f.allergy.eyebrow": "Alergi",
+  "f.allergy.title": "Bahan tersembunyi, ketahuan",
+  "f.allergy.body": "Makanan Korea menyimpan banyak bahan tersembunyi: makanan laut asin fermentasi, pasta kedelai fermentasi, kecap ikan. Beri tahu K-Bap apa yang Anda hindari, dan setiap hidangan ditandai Aman, Hati-hati, atau Hindari.",
+
+  "f.photos.eyebrow": "Foto",
+  "f.photos.title": "Foto untuk setiap hidangan",
+  "f.photos.body": "Banyak menu Korea hanya berisi tulisan Hangul tanpa gambar. K-Bap menampilkan foto setiap hidangan, jadi Anda tahu apa yang Anda pesan.",
+
+  "f.reviews.eyebrow": "Ulasan",
+  "f.reviews.title": "Ulasan dari orang seperti Anda",
+  "f.reviews.body": "Lihat pendapat pelancong dari seluruh dunia tentang setiap hidangan, atau hanya dari pelancong senegara Anda yang seleranya paling mirip.",
+
+  "f.spice.eyebrow": "Pedas",
+  "f.spice.title": "Tahu pedasnya sebelum terasa",
+  "f.spice.body": "Setiap hidangan menunjukkan rata-rata tingkat pedasnya, dari Tidak pedas hingga Sangat pedas.",
+
+  "f.order.eyebrow": "Pesan",
+  "f.order.title": "Pesan dalam bahasa Korea tanpa harus bisa",
+  "f.order.body": "Tak perlu aplikasi penerjemah. K-Bap mengubah pilihan Anda menjadi layar pesanan berbahasa Korea untuk ditunjukkan ke staf, termasuk bahan yang minta dihilangkan.",
+
+  "f.share.eyebrow": "Bagikan",
+  "f.share.title": "Bagikan yang Anda makan",
+  "f.share.body": "Unggah makanan Korea Anda ke Instagram bersama foto-foto pilihan Anda.",
+
+  "cta.title": "Makanan Korea berikutnya, tanpa menebak-nebak.",
+
+  "nav.blog": "Blog",
+  "nav.changelog": "Yang baru",
+  "langSuggest": "Lihat dalam Bahasa Indonesia",
+
+  "footer.privacy": "Privasi",
+  "footer.terms": "Ketentuan",
+  "footer.safety": "Keamanan",
+  "footer.contact": "Kontak",
+  "footer.language": "Bahasa",
+  "footer.disclaimer": "Informasi bahan hanya panduan, bukan nasihat medis.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

@@ -1,0 +1,27 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { t as dict } from '../../i18n/t.js';
+import { releases } from '../../content/posts.js';
+
+// No releases → no page (getStaticPaths returns nothing).
+// ponytail: English only; move under [...lang] when release notes get translated.
+export async function getStaticPaths() {
+  return (await releases()).length ? [{ params: { index: undefined } }] : [];
+}
+
+const list = await Promise.all((await releases()).map(async (e) => ({ e, Content: (await render(e)).Content })));
+const t = dict('en');
+---
+  <Base lang="en" path="/changelog/" title={`${t('nav.changelog')} — K-Bap`} alternates={['en']}>
+    <main class="page">
+      <h1>{t('nav.changelog')}</h1>
+      {list.map(({ e, Content }) => (
+        <article class="release prose" id={`v${e.data.version}`}>
+          <h2>{e.data.version}</h2>
+          <time datetime={e.data.date.toISOString()}>{e.data.date.toLocaleDateString('en', { dateStyle: 'long' })}</time>
+          <Content />
+        </article>
+      ))}
+    </main>
+  </Base>

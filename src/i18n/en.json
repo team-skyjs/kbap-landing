@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — read any Korean menu",
+  "meta.description": "Scan a Korean menu and see every dish in your language, with photos, ingredients, allergy warnings, spice levels and reviews from travelers like you.",
+
+  "hero.headline1": "You can't read",
+  "hero.headline2": "the menu.",
+  "hero.headline3": "K-Bap can.",
+  "hero.sub": "Snap a Korean menu. The dishes you should skip come back marked.",
+  "hero.note": "Free · 10 languages",
+  "hero.shotAlt": "The K-Bap app rating Korean dishes Safe or Avoid against the user's own list",
+
+  "store.appleAlt": "Download on the App Store",
+  "store.playAlt": "Get it on Google Play",
+
+  "f.translate.eyebrow": "Translate",
+  "f.translate.title": "More than a translation",
+  "f.translate.body": "Scan a Korean menu and every dish comes back in your language. Tap one to see what it is and what goes into it.",
+
+  "f.allergy.eyebrow": "Allergies",
+  "f.allergy.title": "Hidden ingredients, found",
+  "f.allergy.body": "Korean food hides a lot: salted seafood, fermented soybean pastes, fish sauce. Tell K-Bap what you avoid and every dish is marked Safe, Caution or Avoid.",
+
+  "f.photos.eyebrow": "Photos",
+  "f.photos.title": "A photo for every dish",
+  "f.photos.body": "Many Korean menus are just a wall of Hangul. K-Bap shows a photo of each dish, so you know what you're ordering.",
+
+  "f.reviews.eyebrow": "Reviews",
+  "f.reviews.title": "Reviews from people like you",
+  "f.reviews.body": "See what travelers from around the world thought of each dish, or only travelers from your own country, whose taste is closest to yours.",
+
+  "f.spice.eyebrow": "Spice",
+  "f.spice.title": "Know the heat before it hits",
+  "f.spice.body": "Every dish shows its average spice level, from None to Extreme.",
+
+  "f.order.eyebrow": "Order",
+  "f.order.title": "Order in Korean without speaking it",
+  "f.order.body": "Skip the translator app. K-Bap turns your picks into an order screen in Korean that you show to the staff, including what to leave out.",
+
+  "f.share.eyebrow": "Share",
+  "f.share.title": "Share what you ate",
+  "f.share.body": "Post your Korean meal to Instagram, together with the photos you choose.",
+
+  "cta.title": "Your next Korean meal, without the guesswork.",
+
+  "nav.blog": "Blog",
+  "nav.changelog": "What's new",
+  "langSuggest": "View in English",
+
+  "footer.privacy": "Privacy",
+  "footer.terms": "Terms",
+  "footer.safety": "Safety",
+  "footer.contact": "Contact",
+  "footer.language": "Language",
+  "footer.disclaimer": "Ingredient information is a guide, not medical advice.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

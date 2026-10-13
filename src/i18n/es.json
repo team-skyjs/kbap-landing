@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — entiende cualquier menú coreano",
+  "meta.description": "Escanea un menú coreano y ve cada plato en tu idioma, con fotos, ingredientes, alertas de alergias, nivel de picante y reseñas de viajeros como tú.",
+
+  "hero.headline1": "No puedes leer",
+  "hero.headline2": "el menú.",
+  "hero.headline3": "K-Bap sí.",
+  "hero.sub": "Fotografía un menú coreano. Los platos que debes evitar vuelven marcados.",
+  "hero.note": "Gratis · 10 idiomas",
+  "hero.shotAlt": "La app K-Bap calificando platos coreanos como Seguro o Evitar según la lista del usuario",
+
+  "store.appleAlt": "Descárgalo en el App Store",
+  "store.playAlt": "Disponible en Google Play",
+
+  "f.translate.eyebrow": "Traducción",
+  "f.translate.title": "Más que una traducción",
+  "f.translate.body": "Escanea un menú coreano y cada plato aparece en tu idioma. Tócalo para ver qué es y qué lleva.",
+
+  "f.allergy.eyebrow": "Alergias",
+  "f.allergy.title": "Ingredientes ocultos, al descubierto",
+  "f.allergy.body": "La comida coreana esconde mucho: mariscos fermentados en sal, pastas de soja fermentada, salsa de pescado. Dile a K-Bap qué evitas y cada plato se marca como Seguro, Precaución o Evitar.",
+
+  "f.photos.eyebrow": "Fotos",
+  "f.photos.title": "Una foto para cada plato",
+  "f.photos.body": "Muchos menús coreanos son solo un muro de hangul. K-Bap muestra una foto de cada plato para que sepas qué estás pidiendo.",
+
+  "f.reviews.eyebrow": "Reseñas",
+  "f.reviews.title": "Reseñas de gente como tú",
+  "f.reviews.body": "Mira qué opinaron de cada plato viajeros de todo el mundo, o solo los de tu país, cuyo gusto se parece más al tuyo.",
+
+  "f.spice.eyebrow": "Picante",
+  "f.spice.title": "Conoce el picante antes de probarlo",
+  "f.spice.body": "Cada plato muestra su nivel medio de picante, de Sin picante a Extremo.",
+
+  "f.order.eyebrow": "Pedir",
+  "f.order.title": "Pide en coreano sin hablarlo",
+  "f.order.body": "Olvida el traductor. K-Bap convierte lo que eliges en una pantalla de pedido en coreano para mostrar al personal, incluido lo que quieres que quiten.",
+
+  "f.share.eyebrow": "Compartir",
+  "f.share.title": "Comparte lo que comiste",
+  "f.share.body": "Publica tu comida coreana en Instagram junto con las fotos que elijas.",
+
+  "cta.title": "Tu próxima comida coreana, sin adivinar.",
+
+  "nav.blog": "Blog",
+  "nav.changelog": "Novedades",
+  "langSuggest": "Ver en español",
+
+  "footer.privacy": "Privacidad",
+  "footer.terms": "Términos",
+  "footer.safety": "Seguridad",
+  "footer.contact": "Contacto",
+  "footer.language": "Idioma",
+  "footer.disclaimer": "La información de ingredientes es orientativa, no un consejo médico.",
+  "footer.copyright": "© 2026 Team SkyJS"
+}

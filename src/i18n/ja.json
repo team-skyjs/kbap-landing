@@ -1,0 +1,56 @@
+{
+  "meta.title": "K-Bap — 韓国語のメニューが読める",
+  "meta.description": "韓国語のメニューを撮るだけで、すべての料理をあなたの言語で。写真、材料、アレルギー警告、辛さ、同じ国の旅行者のレビューも。",
+
+  "hero.headline1": "メニューが",
+  "hero.headline2": "読めない？",
+  "hero.headline3": "K-Bapなら読める。",
+  "hero.sub": "韓国語のメニューを撮るだけ。避けるべき料理に印がついて返ってきます。",
+  "hero.note": "無料 · 10言語対応",
+  "hero.shotAlt": "ユーザー自身のリストに照らして韓国料理を安全・禁止で評価するK-Bapアプリ",
+
+  "store.appleAlt": "App Storeからダウンロード",
+  "store.playAlt": "Google Playで手に入れよう",
+
+  "f.translate.eyebrow": "翻訳",
+  "f.translate.title": "ただの翻訳じゃない",
+  "f.translate.body": "韓国語のメニューを撮ると、すべての料理があなたの言語に。タップすれば、どんな料理で何が入っているかまで分かります。",
+
+  "f.allergy.eyebrow": "アレルギー",
+  "f.allergy.title": "隠れた材料も見つける",
+  "f.allergy.body": "韓国料理には塩辛、味噌やコチュジャンなどの醤類、魚醤など、見えない材料がたくさん。避けたいものを登録すれば、すべての料理を安全・注意・禁止で表示します。",
+
+  "f.photos.eyebrow": "写真",
+  "f.photos.title": "すべての料理に写真を",
+  "f.photos.body": "韓国には写真がなく、ハングルだけが並ぶメニューが多くあります。K-Bapは料理ごとに写真を表示するので、何を頼むのかが分かります。",
+
+  "f.reviews.eyebrow": "レビュー",
+  "f.reviews.title": "あなたと同じ人のレビュー",
+  "f.reviews.body": "世界中の旅行者が各料理をどう感じたかを確認できます。味の好みが近い、同じ国の旅行者のレビューだけを見ることも。",
+
+  "f.spice.eyebrow": "辛さ",
+  "f.spice.title": "食べる前に辛さが分かる",
+  "f.spice.body": "すべての料理に、辛さなしから激辛まで、平均的な辛さを表示します。",
+
+  "f.order.eyebrow": "注文",
+  "f.order.title": "韓国語が話せなくても韓国語で注文",
+  "f.order.body": "翻訳アプリはもう不要。選んだ料理を韓国語の注文画面にして、抜いてほしい材料まで添えます。店員に見せるだけです。",
+
+  "f.share.eyebrow": "シェア",
+  "f.share.title": "食べた韓国料理をシェア",
+  "f.share.body": "食べた韓国料理を、好きな写真と一緒にInstagramに投稿できます。",
+
+  "cta.title": "次の韓国料理は、迷わずに。",
+
+  "nav.blog": "ブログ",
+  "nav.changelog": "アップデート情報",
+  "langSuggest": "日本語で見る",
+
+  "footer.privacy": "プライバシー",
+  "footer.terms": "利用規約",
+  "footer.safety": "安全について",
+  "footer.contact": "お問い合わせ",
+  "footer.language": "言語",
+  "footer.disclaimer": "材料の情報は目安であり、医学的な助言ではありません。",
+  "footer.copyright": "© 2026 Team SkyJS"
+}
