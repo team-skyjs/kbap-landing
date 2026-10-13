@@ -42,6 +42,7 @@ ol,ul{padding:0;list-style:none}
 button{font:inherit;color:inherit}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--main-ink);outline-offset:2px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{max-width:calc(1200px + var(--gutter) * 2);margin:0 auto;padding-inline:var(--gutter)}
 @media (max-width:1023px){ .desk-only{display:none !important} }
 
@@ -191,6 +192,8 @@ a{color:inherit}
 .chapter{padding:var(--section) 0}
 .chapter.alt{background:var(--g50)}
 .ch-head h2{margin-top:4px;font-size:34px;line-height:1.35;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+/* ja CTA: "当てずっぽうで" (7 chars) on one line down to 320px */
+@media (max-width:1023px){ :lang(ja) .cta h2{font-size:min(42px,10vw)} }
 /* ja: the longest heading phrase ("翻訳アプリではなく、", 10 chars) fits one line down to 320px, so 、。 never start a line */
 @media (max-width:1023px){ :lang(ja) .ch-head h2{font-size:min(34px,8vw)} }
 .ch-head > p:last-child{margin-top:12px;font-size:16px;color:var(--g700);max-width:640px}

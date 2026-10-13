@@ -13,7 +13,7 @@ const ZWSP = '\u200B';
 // Closing punctuation BudouX sometimes puts at the start of a phrase ("。説明まで。").
 const LEADING = /^[。、，．！？）」』】〕・ー…：；%]+/;
 // Words that read wrong when split (QA: "もう当て/ずっぽう").
-const KEEP = { ja: ['当てずっぽう'] };
+const KEEP = { ja: ['当てずっぽうで'] };
 export const phrase = (lang, s) => {
   if (!PARSERS[lang] || typeof s !== 'string') return s;
   parsers[lang] ??= PARSERS[lang]();

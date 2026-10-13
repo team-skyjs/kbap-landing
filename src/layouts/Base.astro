@@ -88,7 +88,8 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
     </nav>
     <div class="nav-right">
       <details class="lang-select nav-lang">
-        <summary aria-label={`${ENDONYM[lang]}${SHORT[lang] !== ENDONYM[lang] ? ` (${SHORT[lang]})` : ''}, ${plain('footer.language')}`}><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span></summary>
+        <!-- Name = the visible label + ", Language" (display:none span drops out), so it always starts with what's on screen. -->
+        <summary><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span><span class="sr">, {plain('footer.language')}</span></summary>
         <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
       </details>
       <!-- .pill: app.js points this at Play on Android. -->
@@ -122,7 +123,7 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
         <h2>{t('footer.contact')}</h2>
         <a href="mailto:teamskyjs@gmail.com">teamskyjs@gmail.com</a>
         <details class="lang-select up">
-          <summary aria-label={`${ENDONYM[lang]}, ${plain('footer.language')}`}>{ENDONYM[lang]}</summary>
+          <summary>{ENDONYM[lang]}<span class="sr">, {plain('footer.language')}</span></summary>
           <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
         </details>
       </div>
