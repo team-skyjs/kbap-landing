@@ -53,7 +53,9 @@ a{color:inherit}
 .nav-right{display:flex;align-items:center;gap:8px}
 .nav-right .btn-sm{white-space:nowrap}
 @media (max-width:359px){ .nav-right .btn-sm{padding:0 10px;font-size:14px} }
-.nav-lang summary{min-height:44px;padding:8px 8px 8px 12px}
+.nav .nav-lang summary{min-height:44px;padding:8px 8px 8px 12px}
+/* phones: the list hangs from the screen edge, not the narrow button, so it never leaves the viewport */
+.nav .nav-lang ul{position:fixed;top:60px;right:12px;max-width:calc(100vw - 24px)}
 .nav-lang .full{display:none}
 @media (min-width:1024px){
   .nav-row{height:72px;padding-inline:var(--gutter)}
@@ -61,7 +63,8 @@ a{color:inherit}
   .nav-links{display:flex;gap:32px;font-size:14px;font-weight:500;color:var(--g800)}
   .nav-links a{text-decoration:none}
   .nav-links a:hover{color:var(--g1000)}
-  .nav-lang summary{min-height:40px;padding:8px 10px 8px 14px}
+  .nav .nav-lang summary{min-height:40px;padding:8px 10px 8px 14px}
+  .nav .nav-lang ul{position:absolute;top:calc(100% + 6px);right:0}
   .nav-lang .full{display:inline}
   .nav-lang .short{display:none}
 }
