@@ -52,19 +52,24 @@ for (const l of LANGS) {
   assert.ok(!/http-equiv="refresh"/i.test(html), `${file}: meta refresh is a redirect, Meta rejects those`);
   // every local file a page references exists
   for (const m of html.matchAll(/(?:src|href)="(\/[^"/][^"]*)"/g)) {
-    const f = path.join(dist, decodeURI(m[1].split('?')[0]).replace(/\/$/, '/index.html'));
+    const f = path.join(dist, decodeURI(m[1].split(/[?#]/)[0]).replace(/\/$/, '/index.html'));
     assert.ok(fs.existsSync(f), `${file} references a missing file: ${m[1]}`);
   }
 }
 
-// --- og:image resolves to a real file, and the home page images fit 1.5MB
+// --- og:image resolves to a real file; images that load before any scroll fit 500KB
+// (paid traffic lands here on mobile data). Demo captures must stay loading="lazy".
 const home = read('index.html');
 const og = home.match(/property="og:image" content="([^"]+)"/);
 assert.ok(og && og[1].startsWith(SITE), `og:image must be an absolute ${SITE} URL`);
-const imgs = new Set([og[1].slice(SITE.length)]);
-for (const m of home.matchAll(/(?:src|href)="(\/[^"]+\.(?:webp|png|jpg|svg))"/g)) imgs.add(m[1]);
-for (const f of imgs) imgBytes += fs.statSync(path.join(dist, f)).size;
-assert.ok(imgBytes <= 1_500_000, `home images total ${imgBytes} bytes, over the 1.5MB budget`);
+const eager = new Set();
+for (const m of home.matchAll(/<img\b[^>]*>/g)) {
+  if (/loading="lazy"/.test(m[0])) continue;
+  eager.add(/src="([^"]+)"/.exec(m[0])[1]);
+}
+for (const f of eager) imgBytes += fs.statSync(path.join(dist, f)).size;
+assert.ok(imgBytes <= 500_000, `eager home images total ${imgBytes} bytes, over the 500KB budget`);
+assert.ok(![...eager].some((f) => f.startsWith('/assets/cap/')), 'a demo capture is loading eagerly');
 
 // --- sitemap lists every language
 const sm = read('sitemap-0.xml');
@@ -112,14 +117,15 @@ assert.ok(!/location\s*\.\s*(href\s*=|replace\(|assign\()/.test(outside),
 assert.ok(/window\.location\.href = itmsUrl\(/.test(handler) && /1500/.test(handler),
   'the itms-apps escape and its 1.5s https fallback must both run on tap');
 
-// --- badge sizing (unchanged from the one-screen page)
-assert.ok(/min-height:100svh/.test(css), 'the hero must fill one screen');
+// --- badges: App Store everywhere (D-24), Play added on Android only
+assert.ok(/\.badge-play\{display:none\}/.test(css) && /\.android \.badge-play\{display:inline-flex\}/.test(css),
+  'Play must show on Android and only there');
 
 // The badge row is flex-nowrap, so an oversized pill does not stack the badges,
 // it pushes them out of the viewport. Either way the page is broken, so the
 // two-badge height has to keep the pair inside the narrowest common phone.
-const bh = /\.badges\{\s*--bh:(\d+)px/.exec(css);
-assert.ok(bh, '--bh (badge pill height) is not defined on .badges');
+const bh = /\.android \.badges\{--bh:(\d+)px/.exec(css);
+assert.ok(bh, '--bh (badge pill height) is not defined for .android .badges, the one place both badges share a row');
 const h = Number(bh[1]);
 assert.ok(h >= 40, `badge pill is ${h}px; Apple's minimum is 40px`);
 const rowWidth = h * 2.9916 + h / 2 + 6 + (h / 0.672) * 2.584;   // apple box + gap + play box
@@ -129,7 +135,6 @@ const rowWidth = h * 2.9916 + h / 2 + 6 + (h / 0.672) * 2.584;   // apple box + 
 const free = 360 - 44 - 12;
 assert.ok(rowWidth <= free,
   `both badges need ${Math.ceil(rowWidth)}px but only ${free}px is usable on a 360px phone, so they would overflow`);
-assert.ok(/\.ios \.badge-play\{display:none\}/.test(css), 'iOS should not be offered Play');
 assert.ok(!/\.badge-apple\{display:none\}/.test(css),
   'the App Store badge must never be hidden: this page catches iOS paid traffic');
 

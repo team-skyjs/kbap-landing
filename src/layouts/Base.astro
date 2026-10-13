@@ -21,11 +21,17 @@ const description = Astro.props.description ?? t('meta.description');
 const site = Astro.site!.origin;
 const url = (l: string) => site + localePath(l, path);
 const og = `${site}/assets/brand/og-cover.jpg`;
+const home = localePath(lang, '/');
 
-// Footer links only point at pages that exist: no blog in your language → the English one.
+// Links only point at pages that exist: no blog in your language → the English one.
 const blogLangs = new Set((await posts()).map((p) => p.lang));
 const blogHref = blogLangs.has(lang) ? localePath(lang, '/blog/') : blogLangs.has('en') ? '/blog/' : null;
-const hasChangelog = (await releases()).length > 0;
+const changelogHref = (await releases()).length > 0 ? '/changelog/' : null;
+
+// Pretendard covers Latin, Hangul and Cyrillic; these scripts get their Noto face (D-24 tokens).
+const NOTO = { ja: 'Noto+Sans+JP', 'zh-Hans': 'Noto+Sans+SC', 'zh-Hant': 'Noto+Sans+TC', th: 'Noto+Sans+Thai' };
+const noto = NOTO[lang] && `https://fonts.googleapis.com/css2?family=${NOTO[lang]}:wght@400;500;600;700&display=swap`;
+const APP_STORE = 'https://apps.apple.com/app/id6788635067';
 ---
 <!doctype html>
 <html lang={lang}>
@@ -34,10 +40,11 @@ const hasChangelog = (await releases()).length > 0;
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content={description}>
-<meta name="theme-color" content="#FBF6EC">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href={url(lang)}>
 {alternates.map((l) => <link rel="alternate" hreflang={l} href={url(l)}>)}
 {alternates.includes('en') && <link rel="alternate" hreflang="x-default" href={url('en')}>}
+<link rel="icon" href="/assets/brand/icon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/brand/icon.webp" type="image/webp">
 <link rel="apple-touch-icon" href="/assets/brand/icon.webp">
 <link rel="sitemap" href="/sitemap-index.xml">
@@ -53,8 +60,7 @@ const hasChangelog = (await releases()).length > 0;
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Which store this device has, decided before first paint so the badge row is
-     right in the first frame and nothing moves afterwards. No JS: both badges
-     stay, sized to still sit on one row. -->
+     right in the first frame and nothing moves afterwards. -->
 <script is:inline>(function(u,d){if(/iPhone|iPad|iPod/.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))d.className='ios';else if(/Android/.test(u))d.className='android';})(navigator.userAgent,document.documentElement);</script>
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -62,32 +68,69 @@ const hasChangelog = (await releases()).length > 0;
      critical path so a slow CDN can't hold up first paint on paid traffic. -->
 <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"></noscript>
+{noto && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>}
+{noto && <link rel="stylesheet" href={noto}>}
 
 <!-- Meta Pixel: no pixel exists on the ad account (checked 2026-09-21). When one is
      created, the base code goes here. Nothing is loaded until then. -->
 <slot name="head" />
 </head>
 <body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href={home} class="logo" aria-label="K-Bap"><img src="/assets/brand/wordmark.svg" alt="K-Bap" width="72" height="23"></a>
+    <nav class="nav-links" aria-label="Site">
+      <a href={`${home}#read`}>{t('nav.features')}</a>
+      {blogHref && <a href={blogHref}>{t('nav.blog')}</a>}
+      {changelogHref && <a href={changelogHref}>{t('nav.changelog')}</a>}
+    </nav>
+    <div class="nav-right">
+      <details class="lang-select nav-lang">
+        <summary>{ENDONYM[lang]}</summary>
+        <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
+      </details>
+      <!-- .pill: app.js points this at Play on Android. -->
+      <a class="btn btn-sm pill" data-store="ios" href={APP_STORE}>{t('nav.getApp')}</a>
+    </div>
+  </div>
+</header>
+
 <slot />
 
-<footer>
-  <nav aria-label="Site">
-    {blogHref && <a href={blogHref}>{t('nav.blog')}</a>}
-    {hasChangelog && <a href="/changelog/">{t('nav.changelog')}</a>}
-    <a href="mailto:teamskyjs@gmail.com">{t('footer.contact')}: teamskyjs@gmail.com</a>
-  </nav>
-  <nav aria-label="Legal">
-    <a href="https://team-skyjs.github.io/kbap-legal/privacy-policy.html">{t('footer.privacy')}</a>
-    <a href="https://team-skyjs.github.io/kbap-legal/terms-of-service.html">{t('footer.terms')}</a>
-    <a href="https://team-skyjs.github.io/kbap-legal/safety.html">{t('footer.safety')}</a>
-  </nav>
-  <nav class="langs" aria-label={t('footer.language')}>
-    {alternates.map((l) => (
-      <a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a>
-    ))}
-  </nav>
-  <p class="disclaimer">{t('footer.disclaimer')}</p>
-  <p class="copy-line">{t('footer.copyright')}</p>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <img src="/assets/brand/wordmark.svg" alt="K-Bap" width="72" height="23">
+        <p>{t('footer.tagline')}</p>
+      </div>
+      <div class="footer-col">
+        <h2>{t('footer.product')}</h2>
+        {blogHref && <a href={blogHref}>{t('nav.blog')}</a>}
+        {changelogHref && <a href={changelogHref}>{t('nav.changelog')}</a>}
+        <a data-store="ios" href={APP_STORE}>App Store</a>
+      </div>
+      <div class="footer-col">
+        <h2>{t('footer.legal')}</h2>
+        <a href="https://team-skyjs.github.io/kbap-legal/privacy-policy.html">{t('footer.privacy')}</a>
+        <a href="https://team-skyjs.github.io/kbap-legal/terms-of-service.html">{t('footer.terms')}</a>
+        <a href="https://team-skyjs.github.io/kbap-legal/safety.html">{t('footer.safety')}</a>
+      </div>
+      <div class="footer-col">
+        <h2>{t('footer.contact')}</h2>
+        <a href="mailto:teamskyjs@gmail.com">teamskyjs@gmail.com</a>
+        <details class="lang-select up">
+          <summary aria-label={t('footer.language')}>{ENDONYM[lang]}</summary>
+          <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
+        </details>
+      </div>
+    </div>
+    <div class="fine">
+      <p>{t('footer.disclaimer')}</p>
+      <p>{t('footer.copyright')}</p>
+    </div>
+  </div>
 </footer>
 
 <script is:inline src="/app.js"></script>
