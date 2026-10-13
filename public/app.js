@@ -100,14 +100,23 @@
   // --- root page only: offer the visitor's language as a link. Never navigate
   // on our own (see top of file); the ad sets' ?lang= wins over the browser.
   var suggest = document.querySelector('.lang-suggest');
-  if (suggest) {
+  var DISMISSED = 'kbap.langSuggest.closed';
+  var closed = false;
+  try { closed = localStorage.getItem(DISMISSED) === '1'; } catch (e) { /* private mode */ }
+  if (suggest && !closed) {
     var want = resolveLang(new URLSearchParams(search).get('lang') || navigator.language);
     var label = JSON.parse(suggest.getAttribute('data-suggest'))[want];
     if (label) {
-      suggest.href = '/' + want + '/' + search;
-      suggest.lang = want;
-      suggest.textContent = label + ' \u2192';
+      var link = suggest.querySelector('a');
+      link.href = '/' + want + '/' + search;
+      link.lang = want;
+      link.textContent = label + ' \u2192';
       suggest.hidden = false;
+      // Closing is remembered, so it doesn't come back on every page view.
+      suggest.querySelector('button').addEventListener('click', function () {
+        suggest.hidden = true;
+        try { localStorage.setItem(DISMISSED, '1'); } catch (e) { /* private mode */ }
+      });
     }
   }
 })(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -16,8 +16,9 @@ interface Props {
 
 const { lang, path, alternates = LANGS } = Astro.props;
 const t = dict(lang);
-const title = Astro.props.title ?? t('meta.title');
-const description = Astro.props.description ?? t('meta.description');
+const plain = dict(lang, { plain: true });   // meta tags: no phrase marks
+const title = Astro.props.title ?? plain('meta.title');
+const description = Astro.props.description ?? plain('meta.description');
 const site = Astro.site!.origin;
 const url = (l: string) => site + localePath(l, path);
 const og = `${site}/assets/brand/og-cover.jpg`;
@@ -32,6 +33,8 @@ const changelogHref = (await releases()).length > 0 ? '/changelog/' : null;
 const NOTO = { ja: 'Noto+Sans+JP', 'zh-Hans': 'Noto+Sans+SC', 'zh-Hant': 'Noto+Sans+TC', th: 'Noto+Sans+Thai' };
 const noto = NOTO[lang] && `https://fonts.googleapis.com/css2?family=${NOTO[lang]}:wght@400;500;600;700&display=swap`;
 const APP_STORE = 'https://apps.apple.com/app/id6788635067';
+// Header language button on phones: room for a short label only.
+const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体', 'zh-Hant': '繁體', es: 'ES', id: 'ID', ru: 'RU', th: 'ไทย', vi: 'VI' };
 ---
 <!doctype html>
 <html lang={lang}>
@@ -83,7 +86,7 @@ const APP_STORE = 'https://apps.apple.com/app/id6788635067';
     </nav>
     <div class="nav-right">
       <details class="lang-select nav-lang">
-        <summary>{ENDONYM[lang]}</summary>
+        <summary aria-label={t('footer.language')}><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span></summary>
         <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
       </details>
       <!-- .pill: app.js points this at Play on Android. -->
