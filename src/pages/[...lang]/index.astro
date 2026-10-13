@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Badges from '../../components/Badges.astro';
 import { LANGS, ENDONYM, langParam } from '../../i18n/langs.js';
 import { t as dict } from '../../i18n/t.js';
-import { HERO_MENU, HERO_CYCLE, SPICE_DISHES, ALLERGENS, ALLERGENS_CAPTURED, FLAGS, LANG_FLAG, dishName } from '../../data/dishes.js';
+import { HERO_MENU, HERO_CYCLE, SPICE_DISHES, ALLERGENS_CAPTURED, FLAGS, LANG_FLAG, REVIEWS, REVIEW_COUNT, dishName } from '../../data/dishes.js';
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang: langParam(lang) }, props: { lang } }));
@@ -16,6 +16,7 @@ const boardLang = lang === 'ko' ? 'en' : lang;
 const cycle = [boardLang, ...HERO_CYCLE.filter((l) => l !== boardLang)];
 const RISK = { safe: 'risk.safe', caution: 'risk.caution', danger: 'risk.danger' };
 const flagName = (code: string) => new Intl.DisplayNames([lang], { type: 'region' }).of(code.toUpperCase());
+const flagOrder = [LANG_FLAG[lang], ...FLAGS.filter((f) => f !== LANG_FLAG[lang])].slice(0, 6);
 const cap = (name: string) => `/assets/cap/${name}.webp`;
 // Captures are 1206×2622 screens shown at 640px.
 const CAP_W = 640, CAP_H = 1391;
@@ -93,13 +94,13 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
                   <button type="button" class="chip" lang={l} data-src={cap(`scan-result-list-${l}`)} aria-pressed={l === lang ? 'true' : 'false'}>{ENDONYM[l]}</button>
                 ))}
               </div>
-              <div class="shot phone" style="--top:.03">
+              <div class="shot phone"><div class="screen">
                 <img src={cap(`scan-result-list-${lang}`)} alt={t('lang.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-              </div>
+              </div></div>
             </div>
-            <div class="shot phone desk-only" style="--top:0">
+            <div class="shot phone desk-only"><div class="screen">
               <img src={cap('detail-en')} alt={t('detail.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-            </div>
+            </div></div>
           </div>
         </div>
 
@@ -111,8 +112,8 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
           </div>
           <div class="step-demo">
             <div class="ba" data-demo="ba" style="--pos:50%">
-              <img src={cap('scan-result-original-en')} alt={t('photos.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-              <div class="ba-after"><img src={cap('scan-result-list-en')} alt="" width={CAP_W} height={CAP_H} loading="lazy" decoding="async"></div>
+              <img src={cap('scan-result-list-en')} alt={t('photos.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
+              <div class="ba-before"><img src={cap('scan-result-original-en')} alt="" width={CAP_W} height={CAP_H} loading="lazy" decoding="async"></div>
               <span class="ba-tag before">{t('photos.before')}</span>
               <span class="ba-tag after">{t('photos.after')}</span>
               <span class="ba-knob" aria-hidden="true"></span>
@@ -140,20 +141,23 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
           </div>
           <div class="step-demo two">
             <div class="demo" data-demo="allergy" data-on={cap('scan-result-risk-shrimp-soy-en')} data-off={cap('scan-result-risk-none-en')}>
-              <div class="chips wrapy" role="group" aria-label={t('allergy.hint')}>
-                {ALLERGENS.map((a) => (
-                  <button type="button" class="chip" data-captured={ALLERGENS_CAPTURED.includes(a) ? '' : undefined} aria-pressed={ALLERGENS_CAPTURED.includes(a) ? 'true' : 'false'}>{t(`ingredients.${a}`)}</button>
-                ))}
-              </div>
-              <div class="shot phone" style="--top:.03">
+              <!-- The capture account avoids exactly Shrimp + Soybean, so the demo is one
+                   switch for that list (no capture exists for either one alone). -->
+              <button type="button" class="avoid" role="switch" aria-checked="true">
+                <span class="sw" aria-hidden="true"></span>
+                <span class="avoid-txt"><b>{t('allergy.toggle')}</b>
+                  <span class="avoid-items">{ALLERGENS_CAPTURED.map((a) => <span>{t(`ingredients.${a}`)}</span>)}</span>
+                </span>
+              </button>
+              <div class="shot phone"><div class="screen">
                 <img src={cap('scan-result-risk-shrimp-soy-en')} alt={t('allergy.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-              </div>
+              </div></div>
             </div>
             <div class="demo hidden-demo">
               <p class="callout"><img src="/assets/icons/risk-dot-caution.svg" alt="" width="16" height="16">{t('hidden.label')}</p>
-              <div class="shot bottom">
+              <div class="shot phone"><div class="screen">
                 <img src={cap('detail-ingredient-sheet-en')} alt={t('hidden.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-              </div>
+              </div></div>
             </div>
           </div>
         </div>
@@ -179,7 +183,7 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
                     <b lang={d.name[lang] ? lang : 'en'}>{dishName(d, lang)}</b>
                     <small lang="ko">{d.ko}</small>
                     <span class="peppers" role="img" aria-label={t(`spice.band.${d.spice}`)}>
-                      {[0, 1, 2, 3].map((k) => <img src={`/assets/icons/pepper-${k < d.spice ? 'on' : 'off'}.svg`} alt="" width="12" height="12">)}
+                      {[0, 1, 2, 3].map((k) => <img class="pepper" src={`/assets/icons/pepper-${k < d.spice ? 'on' : 'off'}.svg`} alt="" width="12" height="12">)}
                     </span>
                   </li>
                 ))}
@@ -203,18 +207,34 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
           <div class="step-text">
             <h3>{t('reviews.title')}</h3>
             <p>{t('reviews.body')}</p>
+            <p class="hint">{t('reviews.hint')}</p>
           </div>
           <div class="step-demo">
-            <div class="demo">
-              <!-- ponytail: display only. The filtered capture is an empty state on dev data; make these buttons once prod reviews are captured. -->
-              <ul class="chips scroll flags">
-                {[LANG_FLAG[lang], ...FLAGS.filter((f) => f !== LANG_FLAG[lang])].slice(0, 6).map((f, i) => (
-                  <li class={`chip${i === 0 ? ' on' : ''}`}><img src={`/assets/flags/${f}.svg`} alt="" width="18" height="14">{flagName(f)}</li>
+            <div class="demo" data-demo="reviews">
+              <div class="chips scroll flags" role="group" aria-label={t('reviews.hint')}>
+                {flagOrder.map((f, i) => (
+                  <button type="button" class="chip" data-cc={f} aria-pressed={i === 0 ? 'true' : 'false'}><img src={`/assets/flags/${f}.svg`} alt="" width="18" height="14">{flagName(f)}</button>
                 ))}
-              </ul>
-              <div class="shot phone short" style="--top:.03">
-                <img src={cap('reviews-nat-off-en')} alt={t('reviews.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
               </div>
+              <div class="shot phone"><div class="screen rv">
+                <img src={cap('reviews-nat-off-en')} alt={t('reviews.alt')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
+                <span class="rv-count" lang="en"><span lang="ko">잡채</span> {REVIEW_COUNT} reviews</span>
+                <div class="rv-panel" lang="en">
+                  <p class="rv-filter"><span class="sw on" aria-hidden="true"></span><b data-cc-label>{flagOrder[0].toUpperCase()} only</b><span class="rv-sort">Recent</span></p>
+                  {flagOrder.map((f, i) => (
+                    <ul class="rv-list" data-cc={f} hidden={i !== 0}>
+                      {REVIEWS[f].map(([name, stars, text, when, likes]) => (
+                        <li>
+                          <p class="rv-head"><img src={`/assets/flags/${f}.svg`} alt="" width="18" height="14"><b>{name}</b><span class="rv-stars" aria-label={`${stars}/5`}>{'★'.repeat(stars)}<i>{'★'.repeat(5 - stars)}</i></span></p>
+                          <p class="rv-text">{text}</p>
+                          <p class="rv-foot"><span>{when}</span><span class="rv-like">👍 {likes}</span></p>
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div></div>
+              <p class="note">{t('reviews.example')}</p>
             </div>
           </div>
         </div>
@@ -239,12 +259,12 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
           <div class="step-demo">
             <div class="demo order-demo" data-demo="order">
               <div class="seg" role="group">
-                <button type="button" aria-pressed="true" data-src={cap('order-cart-en')} data-alt={t('orderf.altYours')} data-top=".17">{t('orderf.yours')}</button>
-                <button type="button" aria-pressed="false" data-src={cap('order-card-staff-en')} data-alt={t('orderf.altStaff')} data-top=".3">{t('orderf.staff')}</button>
+                <button type="button" aria-pressed="true" data-src={cap('order-cart-en')} data-alt={t('orderf.altYours')}>{t('orderf.yours')}</button>
+                <button type="button" aria-pressed="false" data-src={cap('order-card-staff-en')} data-alt={t('orderf.altStaff')}>{t('orderf.staff')}</button>
               </div>
-              <div class="shot phone" style="--top:.17">
+              <div class="shot phone"><div class="screen">
                 <img src={cap('order-cart-en')} alt={t('orderf.altYours')} width={CAP_W} height={CAP_H} loading="lazy" decoding="async">
-              </div>
+              </div></div>
             </div>
           </div>
         </div>

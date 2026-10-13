@@ -1,13 +1,11 @@
 {
   "meta.title": "K-Bap — lee cualquier menú coreano",
   "meta.description": "Escanea un menú coreano y ve cada plato en tu idioma, con fotos, ingredientes, alertas de alergias, nivel de picante y reseñas de viajeros como tú.",
-
   "nav.features": "Funciones",
   "nav.blog": "Blog",
   "nav.changelog": "Novedades",
   "nav.getApp": "Descargar",
   "langSuggest": "Ver en español",
-
   "hero.h1": "Lee cualquier menú coreano.",
   "hero.h2": "Come sin preocupaciones.",
   "hero.sub": "Escanea un menú en coreano. K-Bap traduce cada plato y marca lo que debes evitar.",
@@ -17,10 +15,8 @@
   "hero.menu": "MENÚ",
   "hero.popTitle": "Precaución para ti",
   "hero.popBody": "Camarón salado en el kimchi",
-
   "store.appleAlt": "Descárgalo en el App Store",
   "store.playAlt": "Disponible en Google Play",
-
   "read.eyebrow": "Léelo",
   "read.title": "No solo traducido. Explicado.",
   "read.sub": "Cada plato viene con qué es y qué lleva.",
@@ -35,13 +31,13 @@
   "photos.before": "Foto del menú",
   "photos.after": "Con K-Bap",
   "photos.alt": "Un menú coreano sin fotos junto al mismo menú en K-Bap con una foto de cada plato",
-
   "eat.eyebrow": "Come seguro",
   "eat.title": "Sabe qué lleva antes de pedir.",
   "eat.sub": "K-Bap revisa cada plato según lo que evitas, incluidos los ingredientes que no se ven.",
   "allergy.title": "Seguro, precaución o evitar, de un vistazo",
   "allergy.body": "Elige lo que evitas. Cada plato queda marcado, y salen a la luz ingredientes ocultos como el camarón fermentado o la pasta de soja.",
-  "allergy.hint": "Elige un ingrediente",
+  "allergy.hint": "Activa la lista de lo que evitas",
+  "allergy.toggle": "Lista de ejemplo",
   "allergy.alt": "Resultado de escaneo de K-Bap con cada plato calificado según los ingredientes que evita el usuario",
   "hidden.label": "Ingrediente oculto: camarón salado en el kimchi",
   "hidden.alt": "Ficha de ingrediente de K-Bap que explica que el camarón salado se usa en cerca del 55% de las versiones del plato",
@@ -49,14 +45,14 @@
   "spice.body": "Mira qué tan picante suele ser cada plato y muestra solo el nivel que aguantas.",
   "spice.hint": "Desliza el indicador",
   "spice.gauge": "Nivel de picante",
-
   "trust.eyebrow": "Confía",
   "trust.title": "Escucha a gente como tú.",
   "trust.sub": "Reseñas de viajeros de todo el mundo, traducidas a tu idioma.",
   "reviews.title": "Primero, reseñas de tu país",
   "reviews.body": "Filtra por nacionalidad y mira qué opinaron de cada plato las personas de tu país.",
+  "reviews.hint": "Toca una bandera",
   "reviews.alt": "Reseñas de un plato en K-Bap, con calificaciones y la bandera del país de quien la escribió",
-
+  "reviews.example": "Reseñas de ejemplo, solo como ilustración.",
   "order.eyebrow": "Pide y comparte",
   "order.title": "Muestra esta pantalla, no un traductor.",
   "order.sub": "Tu pedido, en coreano, lo bastante grande para que el personal lo lea de un vistazo.",
@@ -69,10 +65,8 @@
   "orderf.altStaff": "Tarjeta de pedido de K-Bap en coreano grande para el personal del restaurante",
   "share.title": "Comparte lo que comiste",
   "share.body": "Convierte tus comidas en una tarjeta para tu historia de Instagram, con las fotos que elijas.",
-
   "cta.title": "Pide sin adivinar.",
   "cta.sub": "Gratis en el App Store, en 10 idiomas.",
-
   "footer.tagline": "Menús coreanos, descifrados para viajeros.",
   "footer.product": "Producto",
   "footer.legal": "Legal",

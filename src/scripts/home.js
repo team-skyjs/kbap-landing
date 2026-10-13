@@ -34,23 +34,46 @@ for (const demo of document.querySelectorAll('[data-demo="lang"]')) {
 }
 
 // --- Read it · before/after. Native range input on top = keyboard + touch for free.
+// Until the visitor touches it, the divider sweeps on its own (only while on screen).
 for (const ba of document.querySelectorAll('[data-demo="ba"]')) {
   const input = ba.querySelector('input');
-  input.addEventListener('input', () => ba.style.setProperty('--pos', input.value + '%'));
+  const set = (v) => { input.value = v; ba.style.setProperty('--pos', v + '%'); };
+  input.addEventListener('input', () => set(input.value));
+  if (reduced) continue;
+  let raf = 0, t0 = 0, touched = false;
+  const tick = (t) => {
+    t0 ||= t;
+    set((50 + 30 * Math.sin((t - t0) / 1100)).toFixed(1));   // 20% ↔ 80%, ~7 s round trip
+    raf = requestAnimationFrame(tick);
+  };
+  const stop = () => { touched = true; cancelAnimationFrame(raf); };
+  ['pointerdown', 'keydown', 'focus'].forEach((e) => input.addEventListener(e, stop, { once: true }));
+  new IntersectionObserver(([e]) => {
+    if (touched) return;
+    if (e.isIntersecting) raf = requestAnimationFrame(tick);
+    else { cancelAnimationFrame(raf); t0 = 0; }
+  }).observe(ba);
 }
 
-// --- Eat safely · allergen chips. Only Shrimp/Soybean exist in the capture account,
-// so any of those on = the rated capture; none of them = the unrated one.
+// --- Eat safely · the example avoid list (Shrimp + Soybean) on/off → rated / unrated capture
 for (const demo of document.querySelectorAll('[data-demo="allergy"]')) {
   const img = demo.querySelector('.shot img');
-  const chips = [...demo.querySelectorAll('.chip')];
-  chips.forEach((c) =>
-    c.addEventListener('click', () => {
-      c.setAttribute('aria-pressed', String(c.getAttribute('aria-pressed') !== 'true'));
-      const on = chips.some((x) => x.hasAttribute('data-captured') && x.getAttribute('aria-pressed') === 'true');
-      swapImage(img, on ? demo.dataset.on : demo.dataset.off);
-    }),
-  );
+  const sw = demo.querySelector('.avoid');
+  sw.addEventListener('click', () => {
+    const on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', String(on));
+    swapImage(img, on ? demo.dataset.on : demo.dataset.off);
+  });
+}
+
+// --- Trust it · flag chips → "<CC> only" and that country's reviews
+for (const demo of document.querySelectorAll('[data-demo="reviews"]')) {
+  const label = demo.querySelector('[data-cc-label]');
+  const lists = [...demo.querySelectorAll('.rv-list')];
+  swapGroup(demo.querySelector('.chips'), (b) => {
+    label.textContent = b.dataset.cc.toUpperCase() + ' only';
+    lists.forEach((l) => (l.hidden = l.dataset.cc !== b.dataset.cc));
+  });
 }
 
 // --- Eat safely · spice gauge: show the dishes you can handle (≤ level), hottest first.
@@ -73,11 +96,8 @@ for (const demo of document.querySelectorAll('[data-demo="spice"]')) {
 
 // --- Order · Your order ↔ Staff view
 for (const demo of document.querySelectorAll('[data-demo="order"]')) {
-  const shot = demo.querySelector('.shot');
-  swapGroup(demo.querySelector('.seg'), (b) => {
-    shot.style.setProperty('--top', b.dataset.top);
-    swapImage(shot.querySelector('img'), b.dataset.src, b.dataset.alt);
-  });
+  const img = demo.querySelector('.shot img');
+  swapGroup(demo.querySelector('.seg'), (b) => swapImage(img, b.dataset.src, b.dataset.alt));
 }
 
 // --- Hero · Korean menu → scan beam → translated + rated → languages cycle.

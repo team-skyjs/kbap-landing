@@ -1,13 +1,11 @@
 {
   "meta.title": "K-Bap — 어떤 한국어 메뉴판도 읽어요",
   "meta.description": "메뉴판을 찍으면 모든 메뉴를 사진, 재료, 알레르기 경고, 맵기, 나와 비슷한 여행자들의 리뷰와 함께 보여줘요.",
-
   "nav.features": "기능",
   "nav.blog": "블로그",
   "nav.changelog": "업데이트 소식",
   "nav.getApp": "앱 받기",
   "langSuggest": "한국어로 보기",
-
   "hero.h1": "어떤 한국어 메뉴판도 읽어요.",
   "hero.h2": "걱정 없이 드세요.",
   "hero.sub": "메뉴판을 찍으면 K-Bap이 모든 메뉴를 번역하고, 피해야 할 메뉴를 알려줘요.",
@@ -17,10 +15,8 @@
   "hero.menu": "MENU",
   "hero.popTitle": "주의가 필요해요",
   "hero.popBody": "김치에 새우젓이 들어 있어요",
-
   "store.appleAlt": "App Store에서 다운로드",
   "store.playAlt": "Google Play에서 다운로드",
-
   "read.eyebrow": "읽기",
   "read.title": "번역을 넘어, 설명까지.",
   "read.sub": "모든 메뉴에 어떤 음식인지, 무엇이 들어가는지가 함께 나와요.",
@@ -35,13 +31,13 @@
   "photos.before": "메뉴판 사진",
   "photos.after": "K-Bap으로 보면",
   "photos.alt": "사진 없는 한국어 메뉴판과, 같은 메뉴판을 K-Bap에서 메뉴마다 사진으로 보여주는 화면",
-
   "eat.eyebrow": "안심하고 먹기",
   "eat.title": "주문 전에 무엇이 들었는지 알아요.",
   "eat.sub": "K-Bap은 내가 피하는 재료를 기준으로 모든 메뉴를 확인해요. 눈에 보이지 않는 재료까지요.",
   "allergy.title": "안전, 주의, 회피를 한눈에",
   "allergy.body": "피하는 재료를 고르세요. 메뉴마다 표시가 붙고, 새우젓이나 된장 같은 숨은 재료도 드러나요.",
-  "allergy.hint": "재료를 골라 보세요",
+  "allergy.hint": "회피 목록을 켜고 꺼 보세요",
+  "allergy.toggle": "예시 회피 목록",
   "allergy.alt": "사용자가 피하는 재료를 기준으로 메뉴마다 평가를 붙인 K-Bap 스캔 결과",
   "hidden.label": "숨은 재료: 김치 속 새우젓",
   "hidden.alt": "이 메뉴의 약 55%에 새우젓이 들어간다고 설명하는 K-Bap 재료 시트",
@@ -49,14 +45,14 @@
   "spice.body": "메뉴마다 보통 얼마나 매운지 보고, 내가 먹을 수 있는 맵기만 골라 보세요.",
   "spice.hint": "게이지를 밀어 보세요",
   "spice.gauge": "맵기",
-
   "trust.eyebrow": "믿고 고르기",
   "trust.title": "나와 비슷한 사람들의 이야기.",
   "trust.sub": "세계 여러 나라 여행자들의 리뷰를 내 언어로 읽어요.",
   "reviews.title": "같은 나라 사람들의 리뷰부터",
   "reviews.body": "국적으로 걸러서, 같은 나라 사람들이 메뉴마다 어떻게 느꼈는지 보세요.",
+  "reviews.hint": "국기를 눌러 보세요",
   "reviews.alt": "평점과 작성자 국기가 함께 나오는 K-Bap 메뉴 리뷰 화면",
-
+  "reviews.example": "이해를 돕기 위한 예시 리뷰예요.",
   "order.eyebrow": "주문하고 공유하기",
   "order.title": "번역 앱 대신, 이 화면을 보여주세요.",
   "order.sub": "내 주문을 한국어로, 직원이 한눈에 읽을 수 있을 만큼 크게.",
@@ -69,10 +65,8 @@
   "orderf.altStaff": "직원이 읽도록 큰 한국어로 쓴 K-Bap 주문 카드",
   "share.title": "먹은 한식을 공유하세요",
   "share.body": "먹은 음식을 내가 고른 사진과 함께 인스타그램 스토리 카드로 만들어요.",
-
   "cta.title": "이제 짐작하지 말고 주문하세요.",
   "cta.sub": "App Store에서 무료, 10개 언어로.",
-
   "footer.tagline": "여행자를 위해 풀어 쓴 한국 메뉴판.",
   "footer.product": "제품",
   "footer.legal": "약관",

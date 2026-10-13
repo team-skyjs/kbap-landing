@@ -1,13 +1,11 @@
 {
   "meta.title": "K-Bap — đọc mọi thực đơn tiếng Hàn",
   "meta.description": "Quét thực đơn tiếng Hàn và xem mọi món bằng ngôn ngữ của bạn, kèm ảnh, nguyên liệu, cảnh báo dị ứng, độ cay và đánh giá từ những du khách như bạn.",
-
   "nav.features": "Tính năng",
   "nav.blog": "Blog",
   "nav.changelog": "Có gì mới",
   "nav.getApp": "Tải ứng dụng",
   "langSuggest": "Xem bằng tiếng Việt",
-
   "hero.h1": "Đọc mọi thực đơn tiếng Hàn.",
   "hero.h2": "Ăn mà không lo lắng.",
   "hero.sub": "Quét thực đơn tiếng Hàn. K-Bap dịch từng món và đánh dấu những món bạn nên tránh.",
@@ -17,10 +15,8 @@
   "hero.menu": "MENU",
   "hero.popTitle": "Bạn cần thận trọng",
   "hero.popBody": "Có mắm tép trong kim chi",
-
   "store.appleAlt": "Tải về trên App Store",
   "store.playAlt": "Tải trên Google Play",
-
   "read.eyebrow": "Đọc hiểu",
   "read.title": "Không chỉ dịch. Còn giải thích.",
   "read.sub": "Món nào cũng kèm thông tin đó là món gì và có gì bên trong.",
@@ -35,13 +31,13 @@
   "photos.before": "Ảnh thực đơn",
   "photos.after": "Với K-Bap",
   "photos.alt": "Thực đơn tiếng Hàn không có ảnh, bên cạnh cùng thực đơn đó trong K-Bap với ảnh cho từng món",
-
   "eat.eyebrow": "Ăn an toàn",
   "eat.title": "Biết bên trong có gì trước khi gọi món.",
   "eat.sub": "K-Bap đối chiếu từng món với những thứ bạn cần tránh, kể cả nguyên liệu không nhìn thấy được.",
   "allergy.title": "An toàn, thận trọng hay tránh, nhìn là biết",
   "allergy.body": "Chọn những thứ bạn cần tránh. Từng món sẽ được đánh dấu, và nguyên liệu ẩn như mắm tép hay tương đậu cũng lộ diện.",
-  "allergy.hint": "Chọn một nguyên liệu",
+  "allergy.hint": "Bật tắt danh sách cần tránh",
+  "allergy.toggle": "Danh sách cần tránh mẫu",
   "allergy.alt": "Kết quả quét của K-Bap với từng món được đánh giá theo nguyên liệu người dùng cần tránh",
   "hidden.label": "Nguyên liệu ẩn: mắm tép trong kim chi",
   "hidden.alt": "Bảng nguyên liệu của K-Bap cho biết khoảng 55% cách làm món này có dùng mắm tép",
@@ -49,14 +45,14 @@
   "spice.body": "Xem mỗi món thường cay đến mức nào, và chỉ hiện những món ở mức bạn ăn được.",
   "spice.hint": "Kéo thước đo",
   "spice.gauge": "Độ cay",
-
   "trust.eyebrow": "Tin tưởng",
   "trust.title": "Nghe từ những người như bạn.",
   "trust.sub": "Đánh giá từ du khách khắp thế giới, được dịch sang ngôn ngữ của bạn.",
   "reviews.title": "Ưu tiên đánh giá từ đồng hương",
   "reviews.body": "Lọc theo quốc tịch và xem người cùng quê nghĩ gì về từng món.",
+  "reviews.hint": "Chạm vào một lá cờ",
   "reviews.alt": "Đánh giá món ăn trong K-Bap, kèm điểm và quốc kỳ của người đánh giá",
-
+  "reviews.example": "Đánh giá mẫu, chỉ để minh họa.",
   "order.eyebrow": "Gọi món & chia sẻ",
   "order.title": "Đưa màn hình này, thay vì ứng dụng dịch.",
   "order.sub": "Đơn của bạn bằng tiếng Hàn, chữ đủ lớn để nhân viên đọc ngay.",
@@ -69,10 +65,8 @@
   "orderf.altStaff": "Thẻ gọi món của K-Bap bằng chữ Hàn cỡ lớn cho nhân viên nhà hàng",
   "share.title": "Chia sẻ món bạn đã ăn",
   "share.body": "Biến bữa ăn thành thẻ story Instagram, với những bức ảnh bạn chọn.",
-
   "cta.title": "Gọi món không cần đoán.",
   "cta.sub": "Miễn phí trên App Store, có 10 ngôn ngữ.",
-
   "footer.tagline": "Thực đơn Hàn Quốc, giải mã cho du khách.",
   "footer.product": "Sản phẩm",
   "footer.legal": "Pháp lý",

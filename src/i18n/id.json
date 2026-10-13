@@ -1,13 +1,11 @@
 {
   "meta.title": "K-Bap — baca menu Korea apa pun",
   "meta.description": "Pindai menu Korea dan lihat setiap hidangan dalam bahasa Anda, lengkap dengan foto, bahan, peringatan alergi, tingkat pedas, dan ulasan dari pelancong seperti Anda.",
-
   "nav.features": "Fitur",
   "nav.blog": "Blog",
   "nav.changelog": "Yang baru",
   "nav.getApp": "Unduh aplikasi",
   "langSuggest": "Lihat dalam Bahasa Indonesia",
-
   "hero.h1": "Baca menu Korea apa pun.",
   "hero.h2": "Makan tanpa khawatir.",
   "hero.sub": "Pindai menu berbahasa Korea. K-Bap menerjemahkan setiap hidangan dan menandai yang perlu Anda hindari.",
@@ -17,10 +15,8 @@
   "hero.menu": "MENU",
   "hero.popTitle": "Hati-hati untuk Anda",
   "hero.popBody": "Ada udang asin di dalam kimchi",
-
   "store.appleAlt": "Unduh di App Store",
   "store.playAlt": "Dapatkan di Google Play",
-
   "read.eyebrow": "Baca",
   "read.title": "Bukan sekadar diterjemahkan. Dijelaskan.",
   "read.sub": "Setiap hidangan dilengkapi penjelasan dan bahan-bahannya.",
@@ -35,13 +31,13 @@
   "photos.before": "Foto menu",
   "photos.after": "Dengan K-Bap",
   "photos.alt": "Menu Korea tanpa foto di samping menu yang sama di K-Bap dengan foto untuk setiap hidangan",
-
   "eat.eyebrow": "Makan dengan aman",
   "eat.title": "Tahu isinya sebelum memesan.",
   "eat.sub": "K-Bap memeriksa setiap hidangan terhadap bahan yang Anda hindari, termasuk yang tidak terlihat.",
   "allergy.title": "Aman, hati-hati, atau hindari, sekilas",
   "allergy.body": "Pilih bahan yang Anda hindari. Setiap hidangan diberi tanda, dan bahan tersembunyi seperti udang fermentasi dan pasta kedelai jadi kelihatan.",
-  "allergy.hint": "Pilih sebuah bahan",
+  "allergy.hint": "Nyalakan daftar pantangan",
+  "allergy.toggle": "Contoh daftar pantangan",
   "allergy.alt": "Hasil pindaian K-Bap dengan setiap hidangan dinilai berdasarkan bahan yang dihindari pengguna",
   "hidden.label": "Bahan tersembunyi: udang asin di dalam kimchi",
   "hidden.alt": "Lembar bahan K-Bap yang menjelaskan bahwa udang asin dipakai di sekitar 55% versi hidangan ini",
@@ -49,14 +45,14 @@
   "spice.body": "Lihat seberapa pedas biasanya setiap hidangan, dan tampilkan hanya tingkat yang sanggup Anda makan.",
   "spice.hint": "Geser pengukurnya",
   "spice.gauge": "Tingkat pedas",
-
   "trust.eyebrow": "Percayai",
   "trust.title": "Dengar dari orang seperti Anda.",
   "trust.sub": "Ulasan dari pelancong di seluruh dunia, diterjemahkan ke bahasa Anda.",
   "reviews.title": "Ulasan dari negara Anda dulu",
   "reviews.body": "Saring berdasarkan kebangsaan dan lihat pendapat orang senegara Anda tentang setiap hidangan.",
+  "reviews.hint": "Ketuk sebuah bendera",
   "reviews.alt": "Ulasan hidangan di K-Bap, dengan nilai dan bendera negara pengulas",
-
+  "reviews.example": "Contoh ulasan, hanya sebagai ilustrasi.",
   "order.eyebrow": "Pesan & bagikan",
   "order.title": "Tunjukkan layar ini, bukan aplikasi penerjemah.",
   "order.sub": "Pesanan Anda dalam bahasa Korea, cukup besar agar staf bisa membacanya sekilas.",
@@ -69,10 +65,8 @@
   "orderf.altStaff": "Kartu pesanan K-Bap dalam tulisan Korea besar untuk staf restoran",
   "share.title": "Bagikan yang Anda makan",
   "share.body": "Jadikan makanan Anda kartu story Instagram, dengan foto pilihan Anda.",
-
   "cta.title": "Pesan tanpa menebak-nebak.",
   "cta.sub": "Gratis di App Store, dalam 10 bahasa.",
-
   "footer.tagline": "Menu Korea, diterjemahkan untuk pelancong.",
   "footer.product": "Produk",
   "footer.legal": "Hukum",

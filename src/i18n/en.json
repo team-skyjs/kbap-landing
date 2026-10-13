@@ -1,13 +1,11 @@
 {
   "meta.title": "K-Bap — read any Korean menu",
   "meta.description": "Scan a Korean menu and see every dish in your language, with photos, ingredients, allergy warnings, spice levels and reviews from travelers like you.",
-
   "nav.features": "Features",
   "nav.blog": "Blog",
   "nav.changelog": "Changelog",
   "nav.getApp": "Get the app",
   "langSuggest": "View in English",
-
   "hero.h1": "Read any Korean menu.",
   "hero.h2": "Eat without worry.",
   "hero.sub": "Scan a menu in Korean. K-Bap translates every dish and flags what to avoid for you.",
@@ -17,10 +15,8 @@
   "hero.menu": "MENU",
   "hero.popTitle": "Caution for you",
   "hero.popBody": "Salted shrimp in the kimchi",
-
   "store.appleAlt": "Download on the App Store",
   "store.playAlt": "Get it on Google Play",
-
   "read.eyebrow": "Read it",
   "read.title": "Not just translated. Explained.",
   "read.sub": "Every dish comes with what it is and what goes into it.",
@@ -35,13 +31,13 @@
   "photos.before": "Menu photo",
   "photos.after": "With K-Bap",
   "photos.alt": "A Korean menu with no photos, next to the same menu in K-Bap with a photo for every dish",
-
   "eat.eyebrow": "Eat safely",
   "eat.title": "Know what’s inside before you order.",
   "eat.sub": "K-Bap checks every dish against what you avoid, including the ingredients you can’t see.",
   "allergy.title": "Safe, caution or avoid, at a glance",
   "allergy.body": "Pick what you avoid. Each dish gets marked, and hidden ingredients like fermented shrimp and soybean paste come to the surface.",
-  "allergy.hint": "Pick an ingredient",
+  "allergy.hint": "Switch the avoid list",
+  "allergy.toggle": "Example avoid list",
   "allergy.alt": "K-Bap scan result with each dish rated against the ingredients the user avoids",
   "hidden.label": "Hidden ingredient: salted shrimp in the kimchi",
   "hidden.alt": "K-Bap ingredient sheet explaining that salted shrimp is used in about 55% of versions of the dish",
@@ -49,14 +45,14 @@
   "spice.body": "See how hot each dish usually is, and show only the level you can handle.",
   "spice.hint": "Drag the gauge",
   "spice.gauge": "Spice level",
-
   "trust.eyebrow": "Trust it",
   "trust.title": "Hear from people like you.",
   "trust.sub": "Reviews from travelers around the world, translated into your language.",
   "reviews.title": "Reviews from your country first",
   "reviews.body": "Filter by nationality and see what people from home thought of each dish.",
+  "reviews.hint": "Tap a flag",
   "reviews.alt": "K-Bap reviews for a dish, with ratings and the reviewer's country flag",
-
+  "reviews.example": "Example reviews, shown for illustration.",
   "order.eyebrow": "Order & share",
   "order.title": "Show this screen, not a translator app.",
   "order.sub": "Your order, in Korean, big enough for the staff to read at a glance.",
@@ -69,10 +65,8 @@
   "orderf.altStaff": "K-Bap order card in large Korean text for the restaurant staff",
   "share.title": "Share what you ate",
   "share.body": "Turn your meals into an Instagram story card, with photos you pick.",
-
   "cta.title": "Order without guessing.",
   "cta.sub": "Free on the App Store, in 10 languages.",
-
   "footer.tagline": "Korean menus, decoded for travelers.",
   "footer.product": "Product",
   "footer.legal": "Legal",

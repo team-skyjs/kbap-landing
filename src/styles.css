@@ -209,23 +209,55 @@ li.chip{cursor:default}
 .demo{display:grid;gap:12px;width:100%;max-width:420px}
 .card{background:#fff;border:1px solid var(--g200);border-radius:24px;box-shadow:var(--sh-card)}
 
-/* a window onto a capture: --top = how far down the screen it starts (fraction of image height) */
-.shot{position:relative;overflow:hidden;height:560px;border:1px solid var(--g200);border-radius:24px;background:#fff}
-.shot img{width:100%;height:auto;transform:translateY(calc(var(--top,0) * -100%));transition:opacity var(--base) var(--ease),transform var(--base) var(--ease)}
-.shot img.swapping{opacity:.35}
-.shot.short{height:440px}
-.shot.bottom{height:380px}
-.shot.bottom img{position:absolute;bottom:-20px;transform:none}
+/* a capture in a phone frame (bezel 10, radius 50, island), whole screen visible at every width.
+   The frame is a size container so HTML drawn over a capture (reviews) scales with it. */
+.shot.phone{position:relative;width:min(100%,340px);margin-inline:auto;padding:10px;border-radius:50px;background:var(--g1000);box-shadow:var(--sh-float);container-type:inline-size}
+.shot.phone::after{content:"";position:absolute;top:20px;left:50%;width:26%;aspect-ratio:88/26;transform:translateX(-50%);border-radius:999px;background:var(--g1000)}
+.screen{position:relative;overflow:hidden;border-radius:40px;background:#fff}
+.screen img{width:100%;height:auto;transition:opacity var(--base) var(--ease)}
+.screen img.swapping{opacity:.35}
 @media (min-width:1024px){
-  /* desktop: the same capture inside a phone frame (bezel 10, radius 50, island) */
-  .shot.phone{width:340px;height:auto;aspect-ratio:340/719;padding:10px;border:0;border-radius:50px;background:var(--g1000);box-shadow:var(--sh-float)}
-  .shot.phone img{border-radius:40px;transform:none}
-  .shot.phone::after{content:"";position:absolute;top:20px;left:50%;width:88px;height:26px;margin-left:-44px;border-radius:999px;background:var(--g1000)}
   .demo{max-width:340px}
   /* two phones share the 640 column: 2 × 308 + 24 */
   .step-demo.two .shot.phone{width:308px}
   .step-demo.two .demo{max-width:308px}
 }
+
+/* switch (allergy demo, reviews filter) */
+.sw{position:relative;flex:none;width:44px;height:26px;border-radius:999px;background:var(--g300);transition:background var(--fast) var(--ease)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform var(--fast) var(--ease)}
+[aria-checked="true"] .sw,.sw.on{background:var(--main)}
+[aria-checked="true"] .sw::after,.sw.on::after{transform:translateX(18px)}
+.avoid{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border:1px solid var(--g200);border-radius:16px;background:#fff;text-align:left;cursor:pointer}
+.avoid-txt{display:flex;flex-direction:column;gap:4px}
+.avoid-txt b{font-size:15px}
+.avoid-items{display:flex;flex-wrap:wrap;gap:6px}
+.avoid-items span{padding:2px 10px;border-radius:999px;background:var(--g100);font-size:13px;font-weight:500;color:var(--g800)}
+.avoid[aria-checked="false"] .avoid-items span{text-decoration:line-through;color:var(--g500)}
+
+/* reviews: HTML over the real capture. Positions are % of the 1206×2622 screen;
+   sizes are cqw (1% of the screen width) so it scales with the phone. */
+.rv-count{position:absolute;left:22%;top:18.2%;width:45%;height:2.6%;display:flex;align-items:center;gap:1.2cqw;background:#fff;font-size:3.4cqw;color:#9196A1}
+.rv-panel{position:absolute;left:0;right:0;top:37.6%;bottom:0;padding:0 5%;background:#fff;font-size:3.4cqw;line-height:1.45}
+.rv-filter{display:flex;align-items:center;gap:2.2cqw;height:7.2cqw;margin-top:.6cqw}
+.rv-filter .sw{width:10.9cqw;height:6cqw}
+.rv-filter .sw::after{top:.5cqw;left:.5cqw;width:5cqw;height:5cqw}
+.rv-filter .sw.on::after{transform:translateX(4.9cqw)}
+.rv-filter b{font-size:3.7cqw;font-weight:500}
+.rv-sort{margin-left:auto;padding:1.2cqw 2.6cqw;border-radius:2cqw;background:var(--g100);font-size:3.5cqw;font-weight:600;color:var(--g800)}
+.rv-sort::after{content:" ⌄"}
+.rv-list{display:grid;gap:2.6cqw;margin-top:2.6cqw}
+.rv-list[hidden]{display:none}
+.rv-list li{padding:3.6cqw;border:1px solid var(--g200);border-radius:2.4cqw;box-shadow:0 1px 4px rgba(28,30,33,.05)}
+.rv-head{display:flex;align-items:center;gap:2cqw}
+.rv-head img{width:4.6cqw;height:auto;border-radius:.6cqw}
+.rv-head b{font-size:3.6cqw}
+.rv-stars{margin-left:auto;color:#FFC83D;font-size:3.4cqw;letter-spacing:.4cqw}
+.rv-stars i{font-style:normal;color:var(--g200)}
+.rv-text{margin-top:1.6cqw;font-size:3.2cqw;color:var(--g700);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rv-foot{display:flex;justify-content:space-between;align-items:center;margin-top:2.4cqw;font-size:2.9cqw;color:#9196A1}
+.rv-like{padding:.8cqw 2.2cqw;border:1px solid var(--g200);border-radius:1.4cqw;color:var(--g900);font-weight:600}
+.note{font-size:12px;color:var(--g700);text-align:center}
 
 /* hidden ingredient callout */
 .callout{display:flex;align-items:center;gap:6px;padding:10px 12px;border:1px solid var(--caution);border-radius:12px;background:rgba(255,165,38,.12);font-size:13px;font-weight:600;line-height:1.4}
@@ -233,12 +265,12 @@ li.chip{cursor:default}
 
 /* before / after */
 .ba{position:relative;width:100%;max-width:420px;height:600px;overflow:hidden;border:1px solid var(--g200);border-radius:24px;background:#fff;--crop:-21%}
-.ba > img,.ba-after img{position:absolute;left:0;top:0;width:100%;max-width:none;height:auto;transform:translateY(var(--crop))}
-.ba-after{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.ba > img,.ba-before img{position:absolute;left:0;top:0;width:100%;max-width:none;height:auto;transform:translateY(var(--crop))}
+.ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
 .ba::after{content:"";position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:#fff;box-shadow:var(--sh-ds);pointer-events:none}
 .ba-tag{position:absolute;z-index:2;bottom:12px;padding:4px 10px;border-radius:999px;background:rgba(28,30,33,.7);color:#fff;font-size:12px;font-weight:600}
-.ba-tag.before{right:12px}
-.ba-tag.after{left:12px}
+.ba-tag.before{left:12px}
+.ba-tag.after{right:12px}
 .ba-knob{position:absolute;z-index:2;top:50%;left:var(--pos);width:48px;height:36px;margin:-18px 0 0 -24px;border-radius:999px;background:var(--main);box-shadow:var(--sh-ds);pointer-events:none}
 .ba-knob::before{content:"‹  ›";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:20px;font-weight:700;line-height:1}
 .ba input{position:absolute;z-index:3;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
@@ -265,10 +297,11 @@ li.chip{cursor:default}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;margin-top:14px}
 .tiles li{display:flex;flex-direction:column;gap:2px;min-width:0}
 .tiles li[hidden]{display:none}
-.tiles img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin-bottom:4px}
+.tiles li > img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin-bottom:4px}
 .tiles b{font-size:14px;line-height:1.35;font-weight:600}
 .tiles small{font-size:12px;color:var(--g700)}
 .peppers{display:flex;gap:1px}
+.pepper{width:12px;height:12px}
 
 /* order: segmented */
 .order-demo{padding:12px;border-radius:24px;background:var(--g50)}
@@ -276,8 +309,7 @@ li.chip{cursor:default}
 .seg{display:flex;padding:4px;border-radius:999px;background:var(--g100)}
 .seg button{flex:1;padding:8px 16px;border:0;border-radius:999px;background:none;font-size:14px;font-weight:600;color:var(--g700);cursor:pointer;transition:background var(--fast) var(--ease),color var(--fast) var(--ease)}
 .seg button[aria-pressed="true"]{background:#fff;color:var(--g1000);box-shadow:var(--sh-ds)}
-.order-demo .shot{height:500px;border-radius:16px}
-@media (min-width:1024px){ .order-demo{padding:16px;max-width:372px} .order-demo .shot.phone{height:auto} }
+@media (min-width:1024px){ .order-demo{padding:16px;max-width:372px} }
 
 /* ---------------- final CTA ---------------- */
 .cta{padding:80px 0}

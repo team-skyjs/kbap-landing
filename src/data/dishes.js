@@ -34,8 +34,7 @@ export const SPICE_DISHES = [
   { img: 'tteok', spice: 3, ko: '떡볶이', name: { en: 'Spicy rice cakes', ja: 'トッポッキ', es: 'Pasteles de arroz picantes', ru: 'Токпокки', th: 'ต๊อกบกกี' } },
 ];
 
-/** Allergen chips. Only Shrimp and Soybean have a capture (the QA account's list). */
-export const ALLERGENS = ['shrimp', 'crab', 'shellfish', 'soybean', 'peanut', 'wheat', 'egg', 'milk'];
+/** The capture account's avoid list: the allergy demo switches exactly this on/off. */
 export const ALLERGENS_CAPTURED = ['shrimp', 'soybean'];
 
 /** Reviews flag chips; the selected one is the visitor's language's country. */
@@ -43,3 +42,54 @@ export const FLAGS = ['us', 'jp', 'th', 'vn', 'cn', 'tw', 'es', 'id', 'ru', 'kr'
 export const LANG_FLAG = { en: 'us', ja: 'jp', th: 'th', vi: 'vn', 'zh-Hans': 'cn', 'zh-Hant': 'tw', es: 'es', id: 'id', ru: 'ru', ko: 'kr' };
 
 export const dishName = (d, lang) => d.name[lang] ?? d.name.en;
+
+/**
+ * Reviews demo: the real reviews-nat-off-en capture, with the country toggle and
+ * the cards under it drawn in HTML so each flag chip shows "<CC> only" and that
+ * country's reviews. ponytail: EXAMPLE reviews and count (the page labels them as
+ * examples); swap in real prod reviews when they exist. English, like the capture UI.
+ */
+export const REVIEW_COUNT = 240;
+// Shown in English like the rest of the capture UI (the app translates reviews).
+export const REVIEWS = {
+  us: [
+    ['jake.m', 5, 'Sweet, savory and not spicy at all. The glass noodles had a great chew and it went perfectly with rice.', '2 days ago', 14],
+    ['sarahk', 5, 'Lighter than I expected and full of vegetables. Easy pick if you are new to Korean food.', '1 week ago', 6],
+  ],
+  jp: [
+    ['yuki_t', 5, 'Tastes like a sweeter sukiyaki. The noodles stay springy even when they cool down.', '3 days ago', 11],
+    ['kenji', 5, 'Gentle seasoning, good for anyone who cannot handle spice. Sesame oil smell is lovely.', '2 weeks ago', 5],
+  ],
+  th: [
+    ['ploy.s', 5, 'Reminds me of pad woon sen but sweeter. I added a bit of chili and it was perfect.', '4 days ago', 9],
+    ['nattapong', 5, 'Not spicy at all, so ask for gochujang on the side if you like heat.', '1 week ago', 3],
+  ],
+  vn: [
+    ['minhh', 5, 'The japchae was delicious, with springy glass noodles coated in a savory, slightly sweet sauce and plenty of crisp-tender vegetables.', 'Today', 0],
+    ['thao.ng', 5, 'Similar to our mien xao but sweeter. Big portion, good for sharing.', '5 days ago', 7],
+  ],
+  cn: [
+    ['lin_w', 5, 'Like a Korean version of stir-fried glass noodles. Not oily, nice sesame fragrance.', '2 days ago', 12],
+    ['chenyu', 5, 'A bit sweet for me but the texture is great. Good with kimchi on the side.', '3 weeks ago', 4],
+  ],
+  tw: [
+    ['wei.h', 5, 'Soft and chewy noodles, light sweet soy flavor. My kids loved it.', '6 days ago', 8],
+    ['yating', 5, 'Very balanced and not spicy. Would order again with rice.', '2 weeks ago', 2],
+  ],
+  es: [
+    ['lucia.g', 5, 'Perfect glass noodles, sweet and savory at once. Great pick if you do not like spicy food.', '3 days ago', 10],
+    ['pablo_r', 5, 'A light dish with lots of vegetables. Ideal for sharing.', '1 week ago', 3],
+  ],
+  id: [
+    ['putri.a', 5, 'Like bihun goreng but sweeter. Big portion and not spicy.', '4 days ago', 9],
+    ['rizky', 5, 'Light and tasty, good for anyone who avoids spicy food.', '2 weeks ago', 2],
+  ],
+  ru: [
+    ['anya.k', 5, 'Tender glass noodles with a sweet and salty taste. Not spicy at all.', '5 days ago', 7],
+    ['dmitry', 5, 'Lots of vegetables and light. Goes well with rice.', '3 weeks ago', 1],
+  ],
+  kr: [
+    ['jiwoo', 5, 'Tastes like the japchae at a family feast. Chewy noodles, seasoned just right.', '1 day ago', 15],
+    ['minseo.l', 5, 'Sweet with plenty of vegetables, and mild enough to share with kids.', '1 week ago', 4],
+  ],
+};
