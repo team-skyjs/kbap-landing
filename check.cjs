@@ -117,15 +117,14 @@ assert.ok(!/location\s*\.\s*(href\s*=|replace\(|assign\()/.test(outside),
 assert.ok(/window\.location\.href = itmsUrl\(/.test(handler) && /1500/.test(handler),
   'the itms-apps escape and its 1.5s https fallback must both run on tap');
 
-// --- badges: App Store everywhere (D-24), Play added on Android only
-assert.ok(/\.badge-play\{display:none\}/.test(css) && /\.android \.badge-play\{display:inline-flex\}/.test(css),
-  'Play must show on Android and only there');
+// --- badges: both stores on every device
+assert.ok(!/\.badge-(play|apple)\{display:none\}/.test(css), 'a store badge is hidden; both must show everywhere');
 
 // The badge row is flex-nowrap, so an oversized pill does not stack the badges,
 // it pushes them out of the viewport. Either way the page is broken, so the
 // two-badge height has to keep the pair inside the narrowest common phone.
-const bh = /\.android \.badges\{--bh:(\d+)px/.exec(css);
-assert.ok(bh, '--bh (badge pill height) is not defined for .android .badges, the one place both badges share a row');
+const bh = /\.badges\{\s*--bh:(\d+)px/.exec(css);
+assert.ok(bh, '--bh (badge pill height) is not defined on .badges');
 const h = Number(bh[1]);
 assert.ok(h >= 40, `badge pill is ${h}px; Apple's minimum is 40px`);
 const rowWidth = h * 2.9916 + h / 2 + 6 + (h / 0.672) * 2.584;   // apple box + gap + play box

@@ -59,10 +59,6 @@ const APP_STORE = 'https://apps.apple.com/app/id6788635067';
 <meta property="og:locale" content={lang.replace('-', '_')}>
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Which store this device has, decided before first paint so the badge row is
-     right in the first frame and nothing moves afterwards. -->
-<script is:inline>(function(u,d){if(/iPhone|iPad|iPod/.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))d.className='ios';else if(/Android/.test(u))d.className='android';})(navigator.userAgent,document.documentElement);</script>
-
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- Pretendard is the app's and the ad creative's typeface. Loaded off the
      critical path so a slow CDN can't hold up first paint on paid traffic. -->

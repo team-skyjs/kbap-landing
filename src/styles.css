@@ -159,23 +159,18 @@ a{color:inherit}
    ~1/4, so it gets none, and its box is pill/0.672 to match pill heights.
    Nothing is rotated, recoloured, redrawn or animated.
 
-   D-24 shows the App Store badge only; Play is added on Android, the one
-   device where the App Store is the wrong store. --bh is the pill height. */
+   Both stores on every device, always on one row. --bh is the pill height. */
 .badges{
   --bh:40px;
   display:flex;align-items:center;gap:6px;
 }
-.ios .badges,.cta .badges{--bh:52px}
-.android .badges{--bh:40px}
 .badge{display:inline-flex;flex:0 0 auto;text-decoration:none;-webkit-tap-highlight-color:transparent;transition:transform .18s ease}
 .badge:active{transform:scale(.97)}
-.badge-play{display:none}
-.android .badge-play{display:inline-flex}
 .badge-apple{padding:calc(var(--bh)/4) calc(var(--bh)/4) calc(var(--bh)/4) 0}
 .badge-apple img{height:var(--bh);width:calc(var(--bh)*2.9916)}
 .badge-play img{height:calc(var(--bh)/.672);width:calc(var(--bh)/.672*2.584)}
 .badge:focus-visible{outline:3px solid var(--main-ink);outline-offset:2px;border-radius:10px}
-@media (min-width:1024px){ .badges{--bh:56px} .android .badges{--bh:44px} }
+@media (min-width:1024px){ .badges{--bh:48px} }
 
 /* ---------------- chapters ---------------- */
 .chapter{padding:var(--section) 0}
