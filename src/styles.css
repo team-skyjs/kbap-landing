@@ -257,7 +257,6 @@ li.chip{cursor:default}
 .rv-text{margin-top:1.6cqw;font-size:3.2cqw;color:var(--g700);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rv-foot{display:flex;justify-content:space-between;align-items:center;margin-top:2.4cqw;font-size:2.9cqw;color:#9196A1}
 .rv-like{padding:.8cqw 2.2cqw;border:1px solid var(--g200);border-radius:1.4cqw;color:var(--g900);font-weight:600}
-.note{font-size:12px;color:var(--g700);text-align:center}
 
 /* hidden ingredient callout */
 .callout{display:flex;align-items:center;gap:6px;padding:10px 12px;border:1px solid var(--caution);border-radius:12px;background:rgba(255,165,38,.12);font-size:13px;font-weight:600;line-height:1.4}

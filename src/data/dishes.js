@@ -46,8 +46,8 @@ export const dishName = (d, lang) => d.name[lang] ?? d.name.en;
 /**
  * Reviews demo: the real reviews-nat-off-en capture, with the country toggle and
  * the cards under it drawn in HTML so each flag chip shows "<CC> only" and that
- * country's reviews. ponytail: EXAMPLE reviews and count (the page labels them as
- * examples); swap in real prod reviews when they exist. English, like the capture UI.
+ * country's reviews. ponytail: example reviews and count, not real data; swap in
+ * real prod reviews when they exist. English, like the capture UI.
  */
 export const REVIEW_COUNT = 240;
 // Shown in English like the rest of the capture UI (the app translates reviews).
