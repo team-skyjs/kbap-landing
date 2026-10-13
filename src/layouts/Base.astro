@@ -68,7 +68,9 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
 <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"></noscript>
 {noto && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>}
-{noto && <link rel="stylesheet" href={noto}>}
+{/* same non-blocking pattern as Pretendard: Noto CSS was render-blocking (ja LCP 10s) */}
+{noto && <link rel="preload" as="style" href={noto} onload="this.onload=null;this.rel='stylesheet'">}
+{noto && <noscript><link rel="stylesheet" href={noto}></noscript>}
 
 <!-- Meta Pixel: no pixel exists on the ad account (checked 2026-09-21). When one is
      created, the base code goes here. Nothing is loaded until then. -->
@@ -86,7 +88,7 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
     </nav>
     <div class="nav-right">
       <details class="lang-select nav-lang">
-        <summary aria-label={t('footer.language')}><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span></summary>
+        <summary aria-label={`${ENDONYM[lang]}${SHORT[lang] !== ENDONYM[lang] ? ` (${SHORT[lang]})` : ''}, ${plain('footer.language')}`}><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span></summary>
         <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
       </details>
       <!-- .pill: app.js points this at Play on Android. -->
@@ -120,7 +122,7 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
         <h2>{t('footer.contact')}</h2>
         <a href="mailto:teamskyjs@gmail.com">teamskyjs@gmail.com</a>
         <details class="lang-select up">
-          <summary aria-label={t('footer.language')}>{ENDONYM[lang]}</summary>
+          <summary aria-label={`${ENDONYM[lang]}, ${plain('footer.language')}`}>{ENDONYM[lang]}</summary>
           <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
         </details>
       </div>

@@ -9,11 +9,27 @@ Object.assign(dicts, import.meta.glob('./zh-*.json', { eager: true, import: 'def
 // (keep-all) then only breaks there: "メニューも、" never splits as "メ/ニュー".
 const PARSERS = { ja: loadDefaultJapaneseParser, 'zh-Hans': loadDefaultSimplifiedChineseParser, 'zh-Hant': loadDefaultTraditionalChineseParser };
 const parsers = {};
-const ZWSP = '​';
+const ZWSP = '\u200B';
+// Closing punctuation BudouX sometimes puts at the start of a phrase ("。説明まで。").
+const LEADING = /^[。、，．！？）」』】〕・ー…：；%]+/;
+// Words that read wrong when split (QA: "もう当て/ずっぽう").
+const KEEP = { ja: ['当てずっぽう'] };
 export const phrase = (lang, s) => {
   if (!PARSERS[lang] || typeof s !== 'string') return s;
   parsers[lang] ??= PARSERS[lang]();
-  return s.split('\n').map((line) => parsers[lang].parse(line).join(ZWSP)).join('\n');
+  const line = (l) => {
+    const chunks = [];
+    for (const c of parsers[lang].parse(l)) {
+      const lead = chunks.length && c.match(LEADING);
+      if (lead) chunks[chunks.length - 1] += lead[0];
+      const rest = lead ? c.slice(lead[0].length) : c;
+      if (rest) chunks.push(rest);
+    }
+    let out = chunks.join(ZWSP);
+    for (const w of KEEP[lang] ?? []) out = out.replace(new RegExp([...w].join(`${ZWSP}?`), 'g'), w);
+    return out;
+  };
+  return s.split('\n').map(line).join('\n');
 };
 
 /**
