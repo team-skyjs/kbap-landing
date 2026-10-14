@@ -17,6 +17,10 @@
   --fast:160ms; --base:240ms; --slow:480ms;
 
   --gutter:24px; --section:72px;
+  /* viewport-fit=cover: in landscape the notch / rounded corners take the side
+     insets, so content never sits closer to the edge than the safe area */
+  --pad-l:max(var(--gutter),env(safe-area-inset-left));
+  --pad-r:max(var(--gutter),env(safe-area-inset-right));
   --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
 }
 @media (min-width:1024px){ :root{--gutter:clamp(40px,8.33vw,120px);--section:140px} }
@@ -43,12 +47,12 @@ button{font:inherit;color:inherit}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--main-ink);outline-offset:2px;border-radius:8px}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.wrap{max-width:calc(1200px + var(--gutter) * 2);margin:0 auto;padding-inline:var(--gutter)}
+.wrap{max-width:calc(1200px + var(--gutter) * 2);margin:0 auto;padding-left:var(--pad-l);padding-right:var(--pad-r)}
 @media (max-width:1023px){ .desk-only{display:none !important} }
 
 /* ---------------- nav ---------------- */
 .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--g100)}
-.nav-row{height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-inline:20px}
+.nav-row{height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
 .logo img{height:20px;width:auto}
 .nav-links{display:none}
 .nav-right{display:flex;align-items:center;gap:8px}
@@ -56,10 +60,10 @@ a{color:inherit}
 @media (max-width:359px){ .nav-right .btn-sm{padding:0 10px;font-size:14px} }
 .nav .nav-lang summary{min-height:44px;padding:8px 8px 8px 12px}
 /* phones: the list hangs from the screen edge, not the narrow button, so it never leaves the viewport */
-.nav .nav-lang ul{position:fixed;top:60px;right:12px;max-width:calc(100vw - 24px)}
+.nav .nav-lang ul{position:fixed;top:60px;right:max(12px,env(safe-area-inset-right));max-width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right))}
 .nav-lang .full{display:none}
 @media (min-width:1024px){
-  .nav-row{height:72px;padding-inline:var(--gutter)}
+  .nav-row{height:72px;padding-left:var(--pad-l);padding-right:var(--pad-r)}
   .logo img{height:24px}
   .nav-links{display:flex;gap:32px;font-size:14px;font-weight:500;color:var(--g800)}
   .nav-links a{text-decoration:none}
@@ -382,7 +386,7 @@ li.chip{cursor:default}
 .lang-suggest button:hover{opacity:1}
 
 /* ---------------- blog / changelog ---------------- */
-.page{max-width:calc(720px + var(--gutter) * 2);margin:0 auto;padding:56px var(--gutter) var(--section)}
+.page{max-width:calc(720px + var(--gutter) * 2);margin:0 auto;padding:56px var(--pad-r) var(--section) var(--pad-l)}
 .page h1{font-size:34px;line-height:1.35;font-weight:700;letter-spacing:-.01em}
 .posts{margin-top:32px;display:grid;gap:12px}
 .posts a{display:block;padding:20px;border:1px solid var(--g200);border-radius:16px;text-decoration:none;transition:box-shadow var(--fast) var(--ease)}
