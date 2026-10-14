@@ -71,6 +71,13 @@ for (const f of eager) imgBytes += fs.statSync(path.join(dist, f)).size;
 assert.ok(imgBytes <= 500_000, `eager home images total ${imgBytes} bytes, over the 500KB budget`);
 assert.ok(![...eager].some((f) => f.startsWith('/assets/cap/')), 'a demo capture is loading eagerly');
 
+// --- phrase marks ship as <wbr>, never as U+200B (it leaks into copy, alt, aria)
+for (const l of LANGS) {
+  const html = read(l === 'en' ? 'index.html' : `${l}/index.html`);
+  assert.ok(!html.includes('\u200B'), `${l}: a U+200B phrase mark reached the page`);
+  if (/^(ja|zh)/.test(l)) assert.ok(html.includes('<wbr>'), `${l}: no <wbr> phrase breaks`);
+}
+
 // --- sitemap lists every language
 const sm = read('sitemap-0.xml');
 for (const l of LANGS) assert.ok(sm.includes(l === 'en' ? `<loc>${SITE}/</loc>` : `<loc>${SITE}/${l}/</loc>`), `sitemap is missing ${l}`);

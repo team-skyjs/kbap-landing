@@ -16,8 +16,9 @@ interface Props {
 
 const { lang, path, alternates = LANGS } = Astro.props;
 const t = dict(lang);
-const title = Astro.props.title ?? t('meta.title');
-const description = Astro.props.description ?? t('meta.description');
+const plain = dict(lang, { plain: true });   // meta tags: no phrase marks
+const title = Astro.props.title ?? plain('meta.title');
+const description = Astro.props.description ?? plain('meta.description');
 const site = Astro.site!.origin;
 const url = (l: string) => site + localePath(l, path);
 const og = `${site}/assets/brand/og-cover.jpg`;
@@ -32,6 +33,8 @@ const changelogHref = (await releases()).length > 0 ? '/changelog/' : null;
 const NOTO = { ja: 'Noto+Sans+JP', 'zh-Hans': 'Noto+Sans+SC', 'zh-Hant': 'Noto+Sans+TC', th: 'Noto+Sans+Thai' };
 const noto = NOTO[lang] && `https://fonts.googleapis.com/css2?family=${NOTO[lang]}:wght@400;500;600;700&display=swap`;
 const APP_STORE = 'https://apps.apple.com/app/id6788635067';
+// Header language button on phones: room for a short label only.
+const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体', 'zh-Hant': '繁體', es: 'ES', id: 'ID', ru: 'RU', th: 'ไทย', vi: 'VI' };
 ---
 <!doctype html>
 <html lang={lang}>
@@ -65,7 +68,9 @@ const APP_STORE = 'https://apps.apple.com/app/id6788635067';
 <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"></noscript>
 {noto && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>}
-{noto && <link rel="stylesheet" href={noto}>}
+{/* same non-blocking pattern as Pretendard: Noto CSS was render-blocking (ja LCP 10s) */}
+{noto && <link rel="preload" as="style" href={noto} onload="this.onload=null;this.rel='stylesheet'">}
+{noto && <noscript><link rel="stylesheet" href={noto}></noscript>}
 
 <!-- Meta Pixel: no pixel exists on the ad account (checked 2026-09-21). When one is
      created, the base code goes here. Nothing is loaded until then. -->
@@ -83,7 +88,8 @@ const APP_STORE = 'https://apps.apple.com/app/id6788635067';
     </nav>
     <div class="nav-right">
       <details class="lang-select nav-lang">
-        <summary>{ENDONYM[lang]}</summary>
+        <!-- Name = the visible label + ", Language" (display:none span drops out), so it always starts with what's on screen. -->
+        <summary><span class="full">{ENDONYM[lang]}</span><span class="short" lang={lang}>{SHORT[lang]}</span><span class="sr">, {plain('footer.language')}</span></summary>
         <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
       </details>
       <!-- .pill: app.js points this at Play on Android. -->
@@ -117,7 +123,7 @@ const APP_STORE = 'https://apps.apple.com/app/id6788635067';
         <h2>{t('footer.contact')}</h2>
         <a href="mailto:teamskyjs@gmail.com">teamskyjs@gmail.com</a>
         <details class="lang-select up">
-          <summary aria-label={t('footer.language')}>{ENDONYM[lang]}</summary>
+          <summary>{ENDONYM[lang]}<span class="sr">, {plain('footer.language')}</span></summary>
           <ul>{alternates.map((l) => <li><a href={localePath(l, path)} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}>{ENDONYM[l]}</a></li>)}</ul>
         </details>
       </div>

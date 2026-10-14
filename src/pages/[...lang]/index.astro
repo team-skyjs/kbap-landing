@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Badges from '../../components/Badges.astro';
 import { LANGS, ENDONYM, langParam } from '../../i18n/langs.js';
-import { t as dict } from '../../i18n/t.js';
+import { t as dict, phrase } from '../../i18n/t.js';
 import { HERO_MENU, HERO_CYCLE, SPICE_DISHES, ALLERGENS_CAPTURED, FLAGS, LANG_FLAG, REVIEWS, REVIEW_COUNT, dishName } from '../../data/dishes.js';
 
 export function getStaticPaths() {
@@ -25,7 +25,12 @@ const CAP_W = 640, CAP_H = 1391;
 const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l, dict(l)('langSuggest')]));
 ---
 <Base lang={lang} path="/">
-  {lang === 'en' && <a class="lang-suggest" hidden data-suggest={JSON.stringify(suggest)}></a>}
+  {lang === 'en' && (
+    <div class="lang-suggest" hidden data-suggest={JSON.stringify(suggest)}>
+      <a></a>
+      <button type="button" aria-label="Close">×</button>
+    </div>
+  )}
 
   <main>
     <!-- ───────────── hero ───────────── -->
@@ -49,14 +54,14 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
             {cycle.map((l, i) => <span class="chip" data-lang={l} lang={l} aria-pressed={i === 0 ? 'true' : 'false'}>{ENDONYM[l]}</span>)}
           </div>
           <p class="morph-toast"><span lang="ko">한국어</span><span class="chev">›</span><b lang={boardLang}>{ENDONYM[boardLang]}</b></p>
-          <div class="board" data-names={JSON.stringify(Object.fromEntries(cycle.map((l) => [l, HERO_MENU.map((d) => dishName(d, l))])))}>
+          <div class="board" data-names={JSON.stringify(Object.fromEntries(cycle.map((l) => [l, HERO_MENU.map((d) => phrase(l, dishName(d, l)))])))}>
             <p class="board-head"><b lang="ko">메 뉴</b><span>{t('hero.menu')}</span></p>
             <ol>
               {HERO_MENU.map((d, i) => (
                 <li style={`--i:${i}`}>
                   <span class="ko-line"><span lang="ko">{d.ko}</span><span class="price">{d.price}원</span></span>
                   <span class="tr-line">
-                    <span class="names"><b class="name" lang={boardLang}>{dishName(d, boardLang)}</b><small lang="ko">{d.ko}</small></span>
+                    <span class="names"><b class="name" lang={boardLang}>{phrase(boardLang, dishName(d, boardLang))}</b><small lang="ko">{d.ko}</small></span>
                     <img class="dot" src={`/assets/icons/risk-dot-${d.verdict}.svg`} alt="" width="18" height="18">
                   </span>
                 </li>
@@ -180,7 +185,7 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
                 {SPICE_DISHES.map((d) => (
                   <li data-spice={d.spice}>
                     <img src={`/assets/food/${d.img}.webp`} alt="" width="480" height="320" loading="lazy" decoding="async">
-                    <b lang={d.name[lang] ? lang : 'en'}>{dishName(d, lang)}</b>
+                    <b lang={d.name[lang] ? lang : 'en'}>{phrase(d.name[lang] ? lang : 'en', dishName(d, lang))}</b>
                     <small lang="ko">{d.ko}</small>
                     <span class="peppers" role="img" aria-label={t(`spice.band.${d.spice}`)}>
                       {[0, 1, 2, 3].map((k) => <img class="pepper" src={`/assets/icons/pepper-${k < d.spice ? 'on' : 'off'}.svg`} alt="" width="12" height="12">)}

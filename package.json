@@ -9,5 +9,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^6.0.5"
+  },
+  "devDependencies": {
+    "budoux": "^0.9.3"
   }
 }
