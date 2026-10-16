@@ -7,8 +7,8 @@
 (function (root) {
   'use strict';
 
-  var APP_STORE = 'https://apps.apple.com/app/id6788635067';
-  var PLAY = 'https://play.google.com/store/apps/details?id=com.rocher.kbap';
+  var APP_STORE = 'https://apps.apple.com/app/apple-store/id6788635067?pt=128938928&ct=homepage&mt=8';
+  var PLAY = 'https://play.google.com/store/apps/details?id=com.rocher.kbap&referrer=utm_source%3Dhomepage%26utm_medium%3Dwebsite%26utm_campaign%3Dhomepage';
 
   /** Languages the app itself ships (each has its own /<code>/ page). */
   var LANGS = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'vi', 'id', 'th', 'ru', 'es'];
@@ -17,27 +17,12 @@
    * Pure helpers (also exported for check.js)
    * ------------------------------------------------------------------ */
 
-  /**
-   * Google Play install referrer, built from the UTM params the ad set sends.
-   * The joined string is encoded once as a whole, which is the format Play
-   * expects: referrer=utm_source%3Dmeta%26utm_campaign%3Dkb255-ios
-   */
-  function playUrl(search) {
-    var p = new URLSearchParams(search || '');
-    var parts = [];
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-      var v = p.get(k);
-      if (v) parts.push(k + '=' + v);
-    });
-    if (!parts.length) return PLAY;
-    return PLAY + '&referrer=' + encodeURIComponent(parts.join('&'));
+  // Homepage installs use the explicit campaign links supplied by the owner.
+  // Incoming query parameters must not replace this campaign attribution.
+  function playUrl() {
+    return PLAY;
   }
 
-  /**
-   * App Store link. The order leaves the campaign token off on purpose: `ct`
-   * only records anything alongside a provider token (`pt`) we don't have, and
-   * guessing one would just produce dead attribution.
-   */
   function appStoreUrl() {
     return APP_STORE;
   }
@@ -96,9 +81,9 @@
     });
   });
 
-  // --- store links: UTM passthrough, then the iOS in-app-browser escape ------
+  // --- fixed homepage campaign links, then the iOS in-app-browser escape ----
   document.querySelectorAll('a[data-store="android"]').forEach(function (a) {
-    a.href = playUrl(search);
+    a.href = playUrl();
   });
 
   document.querySelectorAll('a[data-store="ios"]').forEach(function (a) {
