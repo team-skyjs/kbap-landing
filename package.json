@@ -3,8 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node check.cjs",
-    "preview": "astro preview"
+    "build": "astro build && node check.cjs && node scripts/check-editorial.cjs",
+    "preview": "astro preview",
+    "preview:drafts": "KBAP_DRAFT_PREVIEW=1 astro dev --host 127.0.0.1 --port 4332",
+    "check:editorial": "node scripts/check-editorial.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

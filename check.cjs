@@ -165,3 +165,16 @@ for (const target of ['//evil.example/', 'https://evil.example/', '/\\evil.examp
   assert.strictEqual(kbap.localeUrl(target, campaignSearch), null, 'reject non-route target: ' + target);
 }
 console.log('ok — locale UTM allowlist, route preservation, nested Play referrer encoding');
+
+// A partial editorial release must not link to drafts that have no public route.
+// This covers article bodies as well as indexes/navigation, in every locale.
+for (const file of fs.readdirSync(dist, { recursive: true }).filter((f) => f.endsWith('.html'))) {
+  const html = read(file);
+  for (const [, href] of html.matchAll(/href="([^"#]+)"/g)) {
+    const url = new URL(href, SITE + '/' + file);
+    if (url.origin !== SITE || !/(^|\/)blog\//.test(url.pathname)) continue;
+    const target = path.join(dist, decodeURIComponent(url.pathname), 'index.html');
+    assert.ok(fs.existsSync(target), `${file}: unpublished/missing blog target ${url.pathname}; remove the link or publish its approved target together`);
+  }
+}
+console.log('ok — all rendered internal blog links have published targets');

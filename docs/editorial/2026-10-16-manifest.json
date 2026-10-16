@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "bibimbap-ingredients-ordering",
+    "article_sha256": "c3f7166dd788861111f36021b3470aa2144ec1cd391c0b242802e4b400b85802",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  },
+  {
+    "slug": "google-lens-kbap-menu-without-photos",
+    "article_sha256": "1941c01250e539becab5c9e5e6861c8ef1dc9a3582653741b0d1340e2a228522",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  },
+  {
+    "slug": "kimchi-jjigae-vs-doenjang-jjigae",
+    "article_sha256": "bad2dcef5225c2e0848bd797e2432f592c399efbd4b56ddad0680b25fca3629b",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  },
+  {
+    "slug": "papago-kbap-first-restaurant-visit",
+    "article_sha256": "4f17ec5bb6a2ede90b17fb31d04fd07b0f3773424f7425d3145ab48d12068326",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  },
+  {
+    "slug": "read-korean-menu-with-kbap",
+    "article_sha256": "01281176d61ba5cf0cdb43079691e98013bd4d306226755f4a3b21c9d4889870",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  },
+  {
+    "slug": "show-food-order-in-korean",
+    "article_sha256": "f5f078b2a34ed01e55ab015a97efc20b2eb5053cdaa19752405481810cc3ef93",
+    "review_status": "passed",
+    "approval_status": "approved",
+    "publish_status": "ready",
+    "approval_date": "2026-10-16",
+    "approval_evidence": "User: ㅇㅋ 글들 좋다 이대로 배포해도돼."
+  }
+]

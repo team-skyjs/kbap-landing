@@ -1,8 +1,8 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import { langParam } from '../../../i18n/langs.js';
-import { posts } from '../../../content/posts.js';
+import { langParam, localePath } from '../../../i18n/langs.js';
+import { posts, draftPreview } from '../../../content/posts.js';
 
 export async function getStaticPaths() {
   const all = await posts();
@@ -22,13 +22,15 @@ const ld = {
   description: post.data.description,
   datePublished: post.data.date.toISOString(),
   inLanguage: post.lang,
+  mainEntityOfPage: new URL(localePath(post.lang, `/blog/${post.slug}/`), Astro.site).href,
   publisher: { '@type': 'Organization', name: 'Team SkyJS' },
 };
 ---
 <Base lang={post.lang} path={`/blog/${post.slug}/`} title={`${post.data.title} — K-Bap`}
-      description={post.data.description} alternates={alternates}>
+      description={post.data.description} alternates={alternates} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
   <main class="page">
+    {draftPreview && post.data.draft && <p class="draft-notice">Unpublished draft · awaiting approval. Related draft links require simultaneous publication; remove them for a partial release.</p>}
     <article class="prose">
       <h1>{post.data.title}</h1>
       <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString(post.lang, { dateStyle: 'long' })}</time>
