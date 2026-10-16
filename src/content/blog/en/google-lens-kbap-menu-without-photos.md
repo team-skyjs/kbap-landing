@@ -2,7 +2,7 @@
 title: "Google Lens and K-Bap for a Menu Without Food Photos"
 description: "Use Google Lens to read menu text and K-Bap to explore recognized dishes. Learn what translated words and reference food photos can and cannot tell you."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 A menu can become readable without becoming easy to choose from. You may understand the translated words and still not know what the food looks like. Google Lens and K-Bap offer different starting points for that problem.

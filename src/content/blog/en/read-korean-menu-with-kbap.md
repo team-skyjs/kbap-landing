@@ -2,7 +2,7 @@
 title: "How to Read a Korean Restaurant Menu with K-Bap"
 description: "Read a Korean menu, check recognized dishes, and prepare an order with K-Bap. A practical guide to photos, translations, and what to confirm with staff."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 A Korean-only menu is easier to work through when you separate three questions: What does the line say? What kind of dish is it? Is this the version you want to order? K-Bap helps with the first two, while the restaurant is the place to confirm the third.

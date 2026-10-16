@@ -2,7 +2,7 @@
 title: "How to Show Your Food Order in Korean with K-Bap"
 description: "Prepare a Korean order card in K-Bap, check dish names and quantities, and show it to restaurant staff without confusing it with an online order."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 Once you have chosen what to eat, the next challenge is making sure the restaurant understands your selection. K-Bap's order card puts selected menu items and quantities into Korean so you can show them to staff.

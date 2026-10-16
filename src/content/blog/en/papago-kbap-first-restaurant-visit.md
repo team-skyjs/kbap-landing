@@ -2,7 +2,7 @@
 title: "Papago and K-Bap for Your First Korean Restaurant Visit"
 description: "Compare Papago image translation and K-Bap menu guidance by task: reading text, understanding dishes, and communicating an order in Korea."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 For a first meal in Korea, a general translator and a food-focused app can be useful at different moments. Papago helps translate text you encounter. K-Bap focuses on reading Korean menus and connecting recognized dishes with food information.

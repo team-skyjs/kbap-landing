@@ -2,7 +2,7 @@
 title: "Kimchi Jjigae and Doenjang Jjigae: What Is the Difference?"
 description: "Compare kimchi stew and soybean paste stew, learn their Korean menu names, and check ingredients, portions, and rice before ordering."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 Kimchi jjigae and doenjang jjigae are two Korean stews with different starting points. **김치찌개** is built around kimchi; **된장찌개** is seasoned with doenjang, fermented soybean paste. Recognizing those names helps you choose, but neither name provides a complete ingredient list.

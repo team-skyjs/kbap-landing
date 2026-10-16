@@ -2,7 +2,7 @@
 title: "Bibimbap: What Is in It and How to Order It"
 description: "Learn what bibimbap usually contains, how versions differ, and which questions to ask about toppings and sauce before ordering in Korea."
 date: 2026-10-16
-draft: true
+draft: false
 ---
 
 Bibimbap is a rice dish with toppings that you mix together before eating. It is a useful name to recognize on a Korean menu, but the word alone does not tell you every ingredient in the bowl.
