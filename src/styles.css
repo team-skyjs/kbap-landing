@@ -403,6 +403,58 @@ li.chip{cursor:default}
 .release h2{font-size:20px}
 @media (min-width:1024px){ .page{padding-top:96px} .page h1{font-size:48px} }
 
+/* Mobile controls and demo layout: preserve complete captures while making
+   the surrounding controls readable and reachable with a thumb. */
+.lang-select ul{max-height:calc(100dvh - 96px - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}
+.lang-select li a{min-height:44px;display:flex;align-items:center}
+.step,.step-demo,.demo{min-width:0}
+.step-demo{justify-items:center}
+.ba input,.gauge input{touch-action:pan-y}
+.chips.scroll{scroll-snap-type:x proximity;padding-block:4px}
+.chips.scroll .chip{scroll-snap-align:start}
+@media (max-width:1023px){
+  :root{--section:56px}
+  .logo{display:flex;align-items:center;min-height:44px;flex-shrink:0}
+  .nav-right{min-width:0}
+  .nav-right .btn-sm{min-height:44px;height:auto;white-space:normal;text-align:center;line-height:1.25;padding-block:8px}
+  .nav-row{height:auto;min-height:64px;padding-block:8px;gap:10px}
+  .nav .nav-lang{flex-shrink:0}
+  .nav .nav-lang ul{top:calc(100% + 4px)}
+  .step{gap:24px;margin-top:36px}
+  .step-text > p:not(.hint){font-size:16px;line-height:1.65}
+  .chip,.seg button{min-height:44px}
+  .seg button{min-width:0;padding-inline:10px;overflow-wrap:anywhere}
+  .chips.scroll{margin-inline:0;padding-inline:2px;gap:8px}
+  .demo{gap:16px}
+  .ba{height:auto;aspect-ratio:2/3}
+  .ba-knob{height:44px;margin-top:-22px}
+  .spice-head{flex-wrap:wrap;gap:4px 12px}
+  .gauge input,.gauge input::-webkit-slider-runnable-track{height:44px}
+  .gauge input::-moz-range-track{height:44px}
+  .gauge::before,.gauge::after{top:19px}
+  .gauge input::-webkit-slider-thumb{margin-top:8px}
+  .stops{gap:4px;line-height:1.4;overflow-wrap:anywhere}
+  .cta{text-align:center;padding:56px 0}
+  .cta-icon{margin-inline:auto}
+  .cta .badges{justify-content:center}
+  .footer-cols{gap:24px}
+  .footer-col a{min-height:44px;display:flex;align-items:center;overflow-wrap:anywhere}
+  .footer-col{min-width:0;gap:4px}
+  .lang-suggest{max-width:calc(100% - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));white-space:normal}
+  .lang-suggest button{flex-shrink:0}
+}
+/* Once a tablet has enough room, expose every choice rather than clipping a
+   scroll strip halfway across its centered demo. */
+@media (min-width:600px) and (max-width:1023px){
+  .chips.scroll{flex-wrap:wrap;overflow:visible;justify-content:center}
+  .step-text{max-width:640px}
+}
+@media (orientation:landscape) and (max-height:600px){
+  .shot.phone,.step-demo.two .shot.phone{width:min(100%,340px,37.8svh);padding:6px;border-radius:26px}
+  .shot.phone .screen{border-radius:20px}
+  .shot.phone::after{top:12px}
+}
+
 /* ---------------- motion ---------------- */
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .hero-copy > *{animation:rise var(--slow) var(--ease) backwards}

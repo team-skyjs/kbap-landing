@@ -15,14 +15,25 @@ function swapGroup(root, onPick) {
   );
 }
 
+// Fast repeated taps must not let an older image request replace the last choice.
+const imageRequests = new WeakMap();
 function swapImage(img, src, alt) {
-  if (img.getAttribute('src') === src) return;
+  const request = {};
+  imageRequests.set(img, request);
+  if (img.getAttribute('src') === src) {
+    img.classList.remove('swapping');
+    return;
+  }
   img.classList.add('swapping');
   const next = new Image();
-  next.onload = next.onerror = () => {
+  next.onload = () => {
+    if (imageRequests.get(img) !== request) return;
     img.src = src;
     if (alt) img.alt = alt;
     img.classList.remove('swapping');
+  };
+  next.onerror = () => {
+    if (imageRequests.get(img) === request) img.classList.remove('swapping');
   };
   next.src = src;
 }
@@ -86,6 +97,7 @@ for (const demo of document.querySelectorAll('[data-demo="spice"]')) {
     const v = +input.value;
     demo.querySelector('.gauge').style.setProperty('--v', v);
     label.textContent = bands[v];
+    input.setAttribute('aria-valuetext', bands[v]);
     const fit = tiles.filter((li) => +li.dataset.spice <= v).sort((a, b) => b.dataset.spice - a.dataset.spice).slice(0, 4);
     tiles.forEach((li) => (li.hidden = !fit.includes(li)));
     fit.forEach((li, i) => (li.style.order = i));
