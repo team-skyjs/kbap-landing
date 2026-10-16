@@ -82,7 +82,7 @@ for (const l of LANGS) {
 const sm = read('sitemap-0.xml');
 for (const l of LANGS) assert.ok(sm.includes(l === 'en' ? `<loc>${SITE}/</loc>` : `<loc>${SITE}/${l}/</loc>`), `sitemap is missing ${l}`);
 
-// --- Play install referrer: joined once, encoded once
+// --- Play install referrer: query encoded as one nested value
 assert.strictEqual(
   kbap.playUrl('?lang=en&utm_source=meta&utm_medium=paid&utm_campaign=kb255-ios&utm_content=a6'),
   'https://play.google.com/store/apps/details?id=com.rocher.kbap' +
@@ -92,7 +92,7 @@ assert.ok(!kbap.playUrl('?utm_source=').includes('referrer'), 'a blank UTM value
 // a value with its own separators must survive the round trip
 assert.strictEqual(
   new URLSearchParams(new URL(kbap.playUrl('?utm_content=a%26b')).search).get('referrer'),
-  'utm_content=a&b');
+  'utm_content=a%26b');
 
 // --- App Store link stays plain: no guessed pt/ct campaign token
 assert.strictEqual(kbap.appStoreUrl(), 'https://apps.apple.com/app/id6788635067');
@@ -145,3 +145,23 @@ assert.ok(!/\.badge-apple\{display:none\}/.test(css),
   'the App Store badge must never be hidden: this page catches iOS paid traffic');
 
 console.log(`ok — ${LANGS.length} languages, hreflang/canonical, CNAME + app-ads.txt, images ${(imgBytes / 1024).toFixed(0)}KB, links and redirects verified`);
+
+// Language changes retain only allowed UTM values, with safe relative routes.
+const campaignSearch = '?utm_source=qa&utm_campaign=independent&utm_medium=paid&utm_content=a%26redirect%3Devil&utm_term=한식+%2B&lang=ja&redirect=https://evil.example&fbclid=secret';
+for (const route of ['/', '/ko/', '/zh-Hant/', '/ko/blog/test-post/', '/blog/test-post/']) {
+  const localized = kbap.localeUrl(route, campaignSearch);
+  const url = new URL(localized, SITE);
+  assert.strictEqual(url.origin, SITE);
+  assert.strictEqual(url.pathname, route);
+  assert.deepStrictEqual([...url.searchParams.keys()], ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']);
+  const referrer = new URLSearchParams(new URL(kbap.playUrl(url.search)).searchParams.get('referrer'));
+  assert.deepStrictEqual([...referrer], [...url.searchParams]);
+  assert.strictEqual(referrer.get('utm_content'), 'a&redirect=evil');
+  assert.strictEqual(referrer.get('utm_term'), '한식 +');
+}
+assert.strictEqual(kbap.localeUrl('/ko/', '?utm_source=&lang=ja'), '/ko/');
+assert.strictEqual(kbap.localeUrl('/ko/', '?utm_source=first&utm_source=second'), '/ko/?utm_source=first');
+for (const target of ['//evil.example/', 'https://evil.example/', '/\\evil.example/', '/%2f%2fevil/', '/ko/?redirect=evil', '/ko/../', 'javascript:alert(1)']) {
+  assert.strictEqual(kbap.localeUrl(target, campaignSearch), null, 'reject non-route target: ' + target);
+}
+console.log('ok — locale UTM allowlist, route preservation, nested Play referrer encoding');
