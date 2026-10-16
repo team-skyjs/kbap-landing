@@ -17,20 +17,28 @@
    * Pure helpers (also exported for check.js)
    * ------------------------------------------------------------------ */
 
-  /**
-   * Google Play install referrer, built from the UTM params the ad set sends.
-   * The joined string is encoded once as a whole, which is the format Play
-   * expects: referrer=utm_source%3Dmeta%26utm_campaign%3Dkb255-ios
-   */
-  function playUrl(search) {
-    var p = new URLSearchParams(search || '');
-    var parts = [];
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-      var v = p.get(k);
-      if (v) parts.push(k + '=' + v);
+  /** Only these campaign fields may cross a language/store navigation. */
+  function campaignParams(search) {
+    var source = new URLSearchParams(search || '');
+    var result = new URLSearchParams();
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
+      var value = source.get(key);
+      if (value) result.set(key, value);
     });
-    if (!parts.length) return PLAY;
-    return PLAY + '&referrer=' + encodeURIComponent(parts.join('&'));
+    return result;
+  }
+
+  /** Keep the existing root-relative route; never accept a redirect target. */
+  function localeUrl(path, search) {
+    if (!/^\/(?:[A-Za-z0-9_-]+\/)*$/.test(path || '')) return null;
+    var query = campaignParams(search).toString();
+    return path + (query ? '?' + query : '');
+  }
+
+  /** Encode values within the referrer, then encode that query as one value. */
+  function playUrl(search) {
+    var campaign = campaignParams(search).toString();
+    return campaign ? PLAY + '&referrer=' + encodeURIComponent(campaign) : PLAY;
   }
 
   /**
@@ -57,7 +65,7 @@
     return httpsUrl.replace(/^https:\/\//, 'itms-apps://');
   }
 
-  var api = { playUrl: playUrl, appStoreUrl: appStoreUrl, resolveLang: resolveLang, itmsUrl: itmsUrl, LANGS: LANGS };
+  var api = { localeUrl: localeUrl, playUrl: playUrl, appStoreUrl: appStoreUrl, resolveLang: resolveLang, itmsUrl: itmsUrl, LANGS: LANGS };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.kbap = api;
 
@@ -75,6 +83,12 @@
   // it stays on the App Store, which is where the paid traffic is headed.
   var pill = document.querySelector('.pill');
   if (pill && isAndroid) pill.setAttribute('data-store', 'android');
+
+  // Both language menus use the same allowlisted attribution as store links.
+  document.querySelectorAll('.lang-select a[hreflang]').forEach(function (link) {
+    var href = localeUrl(link.getAttribute('href'), search);
+    if (href) link.setAttribute('href', href);
+  });
 
   // Close language menus with an outside tap or Escape; only one stays open.
   var menus = Array.from(document.querySelectorAll('.lang-select'));
@@ -125,7 +139,7 @@
     var label = JSON.parse(suggest.getAttribute('data-suggest'))[want];
     if (label) {
       var link = suggest.querySelector('a');
-      link.href = '/' + want + '/' + search;
+      link.setAttribute('href', localeUrl('/' + want + '/', search));
       link.lang = want;
       link.textContent = label + ' \u2192';
       suggest.hidden = false;
