@@ -82,24 +82,25 @@ for (const l of LANGS) {
 const sm = read('sitemap-0.xml');
 for (const l of LANGS) assert.ok(sm.includes(l === 'en' ? `<loc>${SITE}/</loc>` : `<loc>${SITE}/${l}/</loc>`), `sitemap is missing ${l}`);
 
-// --- Play install referrer: joined once, encoded once
-assert.strictEqual(
-  kbap.playUrl('?lang=en&utm_source=meta&utm_medium=paid&utm_campaign=kb255-ios&utm_content=a6'),
-  'https://play.google.com/store/apps/details?id=com.rocher.kbap' +
-  '&referrer=utm_source%3Dmeta%26utm_medium%3Dpaid%26utm_campaign%3Dkb255-ios%26utm_content%3Da6');
-assert.ok(!kbap.playUrl('').includes('referrer'), 'no UTM should mean no empty referrer');
-assert.ok(!kbap.playUrl('?utm_source=').includes('referrer'), 'a blank UTM value should be dropped');
-// a value with its own separators must survive the round trip
-assert.strictEqual(
-  new URLSearchParams(new URL(kbap.playUrl('?utm_content=a%26b')).search).get('referrer'),
-  'utm_content=a&b');
-
-// --- App Store link stays plain: no guessed pt/ct campaign token
-assert.strictEqual(kbap.appStoreUrl(), 'https://apps.apple.com/app/id6788635067');
-
-// --- the itms-apps escape hatch Meta's in-app browser needs
-assert.strictEqual(kbap.itmsUrl('https://apps.apple.com/app/id6788635067'),
-  'itms-apps://apps.apple.com/app/id6788635067');
+// --- Owner-provided homepage campaign URLs, regardless of incoming UTM.
+const APP_CAMPAIGN = 'https://apps.apple.com/app/apple-store/id6788635067?pt=128938928&ct=homepage&mt=8';
+const PLAY_CAMPAIGN = 'https://play.google.com/store/apps/details?id=com.rocher.kbap&referrer=utm_source%3Dhomepage%26utm_medium%3Dwebsite%26utm_campaign%3Dhomepage';
+for (const query of ['', '?utm_source=meta&utm_campaign=other', '?referrer=evil&pt=wrong&ct=wrong']) {
+  assert.strictEqual(kbap.playUrl(query), PLAY_CAMPAIGN);
+  assert.strictEqual(kbap.appStoreUrl(query), APP_CAMPAIGN);
+}
+assert.deepStrictEqual([...new URLSearchParams(new URL(PLAY_CAMPAIGN).searchParams.get('referrer'))],
+  [['utm_source', 'homepage'], ['utm_medium', 'website'], ['utm_campaign', 'homepage']]);
+assert.strictEqual(kbap.itmsUrl(APP_CAMPAIGN), APP_CAMPAIGN.replace('https://', 'itms-apps://'));
+// Static links work even when JavaScript is disabled, on homes and articles.
+for (const file of fs.readdirSync(dist, { recursive: true }).filter(f => f.endsWith('.html'))) {
+  const html = read(file);
+  for (const tag of html.matchAll(/<a\b[^>]*data-store="(ios|android)"[^>]*>/g)) {
+    const href = /href="([^"]+)"/.exec(tag[0]);
+    assert.ok(href, `${file}: store href missing`);
+    assert.strictEqual(href[1].replaceAll('&amp;', '&'), tag[1] === 'ios' ? APP_CAMPAIGN : PLAY_CAMPAIGN, `${file}: incorrect store campaign`);
+  }
+}
 
 // --- ?lang= / browser locale resolves to one of the 10, anything else to en
 assert.strictEqual(kbap.resolveLang(''), 'en');
