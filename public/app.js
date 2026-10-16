@@ -76,8 +76,25 @@
   var pill = document.querySelector('.pill');
   if (pill && isAndroid) pill.setAttribute('data-store', 'android');
 
-  // Badge visibility is settled in <head> via the html class, not here: doing it
-  // after load moved the page (CLS). See styles.css .ios/.android rules.
+  // Close language menus with an outside tap or Escape; only one stays open.
+  var menus = Array.from(document.querySelectorAll('.lang-select'));
+  menus.forEach(function (menu) {
+    menu.addEventListener('toggle', function () {
+      if (menu.open) menus.forEach(function (other) { if (other !== menu) other.open = false; });
+    });
+  });
+  document.addEventListener('pointerdown', function (event) {
+    menus.forEach(function (menu) { if (!menu.contains(event.target)) menu.open = false; });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    menus.forEach(function (menu) {
+      if (!menu.open) return;
+      var hadFocus = menu.contains(document.activeElement);
+      menu.open = false;
+      if (hadFocus) menu.querySelector('summary').focus();
+    });
+  });
 
   // --- store links: UTM passthrough, then the iOS in-app-browser escape ------
   document.querySelectorAll('a[data-store="android"]').forEach(function (a) {

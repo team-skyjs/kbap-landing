@@ -80,17 +80,10 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
     <!-- ───────────── read it ───────────── -->
     <section class="chapter alt" id="read">
       <div class="wrap">
-        <header class="ch-head">
-          <p class="eyebrow">{t('read.eyebrow')}</p>
-          <h2>{t('read.title')}</h2>
-          <p>{t('read.sub')}</p>
-        </header>
-
         <div class="step">
           <div class="step-text">
-            <h3>{t('lang.title')}</h3>
+            <h2>{t('lang.title')}</h2>
             <p>{t('lang.body')}</p>
-            <p class="hint">{t('lang.hint')}</p>
           </div>
           <div class="step-demo two">
             <div class="demo" data-demo="lang">
@@ -111,9 +104,8 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
 
         <div class="step">
           <div class="step-text">
-            <h3>{t('photos.title')}</h3>
+            <h2>{t('photos.title')}</h2>
             <p>{t('photos.body')}</p>
-            <p class="hint">{t('photos.hint')}</p>
           </div>
           <div class="step-demo">
             <div class="ba" data-demo="ba" style="--pos:50%">
@@ -132,17 +124,10 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
     <!-- ───────────── eat safely ───────────── -->
     <section class="chapter" id="eat">
       <div class="wrap">
-        <header class="ch-head">
-          <p class="eyebrow">{t('eat.eyebrow')}</p>
-          <h2>{t('eat.title')}</h2>
-          <p>{t('eat.sub')}</p>
-        </header>
-
         <div class="step">
           <div class="step-text">
-            <h3>{t('allergy.title')}</h3>
+            <h2>{t('allergy.title')}</h2>
             <p>{t('allergy.body')}</p>
-            <p class="hint">{t('allergy.hint')}</p>
           </div>
           <div class="step-demo two">
             <div class="demo" data-demo="allergy" data-on={cap('scan-result-risk-shrimp-soy-en')} data-off={cap('scan-result-risk-none-en')}>
@@ -169,9 +154,8 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
 
         <div class="step">
           <div class="step-text">
-            <h3>{t('spice.title')}</h3>
+            <h2>{t('spice.title')}</h2>
             <p>{t('spice.body')}</p>
-            <p class="hint">{t('spice.hint')}</p>
           </div>
           <div class="step-demo">
             <div class="card spice" data-demo="spice">
@@ -202,17 +186,10 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
     <!-- ───────────── trust it ───────────── -->
     <section class="chapter alt" id="trust">
       <div class="wrap">
-        <header class="ch-head">
-          <p class="eyebrow">{t('trust.eyebrow')}</p>
-          <h2>{t('trust.title')}</h2>
-          <p>{t('trust.sub')}</p>
-        </header>
-
         <div class="step">
           <div class="step-text">
-            <h3>{t('reviews.title')}</h3>
+            <h2>{t('reviews.title')}</h2>
             <p>{t('reviews.body')}</p>
-            <p class="hint">{t('reviews.hint')}</p>
           </div>
           <div class="step-demo">
             <div class="demo" data-demo="reviews">
@@ -248,17 +225,10 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
     <!-- ───────────── order & share ───────────── -->
     <section class="chapter" id="order">
       <div class="wrap">
-        <header class="ch-head">
-          <p class="eyebrow">{t('order.eyebrow')}</p>
-          <h2>{t('order.title')}</h2>
-          <p>{t('order.sub')}</p>
-        </header>
-
         <div class="step">
           <div class="step-text">
-            <h3>{t('orderf.title')}</h3>
+            <h2>{t('orderf.title')}</h2>
             <p>{t('orderf.body')}</p>
-            <p class="hint">{t('orderf.hint')}</p>
           </div>
           <div class="step-demo">
             <div class="demo order-demo" data-demo="order">
@@ -276,7 +246,7 @@ const suggest = Object.fromEntries(LANGS.filter((l) => l !== 'en').map((l) => [l
         <!-- ponytail: copy only until the story-card capture exists (needs a saved order, QA). -->
         <div class="step">
           <div class="step-text">
-            <h3>{t('share.title')}</h3>
+            <h2>{t('share.title')}</h2>
             <p>{t('share.body')}</p>
           </div>
         </div>
