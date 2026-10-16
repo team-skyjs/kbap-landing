@@ -420,7 +420,21 @@ li.chip{cursor:default}
   .nav-row{height:auto;min-height:64px;padding-block:8px;gap:10px}
   .nav .nav-lang{flex-shrink:0}
   .nav .nav-lang ul{top:calc(100% + 4px)}
-  .step{gap:24px;margin-top:36px}
+  .step{gap:28px;margin-top:40px}
+  /* Separate complete feature stories, not the copy from its own demo. */
+  .step + .step{margin-top:72px;padding-top:48px;border-top:1px solid var(--g300)}
+  .ch-head{text-align:center;max-width:640px;margin-inline:auto}
+  .ch-head > p:last-child{margin-inline:auto}
+  .step-text{width:100%;max-width:34rem;margin-inline:auto;text-align:center}
+  .step h3{font-size:24px;line-height:1.4;text-wrap:balance}
+  .step-text > p:not(.hint){max-width:32em;margin-inline:auto}
+  .step-text .hint{display:block;margin-top:14px;padding:0;border:0;border-radius:0;background:none;color:var(--g700);font-size:13px;font-weight:500}
+  .step-text .hint::before{display:none}
+
+  .step-demo.two{row-gap:48px}
+  .hidden-demo{padding-top:32px;border-top:1px dashed var(--g300);gap:24px}
+  .hidden-demo .callout{justify-content:center;padding:14px 16px;font-size:16px;line-height:1.5;border-radius:16px;text-align:center}
+  .shot.phone{box-shadow:0 12px 28px -12px rgba(28,30,33,.16)}
   .step-text > p:not(.hint){font-size:16px;line-height:1.65}
   .chip,.seg button{min-height:44px}
   .seg button{min-width:0;padding-inline:10px;overflow-wrap:anywhere}
