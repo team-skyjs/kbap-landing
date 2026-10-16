@@ -2,13 +2,14 @@
 import '../styles.css';
 import { LANGS, ENDONYM, localePath } from '../i18n/langs.js';
 import { t as dict } from '../i18n/t.js';
-import { posts, releases } from '../content/posts.js';
+import { posts, releases, draftPreview } from '../content/posts.js';
 
 interface Props {
   lang: string;
   /** Path without the language prefix, e.g. "/" or "/blog/hello/". */
   path: string;
   title?: string;
+  ogType?: 'website' | 'article';
   description?: string;
   /** Languages this exact page exists in. Only these get hreflang links. */
   alternates?: string[];
@@ -43,6 +44,7 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content={description}>
+{draftPreview && <meta name="robots" content="noindex, nofollow, noarchive">}
 <meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href={url(lang)}>
 {alternates.map((l) => <link rel="alternate" hreflang={l} href={url(l)}>)}
@@ -52,7 +54,7 @@ const SHORT = { en: 'EN', ko: '한국어', ja: '日本語', 'zh-Hans': '简体',
 <link rel="apple-touch-icon" href="/assets/brand/icon.webp">
 <link rel="sitemap" href="/sitemap-index.xml">
 
-<meta property="og:type" content="website">
+<meta property="og:type" content={Astro.props.ogType ?? 'website'}>
 <meta property="og:url" content={url(lang)}>
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>

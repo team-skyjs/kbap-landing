@@ -2,7 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import { langParam, localePath } from '../../../i18n/langs.js';
 import { t as dict } from '../../../i18n/t.js';
-import { posts } from '../../../content/posts.js';
+import { posts, draftPreview } from '../../../content/posts.js';
 
 // A blog index only for languages that have posts: an empty page is thin content.
 export async function getStaticPaths() {
@@ -19,6 +19,7 @@ const t = dict(lang);
 ---
 <Base lang={lang} path="/blog/" title={`${t('nav.blog')} — K-Bap`} alternates={langs}>
   <main class="page">
+    {draftPreview && <p class="draft-notice">Local editorial preview · unpublished drafts · approval pending</p>}
     <h1>{t('nav.blog')}</h1>
     <ul class="posts">
       {list.map((p) => (

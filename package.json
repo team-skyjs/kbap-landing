@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node check.cjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "preview:drafts": "KBAP_DRAFT_PREVIEW=1 astro dev --host 127.0.0.1 --port 4332",
+    "check:drafts": "node scripts/check-editorial-drafts.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
