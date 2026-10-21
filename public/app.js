@@ -84,6 +84,9 @@
   // --- fixed homepage campaign links, then the iOS in-app-browser escape ----
   document.querySelectorAll('a[data-store="android"]').forEach(function (a) {
     a.href = playUrl();
+    a.addEventListener('click', function (e) {
+      if (root.kbapX && root.kbapX.openStore('android')) e.preventDefault();
+    });
   });
 
   document.querySelectorAll('a[data-store="ios"]').forEach(function (a) {
@@ -93,6 +96,7 @@
     // after 1.5s if the scheme didn't take. Fires on tap only, never on load.
     a.addEventListener('click', function (e) {
       e.preventDefault();
+      if (root.kbapX && root.kbapX.openStore('ios')) return;
       var https = a.href;
       window.location.href = itmsUrl(https);
       setTimeout(function () { window.location.href = https; }, 1500);

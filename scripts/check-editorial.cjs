@@ -32,7 +32,12 @@ for (const row of manifest) {
 for (const file of fs.readdirSync(dist, { recursive: true }).filter(f => /\.(html|xml)$/.test(f))) {
   const text = fs.readFileSync(path.join(dist, file), 'utf8');
   assert(!text.includes('Unpublished draft'), `${file}: preview UI leaked`);
-  assert(!text.includes('noindex'), `${file}: production indexing disabled`);
+  // Only the two non-content social tracking hops must stay out of search.
+  if (['go/x-ja/index.html', 'go/x-ja-post/index.html'].includes(file)) {
+    assert(text.includes('noindex'), `${file}: tracking hop must not be indexed`);
+  } else {
+    assert(!text.includes('noindex'), `${file}: production indexing disabled`);
+  }
   assert(!text.includes('/blog/_template/'), `${file}: template leaked`);
   for (const row of manifest.filter(row => row.approval_status !== 'approved')) {
     assert(!text.includes('/blog/' + row.slug), `${file}: unapproved URL leaked`);

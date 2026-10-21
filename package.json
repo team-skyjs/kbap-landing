@@ -3,13 +3,14 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node check.cjs && node scripts/check-editorial.cjs",
+    "build": "astro build && node check.cjs && node scripts/check-editorial.cjs && node scripts/check-x-attribution.mjs",
     "preview": "astro preview",
     "preview:drafts": "KBAP_DRAFT_PREVIEW=1 astro dev --host 127.0.0.1 --port 4332",
     "check:editorial": "node scripts/check-editorial.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
+    "airbridge-web-sdk-loader": "^1.11.4",
     "astro": "^6.0.5"
   },
   "devDependencies": {
