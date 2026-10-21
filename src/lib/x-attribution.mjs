@@ -1,10 +1,14 @@
-// Only these owner-approved Japanese X campaigns may change store behavior.
+// Only these owner-approved social campaigns may change store behavior.
+// Keep channel/campaign pairs strict so X and Threads cannot be mixed.
 export function xCampaign(search) {
   const params = new URLSearchParams(search);
+  const channel = params.get('utm_source');
+  const campaigns = { organic_x: 'official_ja', organic_threads: 'official' };
+  if (!Object.prototype.hasOwnProperty.call(campaigns, channel)) return null;
   const expected = {
-    utm_source: 'organic_x',
+    utm_source: channel,
     utm_medium: 'organic_social',
-    utm_campaign: 'official_ja',
+    utm_campaign: campaigns[channel],
   };
   for (const [key, value] of Object.entries(expected)) {
     if (params.getAll(key).length !== 1 || params.get(key) !== value) return null;
@@ -16,7 +20,7 @@ export function xCampaign(search) {
   for (const key of params.keys()) {
     if (key.startsWith('utm_') && !(key in expected) && key !== 'utm_content') return null;
   }
-  return { channel: 'organic_x', campaign: 'official_ja', medium: 'organic_social', content };
+  return { channel, campaign: campaigns[channel], medium: 'organic_social', content };
 }
 
 export function xInitOptions(campaign, webToken) {

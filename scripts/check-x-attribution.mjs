@@ -21,16 +21,29 @@ assert.equal(calls.length, 0);
 assert.equal(openXStore(sdk, profile, 'ios', 'ios'), true);
 assert.deepEqual(calls, [{ type: 'click', fallbacks: { android: 'google-play', ios: 'itunes-appstore' }, defaultParams: { campaign: 'official_ja', medium: 'organic_social', content: 'profile' } }]);
 assert.equal(openXStore({ isSDKEnabled: true, openDeeplink: () => { throw Error('offline'); } }, profile, 'android', 'android'), false);
-console.log('ok — X campaign allowlist, missing config/SDK, store selection and fallback');
+const threadsBase = '?utm_source=organic_threads&utm_medium=organic_social&utm_campaign=official&utm_content=';
+for (const content of ['profile', 'post']) {
+  const campaign = xCampaign(threadsBase + content);
+  assert.deepEqual(campaign, { channel: 'organic_threads', campaign: 'official', medium: 'organic_social', content });
+  assert.equal(openXStore(sdk, campaign, 'android', 'android'), true);
+  assert.equal(calls.at(-1).defaultParams.campaign, 'official');
+  assert.equal(calls.at(-1).defaultParams.content, content);
+}
+for (const query of [threadsBase.replace('=official&', '=official_ja&') + 'profile', base.replace('=official_ja&', '=official&') + 'post', threadsBase + 'profile&utm_content=post', threadsBase + 'unknown']) {
+  assert.equal(xCampaign(query), null, query);
+}
+console.log('ok — X/Threads campaign allowlists, missing config/SDK, store selection and fallback');
 
 // Registered short links are actually used; incoming query strings cannot
 // replace the destination or cause a loop back to a /go/ entry point.
 const { readFileSync } = await import('node:fs');
-for (const [route, link] of [['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q']]) {
+for (const [route, link] of [['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q'], ['threads', 'https://abr.ge/wt8f2w9'], ['threads-post', 'https://abr.ge/wojmze6']]) {
   const html = readFileSync(new URL('../dist/go/' + route + '/index.html', import.meta.url), 'utf8');
   assert.ok(html.includes(link));
   assert.ok(html.includes('noindex, follow'));
-  assert.ok(html.includes('href="https://kbap.site/ja/"'));
+  const japanese = route.startsWith('x-ja');
+  assert.ok(html.includes('href="https://kbap.site/' + (japanese ? 'ja/' : '') + '"'));
+  assert.ok(html.includes('lang="' + (japanese ? 'ja' : 'en') + '"'));
   assert.ok(html.includes('window.location.replace(destination)'));
   assert.ok(!html.includes('location.search'));
   assert.ok(!readFileSync(new URL('../dist/sitemap-0.xml', import.meta.url), 'utf8').includes('/go/'));
