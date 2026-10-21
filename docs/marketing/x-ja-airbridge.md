@@ -12,6 +12,15 @@ paid-ad destinations. Do not set an Airbridge destination back to a `/go/`
 page: that would create a loop. The intermediate Airbridge URL is real, not a
 masked display label. DNS and the regular home-page routes are unchanged.
 
+Console configuration checked during setup: the profile link has no `sub_id`,
+while the post link has `sub_id=organic_social`. Both website destination URLs
+contain `utm_medium=organic_social`. These are separate inputs; their effective
+priority in received events has not been verified. Do not report the two
+console records as identical or equate `sub_id` with `utm_medium`. Use the
+verified channel `organic_x`, campaign `official_ja`, and content `profile` or
+`post` as the primary reporting dimensions until received-event fields have
+been checked.
+
 Only the exact approved campaign activates the browser SDK. The public Web SDK
 token in `src/scripts/x-attribution.js` is an SDK identifier, not an API token.
 Do not replace it with an API token. Removing the token disables initialization.
