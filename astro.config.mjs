@@ -33,6 +33,8 @@ export default defineConfig({
   integrations: [
     wbr,
     sitemap({
+      // Social tracking hops are not searchable content.
+      filter: (page) => !new URL(page).pathname.startsWith('/go/'),
       // Groups /, /ko/, /ja/… of the same page into hreflang alternates.
       i18n: { defaultLocale: 'en', locales: Object.fromEntries(LANGS.map((l) => [l, l])) },
     }),
