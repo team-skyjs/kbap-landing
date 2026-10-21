@@ -1,32 +1,39 @@
 ---
-// These two social entry points use registered Airbridge links. Do not use them
+// These social entry points use registered Airbridge links. Do not use them
 // as paid-ad destinations: regular landing pages never auto-redirect.
 const entries = {
   'x-ja': 'https://abr.ge/mqzo6ok',
   'x-ja-post': 'https://abr.ge/4fxjp3q',
+  threads: 'https://abr.ge/wt8f2w9',
+  'threads-post': 'https://abr.ge/wojmze6',
 };
 export function getStaticPaths() {
-  return [{ params: { campaign: 'x-ja' } }, { params: { campaign: 'x-ja-post' } }];
+  return ['x-ja', 'x-ja-post', 'threads', 'threads-post'].map((campaign) => ({ params: { campaign } }));
 }
 const destination = entries[Astro.params.campaign];
+const japanese = Astro.params.campaign.startsWith('x-ja');
+const lang = japanese ? 'ja' : 'en';
+const canonical = japanese ? 'https://kbap.site/ja/' : 'https://kbap.site/';
+const title = japanese ? 'K-Bap — 韓国語メニュー翻訳' : 'K-Bap: Korean Menu Translator';
+const description = japanese ? 'K-Bapで韓国のメニューをあなたの言語に。' : 'Scan Korean menus and explore dishes in your language.';
 ---
 <!doctype html>
-<html lang="ja">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://kbap.site/ja/" />
-  <title>K-Bap — 韓国語メニュー翻訳</title>
-  <meta name="description" content="K-Bapで韓国のメニューをあなたの言語に。" />
-  <meta property="og:title" content="K-Bap — 韓国語メニュー翻訳" />
-  <meta property="og:description" content="K-Bapで韓国のメニューをあなたの言語に。" />
+  <link rel="canonical" href={canonical} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
   <meta property="og:image" content="https://kbap.site/assets/brand/og-cover.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <noscript><meta http-equiv="refresh" content={`0;url=${destination}`} /></noscript>
 </head>
 <body>
-  <p><a href={destination}>K-Bapへ進む</a></p>
+  <p><a href={destination}>{japanese ? 'K-Bapへ進む' : 'Continue to K-Bap'}</a></p>
   <script is:inline define:vars={{ destination }}>window.location.replace(destination);</script>
 </body>
 </html>
