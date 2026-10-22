@@ -1,9 +1,9 @@
 // Only these owner-approved social campaigns may change store behavior.
-// Keep channel/campaign pairs strict so X and Threads cannot be mixed.
+// Keep channel/campaign pairs strict so unrelated social campaigns cannot be mixed.
 export function xCampaign(search) {
   const params = new URLSearchParams(search);
   const channel = params.get('utm_source');
-  const campaigns = { organic_x: 'official_ja', organic_threads: 'official' };
+  const campaigns = { organic_x: 'official_ja', organic_threads: 'official', organic_instagram: 'official' };
   if (!Object.prototype.hasOwnProperty.call(campaigns, channel)) return null;
   const expected = {
     utm_source: channel,

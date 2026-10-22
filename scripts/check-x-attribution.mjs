@@ -32,12 +32,24 @@ for (const content of ['profile', 'post']) {
 for (const query of [threadsBase.replace('=official&', '=official_ja&') + 'profile', base.replace('=official_ja&', '=official&') + 'post', threadsBase + 'profile&utm_content=post', threadsBase + 'unknown']) {
   assert.equal(xCampaign(query), null, query);
 }
-console.log('ok — X/Threads campaign allowlists, missing config/SDK, store selection and fallback');
+const instagramBase = '?utm_source=organic_instagram&utm_medium=organic_social&utm_campaign=official&utm_content=';
+for (const content of ['profile', 'post']) {
+  const campaign = xCampaign(instagramBase + content);
+  assert.deepEqual(campaign, { channel: 'organic_instagram', campaign: 'official', medium: 'organic_social', content });
+  assert.equal(openXStore(sdk, campaign, 'ios', 'ios'), true);
+  assert.equal(calls.at(-1).defaultParams.campaign, 'official');
+  assert.equal(calls.at(-1).defaultParams.content, content);
+}
+// Preserve the prior store-only campaign; never reinterpret it as this website campaign.
+for (const query of [instagramBase.replace('=official&', '=official_profile&') + 'profile', instagramBase.replace('=official&', '=official_ja&') + 'post', instagramBase + 'profile&utm_content=post', instagramBase + 'unknown']) {
+  assert.equal(xCampaign(query), null, query);
+}
+console.log('ok — X/Threads/Instagram campaign allowlists, missing config/SDK, store selection and fallback');
 
 // Registered short links are actually used; incoming query strings cannot
 // replace the destination or cause a loop back to a /go/ entry point.
 const { readFileSync } = await import('node:fs');
-for (const [route, link] of [['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q'], ['threads', 'https://abr.ge/wt8f2w9'], ['threads-post', 'https://abr.ge/wojmze6']]) {
+for (const [route, link] of [['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q'], ['threads', 'https://abr.ge/wt8f2w9'], ['threads-post', 'https://abr.ge/wojmze6'], ['instagram', 'https://abr.ge/e5vipmy'], ['instagram-post', 'https://abr.ge/8qf1jkq']]) {
   const html = readFileSync(new URL('../dist/go/' + route + '/index.html', import.meta.url), 'utf8');
   assert.ok(html.includes(link));
   assert.ok(html.includes('noindex, follow'));
