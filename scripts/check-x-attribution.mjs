@@ -49,7 +49,7 @@ console.log('ok — X/Threads/Instagram campaign allowlists, missing config/SDK,
 // Registered short links are actually used; incoming query strings cannot
 // replace the destination or cause a loop back to a /go/ entry point.
 const { readFileSync } = await import('node:fs');
-for (const [route, link] of [['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q'], ['threads', 'https://abr.ge/wt8f2w9'], ['threads-post', 'https://abr.ge/wojmze6'], ['instagram', 'https://abr.ge/e5vipmy'], ['instagram-post', 'https://abr.ge/8qf1jkq']]) {
+for (const [route, link] of [['friend', 'https://abr.ge/n7a18j3'], ['x-ja', 'https://abr.ge/mqzo6ok'], ['x-ja-post', 'https://abr.ge/4fxjp3q'], ['threads', 'https://abr.ge/wt8f2w9'], ['threads-post', 'https://abr.ge/wojmze6'], ['instagram', 'https://abr.ge/e5vipmy'], ['instagram-post', 'https://abr.ge/8qf1jkq']]) {
   const html = readFileSync(new URL('../dist/go/' + route + '/index.html', import.meta.url), 'utf8');
   assert.ok(html.includes(link));
   assert.ok(html.includes('noindex, follow'));

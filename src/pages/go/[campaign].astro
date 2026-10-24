@@ -2,6 +2,7 @@
 // These social entry points use registered Airbridge links. Do not use them
 // as paid-ad destinations: regular landing pages never auto-redirect.
 const entries = {
+  friend: 'https://abr.ge/n7a18j3',
   'x-ja': 'https://abr.ge/mqzo6ok',
   'x-ja-post': 'https://abr.ge/4fxjp3q',
   threads: 'https://abr.ge/wt8f2w9',
@@ -10,7 +11,7 @@ const entries = {
   'instagram-post': 'https://abr.ge/8qf1jkq',
 };
 export function getStaticPaths() {
-  return ['x-ja', 'x-ja-post', 'threads', 'threads-post', 'instagram', 'instagram-post'].map((campaign) => ({ params: { campaign } }));
+  return ['friend', 'x-ja', 'x-ja-post', 'threads', 'threads-post', 'instagram', 'instagram-post'].map((campaign) => ({ params: { campaign } }));
 }
 const destination = entries[Astro.params.campaign];
 const japanese = Astro.params.campaign.startsWith('x-ja');
