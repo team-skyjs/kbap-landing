@@ -33,7 +33,7 @@ for (const file of fs.readdirSync(dist, { recursive: true }).filter(f => /\.(htm
   const text = fs.readFileSync(path.join(dist, file), 'utf8');
   assert(!text.includes('Unpublished draft'), `${file}: preview UI leaked`);
   // Only the approved non-content social tracking hops must stay out of search.
-  if (['go/friend/index.html', 'go/x-ja/index.html', 'go/x-ja-post/index.html', 'go/threads/index.html', 'go/threads-post/index.html', 'go/instagram/index.html', 'go/instagram-post/index.html'].includes(file)) {
+  if (['go/friend/index.html', 'go/x-ja/index.html', 'go/x-ja-post/index.html', 'go/threads/index.html', 'go/threads-post/index.html', 'go/instagram/index.html', 'go/instagram-post/index.html', 'go/kakao-ios/index.html', 'go/kakao-android/index.html'].includes(file)) {
     assert(text.includes('noindex'), `${file}: tracking hop must not be indexed`);
   } else {
     assert(!text.includes('noindex'), `${file}: production indexing disabled`);

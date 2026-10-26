@@ -1,5 +1,5 @@
 ---
-// These social entry points use registered Airbridge links. Do not use them
+// Social entry points use registered Airbridge or native store campaign links. Do not use them
 // as paid-ad destinations: regular landing pages never auto-redirect.
 const entries = {
   friend: 'https://abr.ge/n7a18j3',
@@ -9,9 +9,11 @@ const entries = {
   'threads-post': 'https://abr.ge/wojmze6',
   instagram: 'https://abr.ge/e5vipmy',
   'instagram-post': 'https://abr.ge/8qf1jkq',
+  'kakao-ios': 'https://apps.apple.com/app/apple-store/id6788635067?pt=128938928&ct=openchat&mt=8',
+  'kakao-android': 'https://play.google.com/store/apps/details?id=com.rocher.kbap&referrer=utm_source%3Dopenchat%26utm_medium%3Dmessenger%26utm_campaign%3Dopenchat',
 };
 export function getStaticPaths() {
-  return ['friend', 'x-ja', 'x-ja-post', 'threads', 'threads-post', 'instagram', 'instagram-post'].map((campaign) => ({ params: { campaign } }));
+  return ['friend', 'x-ja', 'x-ja-post', 'threads', 'threads-post', 'instagram', 'instagram-post', 'kakao-ios', 'kakao-android'].map((campaign) => ({ params: { campaign } }));
 }
 const destination = entries[Astro.params.campaign];
 const japanese = Astro.params.campaign.startsWith('x-ja');
